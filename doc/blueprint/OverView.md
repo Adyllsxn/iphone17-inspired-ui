@@ -1,5 +1,9 @@
 # OVERVIEW DO PROJETO
 
+## Nome
+
+---
+
 ## Resumo
 
 ---
@@ -8,7 +12,15 @@
 
 ---
 
-## Funcionalidades Principais
+## Justificativa
+
+---
+
+## Público-Alvo
+
+---
+
+## Tecnologias
 
 ---
 
