@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -15,13 +14,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kairos.Application", "src\b
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kairos.Presentation", "src\backend\Kairos.Presentation\Kairos.Presentation.csproj", "{287EDA81-476F-402D-8B45-7822D9C9A094}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E72DEEA9-8C19-4908-9440-E81785170BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kairos.UnitTest", "test\Kairos.UnitTest\Kairos.UnitTest.csproj", "{12F01572-EEF6-4810-B15E-DBF5E6EE6782}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{72E5304A-14F3-4876-AEB9-53F0EDA636CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,6 +40,13 @@ Global
 		{287EDA81-476F-402D-8B45-7822D9C9A094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{287EDA81-476F-402D-8B45-7822D9C9A094}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{287EDA81-476F-402D-8B45-7822D9C9A094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F01572-EEF6-4810-B15E-DBF5E6EE6782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F01572-EEF6-4810-B15E-DBF5E6EE6782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F01572-EEF6-4810-B15E-DBF5E6EE6782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F01572-EEF6-4810-B15E-DBF5E6EE6782}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{02C827DE-607D-40F1-8CB8-4E7F3F4843C9} = {0442AA44-EA97-4F69-A8E7-DC1A1FECB8BE}
@@ -47,5 +54,6 @@ Global
 		{F5F862F9-FD91-43D3-8A97-5F81AA49FF6B} = {02C827DE-607D-40F1-8CB8-4E7F3F4843C9}
 		{AF5938D0-8383-4DD6-B492-C95B5BE8D99D} = {02C827DE-607D-40F1-8CB8-4E7F3F4843C9}
 		{287EDA81-476F-402D-8B45-7822D9C9A094} = {02C827DE-607D-40F1-8CB8-4E7F3F4843C9}
+		{12F01572-EEF6-4810-B15E-DBF5E6EE6782} = {E72DEEA9-8C19-4908-9440-E81785170BB9}
 	EndGlobalSection
 EndGlobal
