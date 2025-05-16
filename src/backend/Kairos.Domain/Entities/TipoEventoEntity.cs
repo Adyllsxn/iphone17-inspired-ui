@@ -3,6 +3,9 @@ public sealed class TipoEventoEntity: EntityBase, IAgragateRoot
 {
     public string Nome { get; private set; } = null!;
 
+    [JsonIgnore]
+    public ICollection<EventoEntity> Eventos { get; private set; } = null!;
+
     [JsonConstructor]
     public TipoEventoEntity(){}
 
