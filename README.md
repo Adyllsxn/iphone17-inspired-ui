@@ -62,7 +62,7 @@ KAIROS/
 │   │   └── frontend.md             # Explicação da stack e organização do frontend
 │
 ├── test/                           # Testes automatizados
-│   └── Kairos.UnitTest/            # Testes unitários com xUnit
+│   └── Kairos.Tests/               # Projeto de Testes unitários e Integração com xUnit
 │       └── test.md                 # Explicação dos testes, bibliotecas e estrutura
 │
 ├── .gitattributes                  # Define atributos de arquivos para Git (ex: fim de linha, linguagens)
