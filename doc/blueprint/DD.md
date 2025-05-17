@@ -8,8 +8,9 @@
 |--------------|-----------------------------------------|---------------|---------|-------------|----------------|-------------------|-----------------------------------|
 | id           | Identificador único do usuário          | INT           | -       | Sim         | Sim            | Não               | Auto incremento                    |
 | nome         | Nome completo do usuário                 | NVARCHAR      | 100     | Sim         | Não            | Não               |                                   |
-| email        | Email do usuário                         | NVARCHAR      | 100     | Sim         | Não            | Não               | Deve ser único                    |
-| senhaHash    | Senha armazenada em formato criptografado| NVARCHAR    | 255     | Sim         | Não            | Não               |                                   |
+| email        | Email do usuário                         | NVARCHAR      | 250     | Sim         | Não            | Não               | Deve ser único                    |
+| PasswordHash    | Senha armazenada em formato criptografado| NVARCHAR(MAX)    | -     | Sim         | Não            | Não               |                                   |
+| PasswordSalt    | Senha armazenada em formato criptografado| NVARCHAR(MAX)    | -     | Sim         | Não            | Não               |                                   |
 | perfilId     | Identificador do perfil do usuário      | INT           | -       | Sim         | Não            | Sim               | FK para tabela PERFIL             |
 | ativo        | Indica se o usuário está ativo           | BIT           | -       | Sim         | Não            | Não               | Valores: 1 (ativo), 0 (inativo)  |
 | dataCadastro | Data e hora do cadastro do usuário       | DATETIME      | -       | Sim         | Não            | Não               |                                   |
@@ -43,7 +44,7 @@
 | descricao       | Descrição detalhada do evento                  | NVARCHAR(MAX) | -       | Sim         | Não            | Não               |                                                                  |
 | dataHoraInicio  | Data e hora de início do evento                | DATETIME      | -       | Sim         | Não            | Não               |                                                                  |
 | dataHoraFim     | Data e hora de término do evento               | DATETIME      | -       | Sim         | Não            | Não               |                                                                  |
-| local           | Local onde o evento será realizado             | NVARCHAR      | 100     | Sim         | Não            | Não               |                                                                  |
+| local           | Local onde o evento será realizado             | NVARCHAR      | 250     | Sim         | Não            | Não               |                                                                  |
 | tipoEventoId    | Identificador do tipo de evento                | INT           | -       | Sim         | Não            | Sim               | FK para tabela TIPO DE EVENTOS                                   |
 | usuarioId       | Identificador do usuário que criou/organizou o evento | INT    | -       | Sim         | Não            | Sim               | FK para tabela USUÁRIO                                           |
 | statusAprovacao | Status da aprovação do evento                   | NVARCHAR      | 20      | Sim         | Não            | Não               | Valores possíveis: 'Pendente', 'Aprovado', 'Rejeitado'          |
@@ -70,7 +71,7 @@
 | id         | Identificador único da sugestão              | INT           | -       | Sim         | Sim            | Não               | Auto incremento                                        |
 | usuarioId  | Identificador do usuário                      | INT           | -       | Sim         | Não            | Sim               | FK para tabela USUÁRIO                                 |
 | eventoId   | Identificador do evento                       | INT           | -       | Sim         | Não            | Sim               | FK para tabela EVENTOS                                 |
-| conteudo   | Conteúdo da sugestão                          | TEXT          | -       | Sim         | Não            | Não               |                                                       |
+| conteudo   | Conteúdo da sugestão                          | NVARCHAR(MAX)          | -       | Sim         | Não            | Não               |                                                       |
 | dataEnvio  | Data e hora do envio                          | DATETIME      | -       | Sim         | Não            | Não               |                                                       |
 | status     | Status da sugestão                            | NVARCHAR      | 20      | Não         | Não            | Não               | Valores: 'Nova', 'Em análise', 'Respondida' (opcional) |
 

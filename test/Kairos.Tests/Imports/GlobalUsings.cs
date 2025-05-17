@@ -6,4 +6,5 @@
     global using Kairos.Domain.Abstrations.Exceptions;
     global using Kairos.Domain.Entities;
     global using Kairos.Domain.ValueObjets;
+    global using Kairos.Domain.Abstrations.Enums;
 #endregion

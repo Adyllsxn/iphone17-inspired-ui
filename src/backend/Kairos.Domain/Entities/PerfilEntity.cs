@@ -3,6 +3,9 @@ public sealed class PerfilEntity: EntityBase, IAgragateRoot
 {
     public string Nome { get; private set; } = null!;
 
+    [JsonIgnore]
+    public ICollection<UsuarioEntity> Usuarios { get; private set; } = new List<UsuarioEntity>();
+
     [JsonConstructor]
     public PerfilEntity(){}
 
