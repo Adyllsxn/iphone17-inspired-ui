@@ -8,7 +8,7 @@ public sealed class EventoEntity : EntityBase, IAgragateRoot
     public string Local { get; private set; } = null!;
     public int TipoEventoID { get; private set; }
     public int UsuarioID { get; private set; }
-    public EStatusAprovacao StatusAprovacao { get; private set; } = EStatusAprovacao.Pendente;
+    public EStatusAprovacao StatusAprovacao { get; private set; }
     public string ImagemUrl { get; private set; } = null!;
 
     [JsonIgnore]
@@ -32,14 +32,14 @@ public sealed class EventoEntity : EntityBase, IAgragateRoot
     }
     public void ValidationDomain(string titulo, string descricao, DateTime dataHoraInicio, DateTime dataHoraFim, string local, int tipoEventoID, int usuarioID, EStatusAprovacao statusAprovacao, string imagemUrl)
     {
-        DomainValidationException.When(string.IsNullOrWhiteSpace(titulo), "Título é obrigatório.");
-        DomainValidationException.When(titulo.Length > 100, "Título deve ter no máximo 100 caracteres.");
+        DomainValidationException.When(string.IsNullOrWhiteSpace(titulo), "Local é obrigatório.");
+        DomainValidationException.When(titulo.Length > 100, "Local deve ter no máximo 100 caracteres.");
 
         DomainValidationException.When(string.IsNullOrWhiteSpace(descricao), "Descrição é obrigatório.");
         DomainValidationException.When(descricao.Length < 1, "Descrição deve ter no mínimo 1 caracteres.");
 
-        DomainValidationException.When(string.IsNullOrWhiteSpace(local), "Título é obrigatório.");
-        DomainValidationException.When(local.Length > 250, "Título deve ter no máximo 250 caracteres.");
+        DomainValidationException.When(string.IsNullOrWhiteSpace(local), "Local é obrigatório.");
+        DomainValidationException.When(local.Length > 250, "Local deve ter no máximo 250 caracteres.");
 
         DomainValidationException.When(tipoEventoID <= 0 , "ID deve ser maior que zero.");
         DomainValidationException.When(usuarioID <= 0 , "ID deve ser maior que zero.");
@@ -54,7 +54,7 @@ public sealed class EventoEntity : EntityBase, IAgragateRoot
         Local = local;
         TipoEventoID = tipoEventoID;
         UsuarioID = usuarioID;
-        StatusAprovacao = statusAprovacao;
+        StatusAprovacao = EStatusAprovacao.Pendente;
         ImagemUrl = imagemUrl;
     }
 }
