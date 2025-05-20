@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Kairos.Infrastructure.Repositories
+namespace Kairos.Infrastructure.Repositories;
+public class DashBoardRepository
 {
-    public class DashBoardRepository
-    {
-        
-    }
+    
 }
