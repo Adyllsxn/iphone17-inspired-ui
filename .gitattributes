@@ -1,63 +1,37 @@
 ###############################################################################
-# Set default behavior to automatically normalize line endings.
+# Normalização de final de linha (EOL)
 ###############################################################################
+
+# Normaliza os finais de linha automaticamente com base no SO
 * text=auto
 
 ###############################################################################
-# Set default behavior for command prompt diff.
-#
-# This is need for earlier builds of msysgit that does not have it on by
-# default for csharp files.
-# Note: This is only used by command line
+# Tratamento de arquivos de solução e projeto do Visual Studio
 ###############################################################################
-#*.cs     diff=csharp
+
+# Arquivos de projeto são tratados como binários
+# Isso evita conflitos automáticos que podem corromper os arquivos
+*.sln       merge=binary
+*.csproj    merge=binary
+*.vbproj    merge=binary
+*.fsproj    merge=binary
 
 ###############################################################################
-# Set the merge driver for project and solution files
-#
-# Merging from the command prompt will add diff markers to the files if there
-# are conflicts (Merging from VS is not affected by the settings below, in VS
-# the diff markers are never inserted). Diff markers may cause the following 
-# file extensions to fail to load in VS. An alternative would be to treat
-# these files as binary and thus will always conflict and require user
-# intervention with every merge. To do so, just uncomment the entries below
+# Tratamento de arquivos de imagem
 ###############################################################################
-#*.sln       merge=binary
-#*.csproj    merge=binary
-#*.vbproj    merge=binary
-#*.vcxproj   merge=binary
-#*.vcproj    merge=binary
-#*.dbproj    merge=binary
-#*.fsproj    merge=binary
-#*.lsproj    merge=binary
-#*.wixproj   merge=binary
-#*.modelproj merge=binary
-#*.sqlproj   merge=binary
-#*.wwaproj   merge=binary
+
+# Garante que imagens sejam tratadas como binários e não sejam mescladas ou analisadas como texto
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.svg       binary
 
 ###############################################################################
-# behavior for image files
-#
-# image files are treated as binary by default.
+# Configurações de diff opcionais para documentos (ativar se necessário)
 ###############################################################################
-#*.jpg   binary
-#*.png   binary
-#*.gif   binary
 
-###############################################################################
-# diff behavior for common document formats
-# 
-# Convert binary document formats to text before diffing them. This feature
-# is only available from the command line. Turn it on by uncommenting the 
-# entries below.
-###############################################################################
-#*.doc   diff=astextplain
-#*.DOC   diff=astextplain
-#*.docx  diff=astextplain
-#*.DOCX  diff=astextplain
-#*.dot   diff=astextplain
-#*.DOT   diff=astextplain
-#*.pdf   diff=astextplain
-#*.PDF   diff=astextplain
-#*.rtf   diff=astextplain
-#*.RTF   diff=astextplain
+# Exibe conteúdo como texto ao fazer diff em arquivos binários
+# Requer configuração extra do Git para funcionar corretamente
+#*.docx      diff=astextplain
+#*.pdf       diff=astextplain
