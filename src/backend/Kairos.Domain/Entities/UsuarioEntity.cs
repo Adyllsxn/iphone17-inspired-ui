@@ -1,7 +1,7 @@
 namespace Kairos.Domain.Entities;
 public sealed class UsuarioEntity: EntityBase, IAgragateRoot
 {
-    public NomeCompleto NomeCompleto { get; private set; } = null!;
+    public string Nome { get; private set; } = null!;
     public string Email { get; private set; } = null!;
     public int PerfilID { get; private set; }
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
@@ -23,15 +23,15 @@ public sealed class UsuarioEntity: EntityBase, IAgragateRoot
 
     [JsonConstructor]
     public UsuarioEntity(){}
-    public UsuarioEntity(int id, string nome, string sobreNome, string email, int perfilID, DateTime dataCadastro)
+    public UsuarioEntity(int id, string nome, string email, int perfilID, DateTime dataCadastro)
     {
         DomainValidationException.When(id <= 0 , "ID deve ser maior que zero.");
         Id = id;
-        ValidationDomain(nome, sobreNome, email, perfilID, dataCadastro);
+        ValidationDomain(nome, email, perfilID, dataCadastro);
     }
-    public UsuarioEntity( string nome, string sobreNome, string email, int perfilID, DateTime dataCadastro)
+    public UsuarioEntity( string nome,  string email, int perfilID, DateTime dataCadastro)
     {
-        ValidationDomain(nome, sobreNome, email, perfilID, dataCadastro);
+        ValidationDomain(nome, email, perfilID, dataCadastro);
     }
 
     public void UpdatePassword(byte[] passwordHash, byte[] passwordSalt)
@@ -43,14 +43,17 @@ public sealed class UsuarioEntity: EntityBase, IAgragateRoot
     {
         IsActive = isActive;
     }
-    public void ValidationDomain( string nome, string sobreNome, string email, int perfilID, DateTime dataCadastro)
+    public void ValidationDomain( string nome, string email, int perfilID, DateTime dataCadastro)
     {
+        DomainValidationException.When(string.IsNullOrWhiteSpace(nome), "Nome é obrigatório.");
+        DomainValidationException.When(email.Length > 150, "Nome deve ter no máximo 150 caracteres.");
+
         DomainValidationException.When(string.IsNullOrWhiteSpace(email), "Email é obrigatório.");
         DomainValidationException.When(email.Length > 250, "Email deve ter no máximo 250 caracteres.");
 
         DomainValidationException.When(perfilID <= 0 , "ID deve ser maior que zero.");
 
-        NomeCompleto = new NomeCompleto(nome, sobreNome);
+        Nome = nome;
         Email = email;
         PerfilID = perfilID;
         DataCadastro = dataCadastro;

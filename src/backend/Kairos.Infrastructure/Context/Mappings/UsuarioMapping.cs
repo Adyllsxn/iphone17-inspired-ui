@@ -5,9 +5,9 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
         {
                 builder.ToTable("Tbl_Usuario");
                 builder.HasKey(x => x.Id);
-                builder.Property(x => x.NomeCompleto).
+                builder.Property(x => x.Nome).
                         IsRequired(true).
-                        HasMaxLength(100).
+                        HasMaxLength(150).
                         HasColumnType("VARCHAR");
                         
                 builder.Property(x => x.Email).
@@ -23,6 +23,6 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
                 builder.Property(x => x.IsActive).
                         IsRequired(true);
 
-                builder.HasOne(x => x.Perfil).WithMany(x => x.Usuarios).HasForeignKey(x => x.PerfilID).HasConstraintName("FK_Perfil_Usuario").OnDelete(DeleteBehavior.Cascade);
+                builder.HasOne(x => x.Perfil).WithMany(x => x.Usuarios).HasForeignKey(x => x.PerfilID).HasConstraintName("FK_Perfil_Usuario").OnDelete(DeleteBehavior.NoAction);
         }
 }
