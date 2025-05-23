@@ -1,12 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Kairos.Tests.UnitTests.Repositories.Perfil
+namespace Kairos.Tests.UnitTests.Repositories.Perfil;
+public class GetByIdTests
 {
-    public class GetByIdTests
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnBadRequest_WhenIdIsInvalid()
     {
-        
+        using var context = InMemoryDB.CreateInMemoryDbContext();
+        var repository = new PerfilRepository(context);
+
+        var result = await repository.GetByIdAsync(0, CancellationToken.None);
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal(400, result.Code);
     }
+
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnNotFound_WhenIdDoesNotExist()
+    {
+        using var context = InMemoryDB.CreateInMemoryDbContext();
+        var repository = new PerfilRepository(context);
+
+        var result = await repository.GetByIdAsync(999, CancellationToken.None);
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal(404, result.Code);
+    }
+
 }

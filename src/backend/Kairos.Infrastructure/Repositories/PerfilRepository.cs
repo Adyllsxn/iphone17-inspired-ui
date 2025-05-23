@@ -148,12 +148,12 @@ public class PerfilRepository(AppDbContext context) : IPerfilRepository
         {
             try
             {
-                if(entity == null)
+                if(expression == null)
                 {
                     return new Result<List<PerfilEntity>?>(
                         null, 
                         400, 
-                        "Parâmetros não podem estar vazio."
+                        "Expressão de busca inválida."
                         );
                 }
                 var response = await context.Perfils.Where(expression).ToListAsync(token);

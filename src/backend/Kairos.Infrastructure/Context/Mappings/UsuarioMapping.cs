@@ -5,9 +5,9 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
         {
                 builder.ToTable("Tbl_Usuario");
                 builder.HasKey(x => x.Id);
-                builder.Property(x => x.NomeCompleto).
+                builder.Property(x => x.Nome).
                         IsRequired(true).
-                        HasMaxLength(100).
+                        HasMaxLength(150).
                         HasColumnType("VARCHAR");
                         
                 builder.Property(x => x.Email).
