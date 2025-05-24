@@ -25,5 +25,14 @@
 #region </Application>
     global using Kairos.Application.Abstractions.DI;
     global using Kairos.Application.Abstractions.Interfaces;
+
     global using Kairos.Application.UseCases.TipoEvento.GetAll;
+    global using Kairos.Application.UseCases.TipoEvento.Create;
+    global using Kairos.Application.UseCases.TipoEvento.Delete;
+    global using Kairos.Application.UseCases.TipoEvento.GetById;
+    global using Kairos.Application.UseCases.TipoEvento.Search;
+    global using Kairos.Application.UseCases.TipoEvento.Update;
+
+    global using Kairos.Application.UseCases.Perfil.GetById;
+    global using Kairos.Application.UseCases.Perfil.Search;
 #endregion

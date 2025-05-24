@@ -3,6 +3,8 @@ public static class ServiceDI
 {
     public static void AddServiceDI (this IServiceCollection services)
     {
+        services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<ITipoEventoService, TipoEventoService>();
+        services.AddScoped<IPerfilService, PerfilService>();
     }
 }

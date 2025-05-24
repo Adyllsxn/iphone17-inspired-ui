@@ -19,13 +19,19 @@
     global using Kairos.Application.Abstractions.Interfaces;
     global using Kairos.Application.Abstractions.ExtensionsMethods.TipoEvento;
     global using Kairos.Application.Abstractions.ExtensionsMethods.Dashboard;
+    global using Kairos.Application.Abstractions.ExtensionsMethods.Perfil;
     global using Kairos.Application.Services;
     
     global using Kairos.Application.UseCases.Dashboard;
 
     global using Kairos.Application.UseCases.TipoEvento.Create;
+    global using Kairos.Application.UseCases.TipoEvento.Delete;
     global using Kairos.Application.UseCases.TipoEvento.GetAll;
     global using Kairos.Application.UseCases.TipoEvento.GetById;
     global using Kairos.Application.UseCases.TipoEvento.Search;
     global using Kairos.Application.UseCases.TipoEvento.Update;
+
+    global using Kairos.Application.UseCases.Perfil.GetAll;
+    global using Kairos.Application.UseCases.Perfil.GetById;
+    global using Kairos.Application.UseCases.Perfil.Search;
 #endregion
