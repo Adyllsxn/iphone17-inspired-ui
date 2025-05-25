@@ -19,6 +19,7 @@
     global using Kairos.Presentation.Core.Extensions.Architecture;
     global using Kairos.Presentation.Core.Configurations;
     global using Kairos.Presentation.Features.Usuario.Model;
+    global using Kairos.Presentation.Features.Evento.Model;
 #endregion
 
 #region </Infrastructure>
@@ -45,6 +46,9 @@
     global using Kairos.Application.UseCases.Usuario.GetAll;
     global using Kairos.Application.UseCases.Usuario.Search;
     global using Kairos.Application.UseCases.Usuario.Update;
+
+    global using Kairos.Application.UseCases.Evento.Create;
+    global using Kairos.Application.UseCases.Evento.GetFile;
 #endregion
 
 #region </Domain>
