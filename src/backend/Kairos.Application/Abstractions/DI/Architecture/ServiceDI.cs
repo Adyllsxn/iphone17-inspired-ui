@@ -7,5 +7,6 @@ public static class ServiceDI
         services.AddScoped<ITipoEventoService, TipoEventoService>();
         services.AddScoped<IPerfilService, PerfilService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
+        services.AddScoped<IEventoService, EventoService>();
     }
 }

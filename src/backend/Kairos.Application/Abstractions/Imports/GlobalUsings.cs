@@ -14,6 +14,7 @@
     global using Kairos.Domain.Abstrations.Pagination;
     global using Kairos.Domain.Abstrations.Interfaces;
     global using Kairos.Domain.Abstrations.Shared;
+    global using Kairos.Domain.Abstrations.Enums;
     global using Kairos.Domain.Entities;
 #endregion
 
@@ -25,6 +26,7 @@
     global using Kairos.Application.Abstractions.ExtensionsMethods.Dashboard;
     global using Kairos.Application.Abstractions.ExtensionsMethods.Perfil;
     global using Kairos.Application.Abstractions.ExtensionsMethods.Usuario;
+    global using Kairos.Application.Abstractions.ExtensionsMethods.Evento;
     global using Kairos.Application.Services;
     
     
@@ -48,4 +50,7 @@
     global using Kairos.Application.UseCases.Usuario.Update;
     global using Kairos.Application.UseCases.Usuario.Delete;
     global using Kairos.Application.UseCases.Usuario.Exist;
+
+    global using Kairos.Application.UseCases.Evento.Create;
+    global using Kairos.Application.UseCases.Evento.GetFile;
 #endregion

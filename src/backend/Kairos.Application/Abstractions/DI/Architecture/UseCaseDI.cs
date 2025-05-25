@@ -13,6 +13,11 @@ public static class UseCaseDI
             services.AddScoped<SearchPerfilHandler>();
         #endregion
 
+        #region </Evento>
+            services.AddScoped<CreateEventoHandler>();
+            services.AddScoped<GetFileEventoHandler>();
+        #endregion
+
         #region </Usuario>
             services.AddScoped<CreateUsuarioHandler>();
             services.AddScoped<DeleteUsuarioHandler>();
