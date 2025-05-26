@@ -1,5 +1,5 @@
 namespace Kairos.Application.UseCases.Presenca.GetAll;
-public class GetPresencaHandler(IPresencaRepository repository, IUnitOfWork unitOfWork)
+public class GetPresencaHandler(IPresencaRepository repository)
 {
     public async Task<PagedList<List<GetPresencaResponse>?>> GetHandler(GetPresencaCommand command, CancellationToken token)
     {

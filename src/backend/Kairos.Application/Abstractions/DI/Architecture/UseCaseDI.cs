@@ -20,6 +20,14 @@ public static class UseCaseDI
             services.AddScoped<GetPresencaByIdHandler>();
         #endregion
 
+        #region </Presença>
+            services.AddScoped<CreateSugestaoHandler>();
+            services.AddScoped<DeleteSugestaoHandler>();
+            services.AddScoped<GetSugestaoHandler>();
+            services.AddScoped<GetSugestaoByIdHandler>();
+            services.AddScoped<UpdateSugestaoHandler>();
+        #endregion
+
         #region </Evento>
             services.AddScoped<CreateEventoHandler>();
             services.AddScoped<DeleteEventoHandler>();
