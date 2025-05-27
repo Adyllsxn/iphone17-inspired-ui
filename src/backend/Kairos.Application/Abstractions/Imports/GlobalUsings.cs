@@ -29,6 +29,7 @@
     global using Kairos.Application.Abstractions.ExtensionsMethods.Usuario;
     global using Kairos.Application.Abstractions.ExtensionsMethods.Evento;
     global using Kairos.Application.Abstractions.ExtensionsMethods.Presenca;
+    global using Kairos.Application.Abstractions.ExtensionsMethods.Sugestao;
     global using Kairos.Application.Services;
     
     global using Kairos.Application.UseCases.Dashboard;
@@ -74,4 +75,7 @@
     global using Kairos.Application.UseCases.Sugestao.GetAll;
     global using Kairos.Application.UseCases.Sugestao.GetById;
     global using Kairos.Application.UseCases.Sugestao.Update;
+    global using Kairos.Application.UseCases.Sugestao.GetRead;
+    global using Kairos.Application.UseCases.Sugestao.GetUnRead;
+    global using Kairos.Application.UseCases.Sugestao.MarkAsRead;
 #endregion

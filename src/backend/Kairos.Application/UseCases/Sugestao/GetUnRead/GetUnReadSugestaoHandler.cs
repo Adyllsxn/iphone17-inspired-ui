@@ -1,11 +1,11 @@
-namespace Kairos.Application.UseCases.Sugestao.GetAll;
-public class GetSugestaoHandler(ISugestaoRepository repository)
+namespace Kairos.Application.UseCases.Sugestao.GetUnRead;
+public class GetUnReadSugestaoHandler(ISugestaoRepository repository)
 {
-    public async Task<PagedList<List<GetSugestaoResponse>?>> GetHandler(GetSugestaoCommand command, CancellationToken token)
+    public async Task<PagedList<List<GetSugestaoResponse>?>> GetAllUnreadHandler(GetSugestaoCommand command, CancellationToken token)
     {
         try
         {
-            var response = await repository.GetAllAsync(command,token);
+            var response = await repository.GetAllUnreadAsync(command,token);
 
             if (response.Data == null || !response.Data.Any())
             {
