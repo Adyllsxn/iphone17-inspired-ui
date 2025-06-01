@@ -9,7 +9,7 @@ export default function Login({ onLogin }) {
 
     const handlerSubmit = (event) =>{
         event.preventDefault();
-        alert(`Bem-vindo ao Kairos: ${email}`)
+        alert(`Bem-vindo ao Kairos: ${email} ${password}`);
     }
 
     return (
