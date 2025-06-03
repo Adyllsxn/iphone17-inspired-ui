@@ -31,16 +31,10 @@ export default function Header({ onLogout }) {
 
                 <ul className={`nav-menu ${menuActive ? 'active' : ''}`}>
                     <li className='nabar-item'>
-                        <Link className='nav-link'>Início</Link>
+                        <Link to="/" className='nav-link'>Início</Link>
                     </li>
-                    <li className='nabar-item drop-hover'>
-                        <Link className='nav-link'>Eventos</Link>
-                        <div className='drop'>
-                            <Link className='nav-link-drop'>Listar Eventos</Link>
-                            <Link className='nav-link-drop'>Criar Novo Evento</Link>
-                            <Link className='nav-link-drop'>Tipos de Evento</Link>
-                            <Link className='nav-link-drop'>Sugestões</Link>
-                        </div>
+                    <li className='nabar-item'>
+                        <Link to="/listarEvento" className='nav-link'>Eventos</Link>
                     </li>
                     <li className='nabar-item'>
                         <Link className='nav-link'>Organização</Link>

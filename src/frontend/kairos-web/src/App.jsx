@@ -2,11 +2,15 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Login from './pages/public/Login'
+import Listar from './pages/evento/Listar';
+import Detalhes from './pages/evento/Detalhes';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { useState } from 'react'
 
 import './styles/App.css'
+
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -28,7 +32,8 @@ function App() {
       <Header onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* Se quiser forçar a rota login a redirecionar para home quando já logado */}
+        <Route path="/listarEvento" element={<Listar />} />
+        <Route path="/detalhesEvento" element={<Detalhes />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

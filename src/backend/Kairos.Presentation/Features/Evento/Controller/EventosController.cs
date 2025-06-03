@@ -1,6 +1,6 @@
 namespace Kairos.Presentation.Features.Evento.Controller;
 [ApiController]
-[Route("api/")]
+[Route("v1/")]
 [Authorize]
 public class EventosController(IEventoService service, IUsuarioService usuario) : ControllerBase
 {
@@ -38,18 +38,6 @@ public class EventosController(IEventoService service, IUsuarioService usuario) 
         [HttpGet("EventosAprovados"), EndpointSummary("Obter Eventos Aprovados")]
         public async Task<ActionResult> GetAprovado([FromQuery] GetEventosCommand command,CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
-            {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
-
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == 1 || user.Data?.PerfilID == 2))
-            {
-                return Unauthorized("Você não tem permissão para visualizar evento.");
-            }
-
             var response = await service.GetAprovadoHandler(command,token);
             return Ok(response);
         }
