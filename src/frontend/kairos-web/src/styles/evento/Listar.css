@@ -43,17 +43,16 @@
 }
 .evento-cards{
     width: 100%;
-    padding: 10px 5px;
+    padding: 10px 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    padding: auto;
-    gap: 10px;
+    gap: 30px;
 }
 .evento-card-content{
     width: 220px;
     height: 300px;
-    padding: 6px;
+    padding: 1px;
     border-radius: 5px;
     border: 1px solid #d9782c;
     box-shadow: 1px 1px 9px #0000005b;
@@ -62,12 +61,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5px;
 }
 .evento-card-content .evento-card-img{
     border-radius: 5px;
     width: 100%;
-    height: 70%;
+    height: 65%;
 }
 .evento-card-content .evento-card-img img{
     width: 100%;
@@ -76,19 +74,25 @@
 }
 .evento-card-content .evento-card-inf{
     width: 100%;
-    height: 25%;
+    height: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 8px;
-    padding: 10px 0;
+    padding: 5px 2px;
 }
 .evento-card-content .evento-card-inf h5{
     font-size: 17px;
     color: #d9782c;
     text-shadow: #000 1px 1px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 20px 0;
+    
 }
 .evento-card-content .evento-card-inf .evento-card-inf-link{
     text-align: center;
@@ -103,4 +107,28 @@
     background: #d4b37f;
     font-size: 16px;
     transition: all .4 ease-in-out;
+}
+
+.paginacao {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+.paginacao button {
+    margin: 0 3px;
+    padding: 6px 12px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.paginacao button.ativo {
+    background-color: #d9782c;
+    color: white;
+    font-weight: bold;
+}
+.paginacao button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

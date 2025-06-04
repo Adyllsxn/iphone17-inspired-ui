@@ -1,11 +1,12 @@
 import React from 'react';
 import '../styles/Home.css';
-import videoSrc from '..//assets/videos/background.mp4';
+import videoSrc from '../assets/videos/background.mp4';
 
 export default function Home() {
     return (
         <main>
 
+            {/* HERO */}
             <section className='hero'>
                 <div className='hero-section'>
                     <div id="hero-background">
@@ -29,43 +30,47 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* WELCOME */}
             <section className='welcome-section'>
                 <div className='layout-container'>
                     <div className='welcome-content'>
                         <div className='welcome-text'>
-                            <h1>Seja bem-vindo a Igreja Sossego em Cristo!</h1>
+                            <h1>Bem-vindo ao Kairos</h1>
                             <p>
-                                Participar de uma comunidade é um dos melhores caminhos para encorajar o crescimento espiritual. Através dos Grupos da cidade, faixas etárias, discipulado e ministérios, você terá a oportunidade de se conectar e crescer em seu relacionamento com Cristo. Vem com a gente!
+                                Aqui você pode consultar facilmente todos os eventos da igreja, desde cultos regulares até encontros especiais, conferências e projetos de ministério. 
+                                Acompanhe suas inscrições, participe ativamente e mantenha-se conectado com a comunidade.
+                                Também poderá gerenciar seu perfil e receber notificações sobre novidades e mudanças na programação.
                             </p>
                         </div>
                         <div className='welcome-buttons'>
-                            <a href="#">Programação</a>
-                            <a href="#">Programação</a>
-                            <a href="#">Programação</a>
+                            <a href="/eventos">Ver Eventos</a>
+                            <a href="/inscricoes">Minhas Inscrições</a>
+                            <a href="/perfil">Meu Perfil</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            {/* CARDS */}
             <section className='cards-section'>
                 <div className='layout-container'>
                     <div className='cards-grid'>
                         <div className='card'>
-                            <h1> Para Empresas</h1>
+                            <h1>Fique por dentro</h1>
                             <p>
-                                Por apenas R$ 9,90/ mês por colaborador, tenha acesso a todos os conteúdos do nosso catálogo no Intersaberes Play. Monte o curso que mais se adequa à sua realidade em quase 60 áreas. 
+                                Confira toda a programação atualizada dos cultos, encontros e eventos especiais da igreja.
                             </p>
                         </div>
                         <div className='card'>
-                            <h1> Para Empresas</h1>
+                            <h1>Participe facilmente</h1>
                             <p>
-                                Por apenas R$ 9,90/ mês por colaborador, tenha acesso a todos os conteúdos do nosso catálogo no Intersaberes Play. Monte o curso que mais se adequa à sua realidade em quase 60 áreas. 
+                                Inscreva-se e acompanhe sua participação de forma prática e rápida pelo sistema.
                             </p>
                         </div>
                         <div className='card'>
-                            <h1> Para Empresas</h1>
+                            <h1>Seu espaço pessoal</h1>
                             <p>
-                                Por apenas R$ 9,90/ mês por colaborador, tenha acesso a todos os conteúdos do nosso catálogo no Intersaberes Play. Monte o curso que mais se adequa à sua realidade em quase 60 áreas. 
+                                Gerencie seus dados, veja suas inscrições e mantenha tudo organizado em um só lugar.
                             </p>
                         </div>
                     </div>

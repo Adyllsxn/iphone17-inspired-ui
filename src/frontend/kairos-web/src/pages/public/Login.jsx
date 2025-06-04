@@ -1,63 +1,83 @@
 import React, { useState } from 'react';
-import {FaUser, FaLock } from 'react-icons/fa';
+import { FaUser, FaLock } from 'react-icons/fa';
 import apiservice from '../../service/ApiService';
-import '../../styles/public/Login.css'
+import '../../styles/public/Login.css';
+import Alert from '../../components/shared/Alert';
 
 export default function Login({ onLogin }) {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({ message: '', type: '' });
 
-    async function login(event){
+    async function login(event) {
         event.preventDefault();
-        const data = {
-            email,password
-        };
-        try{
+        setLoading(true);
+        const data = { email, password };
+
+        try {
             const response = await apiservice.post('/v1/Login', data);
             localStorage.setItem('email', email);
             localStorage.setItem('token', response.data.token);
 
-            onLogin(); 
-            
             onLogin();
-
-        }catch(error){
-            alert(`Login falhou: ${error}`);
+        } catch (error) {
+            let message = 'Erro ao fazer login.';
             if (error.response) {
-            console.log("Dados da resposta:", error.response.data);
-            console.log("Status:", error.response.status);
-            console.log("Headers:", error.response.headers);
+                if (error.response.status === 401) {
+                    message = 'Email ou senha inválidos.';
+                } else if (error.response.status === 404) {
+                    message = 'Usuário não encontrado.';
+                } else {
+                    message = error.response.data?.message || 'Erro inesperado.';
+                }
             } else if (error.request) {
-            console.log("Nenhuma resposta recebida:", error.request);
+                message = 'Servidor não respondeu. Verifique sua conexão.';
             } else {
-            console.log("Erro ao configurar a requisição:", error.message);
+                message = error.message;
             }
+
+            setAlert({ message, type: 'error' }); // DISPARA ALERTA
+        } finally {
+            setLoading(false);
         }
     }
-    
+
     return (
         <main className='login-wrap'>
+            {alert.message && (
+                <Alert 
+                    message={alert.message} 
+                    type={alert.type} 
+                    onClose={() => setAlert({ message: '', type: '' })} 
+                />
+            )}
+
             <div className='login-conteiner'>
                 <form onSubmit={login}>
                     <h1>Kairos</h1>
 
                     <div className='input-field'>
-                        <input  type="email" 
-                                placeholder='Exemplo@gmail.com'
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)} />
-                        <FaUser className='icon'/> 
+                        <input
+                            type="email"
+                            placeholder='Exemplo@gmail.com'
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <FaUser className='icon' />
                     </div>
 
                     <div className='input-field'>
-                        <input  type={showPassword ? 'text' : 'password'}
-                                placeholder='Senha'
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}/>
-                        <FaLock className='icon'/>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder='Senha'
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <FaLock className='icon' />
                     </div>
 
                     <div className='toggle-password'>
@@ -65,14 +85,16 @@ export default function Login({ onLogin }) {
                             type="checkbox"
                             id="showPassword"
                             checked={showPassword}
-                            onChange={() => setShowPassword(!showPassword)} />
+                            onChange={() => setShowPassword(!showPassword)}
+                        />
                         <label htmlFor="showPassword">Mostrar a senha</label>
                     </div>
 
-
-                    <button type="submit">Entrar</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Aguarde...' : 'Entrar'}
+                    </button>
                 </form>
             </div>
         </main>
-    )
+    );
 }
