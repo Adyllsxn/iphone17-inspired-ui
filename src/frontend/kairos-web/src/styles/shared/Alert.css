@@ -13,22 +13,20 @@
 .custom-alert span{
     font-size: 14px;
 }
-
 .custom-alert.success {
     background-color: #2ecc71;
 }
-
 .custom-alert.error {
     background-color: #e74c3c;
 }
-
 .custom-alert.warning {
     background-color: #f39c12;
 }
-
 .custom-alert.info {
     background-color: #3498db;
 }
+
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }

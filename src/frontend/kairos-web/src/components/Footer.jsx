@@ -14,24 +14,8 @@ export default function Footer() {
                             <h3>Institucional</h3>
                             <ul>
                                 <li><a href="#">Sobre Nós</a></li>
-                                <li><a href="#">Equipe de Desenvolvimento</a></li>
+                                <li><a href="#">Ajuda</a></li>
                                 <li><a href="#">Contato</a></li>
-                            </ul>
-                        </div>
-                        <div className='footer-column'>
-                            <h3>Redes Socias</h3>
-                            <ul>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">FaceBook</a></li>
-                                <li><a href="#">X</a></li>
-                            </ul>
-                        </div>
-                        <div className='footer-column'>
-                            <h3>Ajuda</h3>
-                            <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Suporte Técnico</a></li>
-                                <li><a href="#">Manual do Usuário</a></li>
                             </ul>
                         </div>
                         <div className='footer-column'>
@@ -40,6 +24,14 @@ export default function Footer() {
                                 <li>Endereço: Rua Exemplo, 123 - Sossego</li>
                                 <li>Telefone: (+244) 912-034-678</li>
                                 <li>Email: contato@sossegoemcristo.org</li>
+                            </ul>
+                        </div>
+                        <div className='footer-column'>
+                            <h3>Redes Socias</h3>
+                            <ul>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">FaceBook</a></li>
+                                <li><a href="#">X</a></li>
                             </ul>
                         </div>
                     </div>
