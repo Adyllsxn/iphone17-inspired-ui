@@ -14,8 +14,8 @@ export default function Detalhes() {
 
   return (
     <main>
+      <section className='evento-detalhe-content'>
       <div className='layout-container'>
-        <section className='evento-detalhe-content'>
           <div className='evento-detalhes'>
 
             <div className='evento-detalhe-img'>
@@ -31,8 +31,9 @@ export default function Detalhes() {
             </div>
 
           </div>
-        </section>
+        
       </div>
+      </section>
     </main>
   );
 }

@@ -22,6 +22,7 @@
     font-size: 16px;
     color: #d9782c;
     background: #fff;
+    border: 1px solid #d9782c;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -35,6 +36,7 @@
     border-bottom-right-radius: 10px;
     color: #d9782c;
     transition: all .5s ease-in-out;
+    border: 1px solid #d9782c;
 }
 .eventos-section .evento-content form button:hover{
     background: #d9782c;
@@ -49,18 +51,25 @@
     flex-wrap: wrap;
     gap: 30px;
 }
-.evento-card-content{
+.evento-card-content {
     width: 220px;
     height: 300px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #d9782c;
-    box-shadow: 1px 1px 9px #0000005b;
-    backdrop-filter: blur(10px);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.evento-card-content:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 .evento-card-content .evento-card-img{
     border-radius: 5px;

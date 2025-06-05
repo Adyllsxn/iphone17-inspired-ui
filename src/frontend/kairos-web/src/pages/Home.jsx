@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Home.css';
 import videoSrc from '../assets/videos/background.mp4';
 import InspirationalSlider from '../components/shared/InspirationalSlider';
+import ChurchMap from '../components/shared/ChurchMap';
 
 export default function Home() {
     return (
@@ -79,34 +80,10 @@ export default function Home() {
             </section>
 
             {/* MAPA DA IGREJA */}
-            <section className='mapa-section'>
-                <div className='layout-container'>
-                    <h2 className='mapa-title'>Como Chegar</h2>
-                    <p className='mapa-subtitle'>Veja nossa localização e venha nos visitar!</p>
-                    <div className='mapa-container'>
-                        <iframe
-                            title="Localização da Igreja"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.2996508237295!2d13.23835331482178!3d-8.838333190180294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a52f1ef3ab65a8f%3A0x9fcfbb00eb70548d!2sLuanda!5e0!3m2!1spt-PT!2sao!4v1717583183521!5m2!1spt-PT!2sao"
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        >
-                        </iframe>
-                    </div>
-                    <a
-                    href="https://www.google.com/maps/place/Luanda"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mapa-button"
-                    >
-                    Abrir no Google Maps
-                    </a>
-                </div>
-            </section>
-
+            <ChurchMap />
+            
             {/* SLIDE DE FRASES */}
             <InspirationalSlider />
-
 
         </main>
     )
