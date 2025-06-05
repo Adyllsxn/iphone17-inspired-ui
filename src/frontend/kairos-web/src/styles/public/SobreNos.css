@@ -1,19 +1,17 @@
-.sobre-nos-section{
-    padding: 50px 0;
-    height: 60vh;
+.sobre-nos-section {
+    padding: 40px 0;
+    background-color: #f9f9f9;
 }
-.sobre-nos-section .sobre-nos-content{
-    width: 100%;
-}
-.sobre-nos-section .sobre-nos-content h1{
-    text-shadow: #000 1px 1px;
-    font-weight: bold;
-    font-size: 2rem;
-    margin: 20px 0;
-}
-
-.sobre-nos-section .sobre-nos-content p{
-    font-size: 16px;
+.sobre-nos-content {
+    color: #333;
     line-height: 1.6;
-    text-align: justify;
+}
+.sobre-nos-content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #222;
+}
+.sobre-nos-content p {
+    margin-bottom: 16px;
+    font-size: 16px;
 }

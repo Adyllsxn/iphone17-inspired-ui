@@ -83,7 +83,7 @@
 .welcome-section {
     position: relative;
     width: 100%;
-    background-color: var(--color01);
+    background-color: #f9f9f9;
     padding: 30px 0;
 }
 .welcome-content{
@@ -97,6 +97,7 @@
     font-weight: 500;
     font-size: 40px;
     text-transform: capitalize;
+    color: #222;
     text-shadow: #000 1px 1px;
 }
 .welcome-section .welcome-text p{
@@ -104,6 +105,7 @@
     font-size: 16px;
     font-weight: 300;
     line-height: 2;
+    color: #333;
     text-align: center;
 }
 .welcome-buttons{
@@ -117,7 +119,7 @@
     margin: 0 10px;
     transition: all .1s;
     font-size: 15px;
-    text-shadow: #000 0px 0px 1px;
+    font-weight: bold;
 }
 .welcome-buttons a:hover{
     background: var(--col0r03);
@@ -160,6 +162,69 @@
     line-height: 1.5;
 }
 /*          cards-section           */
+
+/*          presenca-section           */
+.exemplo-section {
+    padding: 40px 0;
+    background-color: #fff;
+    height: 400px;
+}
+/*          presenca-section           */
+
+
+/*          mapa-section           */
+.mapa-section {
+    background-color: #f8f8f8;
+    padding: 60px 0;
+    text-align: center;
+}
+.mapa-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #222;
+}
+.mapa-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+}
+.mapa-container {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+.mapa-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.mapa-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #0d0d0d;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+.mapa-button:hover {
+    background-color: #333;
+}
+/*          mapa-section           */
+
+
+
+
+
+
+
 
 
 

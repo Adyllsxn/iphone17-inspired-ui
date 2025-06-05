@@ -6,14 +6,33 @@ export default function SobreNos() {
     <main>
       <section className='sobre-nos-section'>
         <div className='layout-container'>
-            <div className='sobre-nos-content'>
-                <h1>Sobre Nós</h1>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, enim dignissimos expedita laborum fugiat quisquam. Quisquam aliquam cumque aut corporis sequi. Unde quas distinctio hic molestiae alias recusandae, a aperiam laboriosam deserunt consequuntur, aliquam modi. Modi mollitia fugiat repudiandae sequi facere inventore unde consequuntur eligendi, omnis minus illo excepturi fugit dolor eum id culpa nobis debitis. Quis nostrum consequatur quos reprehenderit aliquam dignissimos fugiat quia debitis fugit quasi reiciendis minus ad soluta necessitatibus expedita culpa deleniti sapiente impedit nam odit repellat, atque nisi hic? Dolor facilis molestias id, culpa reiciendis inventore, quibusdam, ea commodi dignissimos iure minima itaque sunt nihil. Ex beatae temporibus ad corrupti aspernatur autem dolores, architecto ratione animi inventore sit ullam officiis reiciendis fugit quia exercitationem a suscipit! Excepturi, vel aut? Consequuntur ea, molestiae nulla delectus voluptate quis quos, nisi ratione atque officia maxime adipisci mollitia consequatur tenetur omnis? Enim, vero temporibus? Nulla dolores libero, aspernatur dolor distinctio quae reprehenderit magnam dolore quaerat accusamus esse. Error sed libero est nulla provident quam hic dolor earum quia nemo asperiores porro excepturi quis eum, delectus quos vero. Deleniti dolorem at ratione qui voluptate perspiciatis maiores, esse molestias est excepturi consequatur voluptates quibusdam? Totam ab corrupti ad cum quis ipsam officia deleniti quo debitis quam. Atque officia animi qui amet architecto tempora vel officiis magnam, id assumenda dolore ad perferendis iste ducimus repellat, culpa cum, beatae nihil laborum error maiores repudiandae totam aspernatur. Qui quidem sequi inventore atque, tenetur, voluptatibus nobis dolores quo molestiae, omnis numquam quia molestias alias laudantium.
-                </p>
-            </div>
+          <div className='sobre-nos-content'>
+            <h1>Sobre Nós</h1>
+            <p>
+              O <strong>Kairos</strong> é uma plataforma desenvolvida com o propósito de auxiliar igrejas na gestão eficiente de cultos, eventos e atividades ministeriais.
+              Buscamos oferecer uma solução prática e segura para líderes, membros e equipes administrativas, promovendo organização e excelência no serviço cristão.
+            </p>
+
+            <p>
+              Nosso sistema permite o agendamento de eventos, controle de presenças, comunicação interna e centralização de informações importantes.
+              Tudo isso em um ambiente simples, intuitivo e acessível, pensado para fortalecer a missão da igreja e facilitar o envolvimento dos membros.
+            </p>
+
+            <p>
+              Acreditamos que a tecnologia pode e deve ser usada como ferramenta para o avanço do Reino de Deus.
+              Por isso, desenvolvemos o Kairos com base em princípios cristãos, transparência e compromisso com a segurança dos dados.
+            </p>
+
+            <p>
+              Seja bem-vindo à nossa plataforma. Que cada funcionalidade aqui sirva para edificar e apoiar sua comunidade de fé.
+            </p>
+
+            <p>
+              <em>“Tudo deve ser feito com decência e ordem.” – 1 Coríntios 14:40</em>
+            </p>
+          </div>
         </div>
       </section>
     </main>
-  )
+  );
 }
