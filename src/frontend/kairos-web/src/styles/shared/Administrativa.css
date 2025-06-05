@@ -1,0 +1,65 @@
+.administrativa-section{
+    padding: 50px 0;
+}
+.administrativa-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.administrativa-content div{
+    width: 100%;
+    margin: 10px 0;
+}
+.administrativa-content .administrativa-context h1{
+    text-shadow: #000 1px 1px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.administrativa-content .administrativa-context p{
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 20px 0;
+}
+.administrativa-content .administrativa-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+}
+.administrativa-content .administrativa-button button{
+    border: none;
+    background: transparent;
+    text-shadow: #000 1px 1px;
+    border:1px solid #d9782c;
+    padding: 6px 10px;
+    border-radius:  5px;
+    transition: all 4.s ease-in-out;
+}
+.administrativa-content .administrativa-button button:hover{
+    background: #000;
+    transition: all 4.s ease-in-out;
+}
+.administrativa-content .administrativa-button button .nav-link{
+    color: #d9782c;
+}
+
+
+
+@media(max-width: 768px){
+    .administrativa-content .administrativa-context h1{
+        font-size: 1.4rem;
+    }
+    .administrativa-content .administrativa-context p{
+        line-height: 1.2;
+    }
+    .administrativa-content .administrativa-button{
+        flex-direction: column;
+    }
+    .administrativa-content .administrativa-button button{
+        width: 100%;
+    }
+}

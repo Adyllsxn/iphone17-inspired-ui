@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import '../styles/Footer.css';
 
 export default function Footer() {
@@ -13,9 +14,9 @@ export default function Footer() {
                         <div className='footer-column'>
                             <h3>Institucional</h3>
                             <ul>
-                                <li><a href="#">Sobre Nós</a></li>
-                                <li><a href="#">Ajuda</a></li>
-                                <li><a href="#">Contato</a></li>
+                                <li><Link to="/sobreNos" className='.nav-link'>Sobre Nós</Link></li>
+                                <li><Link to="/ajuda" className='.nav-link'>Ajuda</Link></li>
+                                <li><Link to="faq" className='.nav-link'>FAQ</Link></li>
                             </ul>
                         </div>
                         <div className='footer-column'>
@@ -39,7 +40,7 @@ export default function Footer() {
 
                 <div className="footer-bottom">
                     <p> © 2025 Kairos | Todos os direitos reservados </p>
-                    <p><a href="#">Política de Privacidade</a></p>
+                    <p><Link to="/politicaDePrivacidade" className='nav-link'>Política de Privacidade</Link></p>
                 </div>
             </div>
         </footer>

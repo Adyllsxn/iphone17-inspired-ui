@@ -35,6 +35,13 @@
 .footer-top .footer-links .footer-column a:hover{
     text-decoration: underline;
 }
+.footer-top .footer-links .footer-column .nav-link, li{
+    font-size: 16px;
+    margin: 10px 0;
+}
+.footer-top .footer-links .footer-column .nav-link:hover{
+    text-decoration: underline;
+}
 
 .footer-bottom{
     display: flex;

@@ -1,0 +1,18 @@
+.sobre-nos-section{
+    padding: 50px 0;
+}
+.sobre-nos-section .sobre-nos-content{
+    width: 100%;
+}
+.sobre-nos-section .sobre-nos-content h1{
+    text-shadow: #000 1px 1px;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+.sobre-nos-section .sobre-nos-content p{
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
