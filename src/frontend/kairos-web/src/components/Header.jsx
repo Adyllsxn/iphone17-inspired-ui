@@ -37,10 +37,7 @@ export default function Header({ onLogout }) {
                         <Link to="/listarEvento" className='nav-link'>Eventos</Link>
                     </li>
                     <li className='nabar-item'>
-                        <Link className='nav-link'>Organização</Link>
-                    </li>
-                    <li className='nabar-item'>
-                        <Link className='nav-link'>Administração</Link>
+                        <Link to="/administrativa" className='nav-link'>Administrativa</Link>
                     </li>
                     <li className='nabar-item drop-hover'>
                         <Link className='nav-link'>Perfil</Link>

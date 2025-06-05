@@ -111,16 +111,18 @@
 }
 .welcome-buttons a{
     color: var(--col0r03);
-    padding: 9px;
+    padding: 5px 15px;
     border: 1px solid var(--col0r03);
     border-radius: 20px;
     margin: 0 10px;
-    transition: all .2s;
+    transition: all .1s;
+    font-size: 15px;
+    text-shadow: #000 0px 0px 1px;
 }
 .welcome-buttons a:hover{
     background: var(--col0r03);
     color: var(--color01);
-    transition: all 2s;
+    transition: all 1s ease-in-out;
 }
 /*          welcome-section         */
 
@@ -141,13 +143,14 @@
 }
 .cards-grid .card{
     width: 330px;
-    height: 340px;
+    height: 280px;
     border: 2px solid var(--color01);
     border-radius: 10px;
     padding: 20px;
 }
 .cards-grid .card h1{
-    text-align: left;
+    text-align: center;
+    text-shadow: #000 0px 0px 1px;
     color: var(--color01);
     margin-bottom: 20px;
 }
