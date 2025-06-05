@@ -23,22 +23,16 @@ export default function Footer() {
                         <div className='footer-column'>
                             <h3>Igreja Sossego em Cristo</h3>
                             <ul>
-                                <li>Endereço: Rua Exemplo, 123 - Sossego</li>
-                                <li>Telefone: (+244) 912-034-678</li>
-                                <li>Email: contato@sossegoemcristo.org</li>
+                                <li>Endereço: Rua nº 03, Bairro Sossego, Kilamba</li>
+                                <li>Telefone: (+244) 925 573 990</li>
+                                <li>Email: sossegoemcristo@hotmail.com</li>
                             </ul>
                         </div>
                         <div className='footer-column'>
                             <h3>Redes Sociais</h3>
                             <div className='social-icons'>
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <FaInstagram />
-                                </a>
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <a href="https://www.facebook.com/nossosossegoemcristo" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                     <FaFacebookF />
-                                </a>
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                                    <FaXTwitter />
                                 </a>
                             </div>
                         </div>
