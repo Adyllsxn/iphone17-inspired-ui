@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import '../../styles/shared/Administrativa.css'
+import { Link } from 'react-router-dom';
+import '../../styles/shared/Administrativa.css';
 
 export default function Administrativa() {
     return (
@@ -10,19 +10,26 @@ export default function Administrativa() {
                     <div className='administrativa-content'>
                         <div className='administrativa-context'>
                             <h1>Área Administrativa</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum aut cupiditate eum aperiam hic illo quos obcaecati exercitationem, omnis maiores eveniet totam, quidem dolorum odit. Impedit molestias iusto nisi quisquam.</p>
+                            <p>
+                                Esta área é exclusiva para membros autorizados da equipe administrativa e de organização da igreja. 
+                                Aqui, é possível gerenciar eventos, definir responsáveis, controlar presença, ajustar horários e organizar os recursos para os cultos.
+                            </p>
                         </div>
                         <div className='administrativa-button'>
-                            <button className='button-org'>
-                                <Link className='nav-link'>Organização</Link>
-                            </button>
-                            <button className='button-adm'>
-                                <Link className='nav-link'>Administradores</Link>
-                            </button>
+                            <Link  className='nav-link'>
+                                <button className='button-org'>
+                                    Organização
+                                </button>
+                            </Link>
+                            <Link  className='nav-link'>
+                                <button className='button-adm'>
+                                    Administradores
+                                </button>
+                            </Link>
                         </div>
                     </div>  
                 </div>
             </section>
         </main>
-    )
+    );
 }

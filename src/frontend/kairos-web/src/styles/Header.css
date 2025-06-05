@@ -125,9 +125,6 @@ header{
 
 
 @media(max-width: 768px){
-    .drop-hover{
-        display: none;
-    }
     header{
         background: var(--color002);
     }
@@ -153,13 +150,14 @@ header{
     .nav-menu{
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 100px;
         gap: 0;
         border-radius: 0 0 20px 20px;
         background-color: var(--color002);
         text-align: center;
         flex-direction: column;
         width: 100%;
+        height: 100vh;
         transition: 0.3s;
     }
     .nabar-item{
@@ -168,5 +166,13 @@ header{
     .nav-menu.active{
         left: 0;
     }
-
+    .drop {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        background: transparent;
+    }
+    .drop .nav-link-drop:hover{
+        color: #d9782c;
+    }
 }

@@ -1,66 +1,73 @@
-.administrativa-section{
+.administrativa-section {
     padding: 50px 0;
-    height: 60vh;
+    min-height: 60vh;
+    background-color: #f9f9f9;
 }
-.administrativa-content{
+.administrativa-content {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
 }
-.administrativa-content div{
+.administrativa-context {
     width: 100%;
-    margin: 10px 0;
+    margin-bottom: 20px;
+    text-align: center;
 }
-.administrativa-content .administrativa-context h1{
+.administrativa-context h1 {
     text-shadow: #000 1px 1px;
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    color: #222;
 }
-.administrativa-content .administrativa-context p{
-    font-size: 15px;
-    line-height: 1.5;
+.administrativa-context p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 800px;
+    color: #333;
+    margin: 0 auto;
     text-align: justify;
-    margin: 20px 0;
 }
-.administrativa-content .administrativa-button{
+.administrativa-button {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
     gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-.administrativa-content .administrativa-button button{
+.administrativa-button .nav-link {
+    text-decoration: none;
+}
+.administrativa-button button {
     border: none;
     background: transparent;
-    text-shadow: #000 1px 1px;
-    border:1px solid #d9782c;
-    padding: 6px 10px;
-    border-radius:  5px;
-    transition: all 4.s ease-in-out;
+    background: #d9782c;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
 }
-.administrativa-content .administrativa-button button:hover{
+.administrativa-button button:hover {
     background: #000;
-    transition: all 4.s ease-in-out;
-}
-.administrativa-content .administrativa-button button .nav-link{
+    border: none;
     color: #d9782c;
 }
 
 
-
-@media(max-width: 768px){
-    .administrativa-content .administrativa-context h1{
+/* Responsivo */
+@media (max-width: 768px) {
+    .administrativa-context h1 {
         font-size: 1.4rem;
     }
-    .administrativa-content .administrativa-context p{
-        line-height: 1.2;
-    }
-    .administrativa-content .administrativa-button{
+
+    .administrativa-button {
         flex-direction: column;
+        gap: 10px;
     }
-    .administrativa-content .administrativa-button button{
+
+    .administrativa-button button {
         width: 100%;
     }
 }
