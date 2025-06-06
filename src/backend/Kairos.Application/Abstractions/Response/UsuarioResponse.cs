@@ -8,5 +8,6 @@ public record UsuarioResponse
     public int PerfilID { get;  set; }
     public PerfilResponse Perfil { get;  set; } = null!;
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
-    
+    public string Telefone { get; set; } = null!;
+    public string BI { get; set; } = null!;
 }

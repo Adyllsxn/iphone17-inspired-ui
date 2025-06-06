@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kairos.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250606124946_CREATEMIGRATIONS")]
+    [Migration("20250606150142_CREATEMIGRATIONS")]
     partial class CREATEMIGRATIONS
     {
         /// <inheritdoc />
@@ -220,10 +220,6 @@ namespace Kairos.Infrastructure.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("Foto")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -255,7 +251,16 @@ namespace Kairos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BI")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("PerfilID");
+
+                    b.HasIndex("Telefone")
+                        .IsUnique();
 
                     b.ToTable("Tbl_Usuario", (string)null);
                 });

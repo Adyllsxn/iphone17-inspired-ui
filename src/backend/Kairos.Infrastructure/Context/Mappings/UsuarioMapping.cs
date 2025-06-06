@@ -22,6 +22,9 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR");
 
+                builder.HasIndex(x => x.Email)
+                        .IsUnique();
+
                 builder.Property(x => x.PerfilID)
                         .IsRequired();
 
@@ -36,14 +39,16 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
+                builder.HasIndex(x => x.Telefone)
+                        .IsUnique();
+
                 builder.Property(x => x.BI)
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
-                builder.Property(x => x.Foto)
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
+                builder.HasIndex(x => x.BI)
+                        .IsUnique();
 
                 builder.Property(x => x.PasswordHash)
                         .IsRequired();
@@ -57,5 +62,6 @@ public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
                         .HasConstraintName("FK_Perfil_Usuario")
                         .OnDelete(DeleteBehavior.NoAction);
         }
+
 }
 
