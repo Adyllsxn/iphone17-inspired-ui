@@ -15,7 +15,9 @@ public static class GetUsuarioByIdExtensions
                 Id = entity.Perfil.Id,
                 Nome = entity.Perfil.Nome
             },
-            DataCadastro = entity.DataCadastro
+            DataCadastro = entity.DataCadastro,
+            Telefone = entity.Telefone,
+            BI = entity.BI
         };
     }
     public static IEnumerable<GetUsuarioByIdResponse> MapToGetUsuarioById(this IEnumerable<UsuarioEntity> response)
