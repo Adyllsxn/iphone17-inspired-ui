@@ -15,7 +15,9 @@ public static class SearchUsuarioExtensions
                 Id = entity.Perfil.Id,
                 Nome = entity.Perfil.Nome
             },
-            DataCadastro = entity.DataCadastro
+            DataCadastro = entity.DataCadastro,
+            Telefone = entity.Telefone,
+            BI = entity.BI
         };
     }
     public static IEnumerable<SearchUsuarioResponse> MapToSearchUsuario(this IEnumerable<UsuarioEntity> response)

@@ -43,6 +43,36 @@ public class UsuariosController(IUsuarioService service)  : ControllerBase
             return Ok(response);
         }
     #endregion
+    
+    #region </GetNotId>
+        [HttpGet("UsuarioGetNotId"), EndpointSummary("Obter Usuario Sem o  Id")]
+        [Authorize]
+        public async Task<ActionResult> GetGetNotId()
+        {
+            var command = new GetUsuarioByIdCommand();
+            var token = new CancellationToken();
+            
+            var userId = User.GetId();
+            var user = await service.GetByIdHandler(new GetUsuarioByIdCommand{Id = userId}, token);
+            if(command?.Id == 0)
+            {
+                command.Id = userId;
+            }
+            bool isAdmin = user.Data?.PerfilID == 1;
+            bool consultandoProprioUsuario = user.Data?.Id == command?.Id;
+
+            if (!consultandoProprioUsuario && !isAdmin)
+            {
+                return Unauthorized("Você não tem permissão para consultar os usuários do sistema.");
+            }
+
+            var newCommand = new GetUsuarioByIdCommand{
+                Id = userId
+            };
+            var response = await service.GetByIdHandler(newCommand,token);
+            return Ok(response);
+        }
+    #endregion
 
     #region </Search>
         [HttpGet("SearchUsuario"), EndpointSummary("Pesquisar Usuarios")]
