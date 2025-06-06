@@ -12,8 +12,7 @@ public static class CreateUsuarioExtensions
             command.PerfilID ?? 3,
             command.DataCadastro,
             command.Telefone,
-            command.BI,
-            command.Foto
+            command.BI
         );
     }
     
@@ -26,7 +25,9 @@ public static class CreateUsuarioExtensions
             SobreNome = entity.SobreNome,
             Email = entity.Email,
             PerfilID = entity.PerfilID,
-            DataCadastro = entity.DataCadastro
+            DataCadastro = entity.DataCadastro,
+            Telefone = entity.Telefone,
+            BI = entity.BI
         };
     }
     public static IEnumerable<CreateUsuarioResponse> MapToCreateUsuario(this IEnumerable<UsuarioEntity> response)

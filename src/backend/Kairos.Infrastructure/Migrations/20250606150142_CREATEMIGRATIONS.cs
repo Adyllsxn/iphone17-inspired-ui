@@ -54,8 +54,7 @@ namespace Kairos.Infrastructure.Migrations
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Telefone = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false),
-                    BI = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false),
-                    Foto = table.Column<string>(type: "VARCHAR", nullable: false)
+                    BI = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,9 +199,27 @@ namespace Kairos.Infrastructure.Migrations
                 column: "UsuarioID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tbl_Usuario_BI",
+                table: "Tbl_Usuario",
+                column: "BI",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tbl_Usuario_Email",
+                table: "Tbl_Usuario",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tbl_Usuario_PerfilID",
                 table: "Tbl_Usuario",
                 column: "PerfilID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tbl_Usuario_Telefone",
+                table: "Tbl_Usuario",
+                column: "Telefone",
+                unique: true);
         }
 
         /// <inheritdoc />

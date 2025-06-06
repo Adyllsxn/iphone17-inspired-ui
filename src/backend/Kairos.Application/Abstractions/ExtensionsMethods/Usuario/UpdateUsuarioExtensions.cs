@@ -12,8 +12,7 @@ public static class UpdateUsuarioExtensions
             command.PerfilID ?? 3,
             command.DataCadastro ,
             command.Telefone,
-            command.BI,
-            command.Foto
+            command.BI
         );
     }
     
@@ -26,7 +25,9 @@ public static class UpdateUsuarioExtensions
             SobreNome = entity.SobreNome,
             Email = entity.Email,
             PerfilID = entity.PerfilID,
-            DataCadastro = entity.DataCadastro
+            DataCadastro = entity.DataCadastro,
+            Telefone = entity.Telefone,
+            BI = entity.BI
         };
     }
     public static IEnumerable<UpdateUsuarioResponse> MapToUpdateUsuario(this IEnumerable<UsuarioEntity> response)

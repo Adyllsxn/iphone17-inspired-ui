@@ -43,7 +43,4 @@ public class CreateUsuarioCommand
     [Required(ErrorMessage = "BI é obrigatório")]
     [MaxLength(20)]
     public string BI { get; set; } = null!;
-
-    [Required(ErrorMessage = "Foto é obrigatória")]
-    public string Foto { get; set; } = null!;
 }

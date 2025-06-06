@@ -12,7 +12,6 @@ public sealed class UsuarioEntity : EntityBase, IAgragateRoot
 
     public string Telefone { get; private set; } = null!;
     public string BI { get; private set; } = null!;
-    public string Foto { get; private set; } = null!;
 
     [JsonIgnore]
     public PerfilEntity Perfil { get; private set; } = null!;
@@ -25,32 +24,27 @@ public sealed class UsuarioEntity : EntityBase, IAgragateRoot
 
     [JsonConstructor]
     public UsuarioEntity() { }
-    public UsuarioEntity(int id, string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi, string foto)
+    public UsuarioEntity(int id, string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi)
     {
         DomainValidationException.When(id <= 0 , "ID deve ser maior que zero.");
         Id = id;
-        ValidationDomain(nome, sobrenome, email, perfilID, dataCadastro, telefone, bi, foto);
+        ValidationDomain(nome, sobrenome, email, perfilID, dataCadastro, telefone, bi);
     }
-    public UsuarioEntity(string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi, string foto)
+    public UsuarioEntity(string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi)
     {
-        ValidationDomain(nome, sobrenome, email, perfilID, dataCadastro, telefone, bi, foto);
+        ValidationDomain(nome, sobrenome, email, perfilID, dataCadastro, telefone, bi);
     }
     public void UpdatePassword(byte[] passwordHash, byte[] passwordSalt)
     {
         PasswordHash = passwordHash;
         PasswordSalt = passwordSalt;
     }
-    public void AlterarFoto(string novaFoto)
-    {
-        DomainValidationException.When(string.IsNullOrWhiteSpace(novaFoto), "Foto é obrigatória.");
-        Foto = novaFoto;
-    }
     public void Deactivate()
     {
         IsActive = false;
     }
 
-    public void ValidationDomain(string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi, string foto)
+    public void ValidationDomain(string nome, string sobrenome, string email, int perfilID, DateTime dataCadastro, string telefone, string bi)
     {
         DomainValidationException.When(string.IsNullOrWhiteSpace(nome), "Nome é obrigatório.");
         DomainValidationException.When(nome.Length > 50, "Nome deve ter no máximo 50 caracteres.");
@@ -72,7 +66,6 @@ public sealed class UsuarioEntity : EntityBase, IAgragateRoot
         DomainValidationException.When(string.IsNullOrWhiteSpace(bi), "BI é obrigatório.");
         DomainValidationException.When(!biRegex.IsMatch(bi), "BI inválido.");
 
-        DomainValidationException.When(string.IsNullOrWhiteSpace(foto), "Foto é obrigatória.");
 
         Nome = nome;
         SobreNome = sobrenome;
@@ -82,6 +75,5 @@ public sealed class UsuarioEntity : EntityBase, IAgragateRoot
         IsActive = true;
         Telefone = telefone;
         BI = bi;
-        Foto = foto;
     }
 }
