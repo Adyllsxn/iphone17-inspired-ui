@@ -12,6 +12,10 @@ export default function Header({ onLogout }) {
         setMenuActive(!menuActive);
     };
 
+    const closeMenu = () => {
+        setMenuActive(false);
+    };
+
     useEffect(() => {
         const storedEmail = localStorage.getItem('email');
         const storedPerfilID = parseInt(localStorage.getItem('perfilID'), 10);
@@ -23,6 +27,7 @@ export default function Header({ onLogout }) {
     function handleLogoutClick() {
         onLogout();
         navigate('/login');
+        closeMenu(); // Fecha o menu também ao fazer logout
     }
 
     return (
@@ -33,30 +38,29 @@ export default function Header({ onLogout }) {
             </div>
             <nav className='navbar'>
             <div className="navbar-logo">
-                <Link to="/" className='nav-link'>Kairos</Link>
+                <Link to="/" className='nav-link' onClick={closeMenu}>Kairos</Link>
             </div>
 
             <ul className={`nav-menu ${menuActive ? 'active' : ''}`}>
                 <li className='nabar-item'>
-                <Link to="/" className='nav-link'>Início</Link>
+                <Link to="/" className='nav-link' onClick={closeMenu}>Início</Link>
                 </li>
 
                 <li className='nabar-item'>
-                <Link to="/listarEvento" className='nav-link'>Eventos</Link>
+                <Link to="/listarEvento" className='nav-link' onClick={closeMenu}>Eventos</Link>
                 </li>
 
-                {/* Exibe Administrativa somente se perfilID === 1 ou 2 */}
                 {(perfilID === 1 || perfilID === 2) && (
                 <li className='nabar-item'>
-                    <Link to="/administrativa" className='nav-link'>Administrativa</Link>
+                    <Link to="/administrativa" className='nav-link' onClick={closeMenu}>Administrativa</Link>
                 </li>
                 )}
 
                 <li className='nabar-item drop-hover'>
-                <Link className='nav-link'>Perfil</Link>
+                <span className='nav-link'>Perfil</span>
                 <div className='drop'>
-                    <Link to="/verPerfil" className='nav-link-drop'>Ver Perfil</Link>
-                    <Link className='nav-link-drop' onClick={handleLogoutClick}>Logout</Link>
+                    <Link to="/verPerfil" className='nav-link-drop' onClick={closeMenu}>Ver Perfil</Link>
+                    <span className='nav-link-drop' onClick={handleLogoutClick}>Logout</span>
                 </div>
                 </li>
             </ul>

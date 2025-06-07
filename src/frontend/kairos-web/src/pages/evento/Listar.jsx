@@ -10,7 +10,7 @@ export default function Listar() {
     const [busca, setBusca] = useState('');
     const [alert, setAlert] = useState({ message: '', type: '' });
     const [carregado, setCarregado] = useState(false); // indica se o carregamento terminou
-    const eventosPorPagina = 8;
+    const eventosPorPagina = 6;
 
     const token = localStorage.getItem("token");
     const authorization = {

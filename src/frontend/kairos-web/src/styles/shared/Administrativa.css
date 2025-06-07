@@ -29,45 +29,59 @@
     margin: 0 auto;
     text-align: justify;
 }
-.administrativa-button {
-    display: flex;
+.administrativa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-top: 30px;
 }
-.administrativa-button .nav-link {
+.card-link {
     text-decoration: none;
 }
-.administrativa-button button {
-    border: none;
-    background: transparent;
-    background: #d9782c;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
+.adm-card {
+    background-color: #fff;
+    border: 2px solid #d9782c;
+    border-radius: 10px;
+    padding: 20px;
+    color: #222;
+    text-align: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
-.administrativa-button button:hover {
-    background: #000;
-    border: none;
+.adm-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
     color: #d9782c;
 }
+.adm-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+.adm-card:hover {
+    background-color: #d9782c;
+    color: white;
+    border-color: black;
+    transform: scale(1.05) translateX(10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.adm-card:hover h2,
+.adm-card:hover p {
+    color: white;
+}
+.sem-acesso {
+    margin-top: 30px;
+    background-color: #ffe0e0;
+    padding: 20px;
+    border: 1px solid #ff7d7d;
+    border-radius: 10px;
+    text-align: center;
+    color: #a00;
+    max-width: 500px;
+}
 
 
-/* Responsivo */
 @media (max-width: 768px) {
     .administrativa-context h1 {
         font-size: 1.4rem;
-    }
-
-    .administrativa-button {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .administrativa-button button {
-        width: 100%;
     }
 }

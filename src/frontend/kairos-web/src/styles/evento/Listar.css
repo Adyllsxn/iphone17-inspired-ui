@@ -1,21 +1,26 @@
-.eventos-section{
+.eventos-section {
     padding: 10px 0;
 }
-.eventos-section .evento-content{
+.eventos-section .evento-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     flex-direction: row;
+    flex-wrap: wrap;
     padding: 10px 0;
 }
-.eventos-section .evento-content h1{
+.eventos-section .evento-content h1 {
     text-align: center;
     font-size: 2rem;
     color: #d9782c;
     text-shadow: #000 1px 1px;
 }
-.eventos-section .evento-content form input{
+.eventos-section .evento-content form {
+    display: flex;
+    flex-wrap: wrap;
+}
+.eventos-section .evento-content form input {
     outline: none;
     border: none;
     padding: 10px 30px;
@@ -25,8 +30,9 @@
     border: 1px solid #d9782c;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    min-width: 200px;
 }
-.eventos-section .evento-content form button{
+.eventos-section .evento-content form button {
     padding: 10px 15px;
     border: none;
     outline: none;
@@ -37,61 +43,57 @@
     color: #d9782c;
     transition: all .5s ease-in-out;
     border: 1px solid #d9782c;
+    background-color: white;
 }
-.eventos-section .evento-content form button:hover{
+.eventos-section .evento-content form button:hover {
     background: #d9782c;
     color: #000;
     transition: all .5s ease-in-out;
 }
-.evento-cards{
+.evento-cards {
     width: 100%;
     padding: 10px 15px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
 }
 .evento-card-content {
-    width: 220px;
-    height: 300px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .evento-card-content:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
-.evento-card-content .evento-card-img{
+.evento-card-content .evento-card-img {
     border-radius: 5px;
     width: 100%;
-    height: 65%;
+    height: 180px;
+    overflow: hidden;
 }
-.evento-card-content .evento-card-img img{
+.evento-card-content .evento-card-img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     border-radius: 5px;
 }
-.evento-card-content .evento-card-inf{
+.evento-card-content .evento-card-inf {
     width: 100%;
-    height: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 8px;
-    padding: 5px 2px;
+    padding: 10px 2px;
 }
-.evento-card-content .evento-card-inf h5{
+.evento-card-content .evento-card-inf h5 {
     font-size: 17px;
     color: #d9782c;
     text-shadow: #000 1px 1px;
@@ -100,22 +102,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-    padding: 20px 0;
-    
+    padding: 10px 0;
 }
-.evento-card-content .evento-card-inf .evento-card-inf-link{
+.evento-card-content .evento-card-inf .evento-card-inf-link {
     text-align: center;
     margin: auto;
     font-size: 14px;
-    padding: 5px;
+    padding: 5px 10px;
     background: #d9782c;
     border-radius: 5px;
-    transition: all .4 ease-in-out;
+    transition: all .4s ease-in-out;
+    color: white;
+    text-decoration: none;
 }
-.evento-card-content .evento-card-inf .evento-card-inf-link:hover{
+.evento-card-content .evento-card-inf .evento-card-inf-link:hover {
     background: #d4b37f;
     font-size: 16px;
-    transition: all .4 ease-in-out;
+    transition: all .4s ease-in-out;
 }
 .paginacao {
     margin-top: 20px;
@@ -143,15 +146,27 @@
 }
 
 
-
-@media(max-width: 768px){
-    .eventos-section .evento-content{
+@media(max-width: 768px) {
+    .eventos-section .evento-content {
         flex-direction: column;
+        gap: 20px;
     }
-    .eventos-section .evento-content h1{
-        font-size: 1.2rem;
+
+    .eventos-section .evento-content h1 {
+        font-size: 1.5rem;
     }
-    .eventos-section .evento-content form input{
-        padding: 10px;
+
+    .evento-cards {
+        grid-template-columns: 1fr; /* Um card por linha */
+    }
+
+    .evento-card-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .paginacao button {
+        padding: 8px;
+        font-size: 12px;
     }
 }
