@@ -4,16 +4,16 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Administrativa from './components/shared/Administrativa';
 import Footer from './components/Footer';
-import Ajuda from './pages/public/Ajuda';
-import FAQ from './pages/public/FAQ';
-import SobreNos from './pages/public/SobreNos';
-import PoliticaDePrivacidade from './pages/public/PoliticaDePrivacidade';
+import Ajuda from './pages/institucional/Ajuda';
+import FAQ from './pages/institucional/FAQ';
+import SobreNos from './pages/institucional/SobreNos';
+import PoliticaDePrivacidade from './pages/institucional/PoliticaDePrivacidade';
 import Home from './pages/Home';
-import Login from './pages/public/Login';
-import Listar from './pages/evento/Listar';
-import Detalhes from './pages/evento/Detalhes';
-import AlterarSenha from './pages/perfil/AlterarSenha';
-import VerPerfil from './pages/perfil/VerPerfil';
+import Login from './features/auth/Login';
+import Listar from './features/evento/Listar';
+import Detalhes from './features/evento/Detalhes';
+import AlterarSenha from './features/perfil/AlterarSenha';
+import VerPerfil from './features/perfil/VerPerfil';
 
 import './styles/App.css';
 
@@ -33,7 +33,7 @@ export default function App() {
     setIsLoggedIn(false);
   }
 
-  if (!isLoggedIn) {
+  if (isLoggedIn) {
     return <Login onLogin={handleLogin} />
   }
 

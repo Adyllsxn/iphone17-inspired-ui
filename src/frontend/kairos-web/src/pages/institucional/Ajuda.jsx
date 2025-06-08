@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/public/Ajuda.css';
+import '../../styles/institucional/Ajuda.css';
 
 export default function Ajuda() {
   return (
