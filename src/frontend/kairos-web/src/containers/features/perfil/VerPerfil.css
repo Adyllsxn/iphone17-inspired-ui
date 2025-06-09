@@ -1,51 +1,152 @@
-.verperfil-section {
+.tipo-evento-section {
     padding: 40px 0;
-}
-.perfil-dados {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-.perfil-conteudo {
+  }
+  
+  .layout-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  
+  .tipo-evento-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-.perfil-foto {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .btn-cadastrar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  
+  .btn-cadastrar:hover {
+    background-color: #218838;
+  }
+  
+  .busca-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .busca-container input {
+    padding: 0.5rem;
     flex: 1;
-    max-width: 250px;
-}
-.foto-legenda {
-    margin-top: 10px;
-    color: #888;
-    font-size: 14px;
-    text-align: center;
-}
-.perfil-info {
-    flex: 2;
-    min-width: 250px;
-}
-.perfil-info p {
-    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     font-size: 16px;
-}
-
-
-@media (max-width: 768px) {
-    .perfil-conteudo {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+  }
+  
+  .btn-buscar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 600;
+  }
+  
+  .btn-buscar:hover {
+    background-color: #0069d9;
+  }
+  
+  .tipo-evento-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  .tipo-evento-tabela th,
+  .tipo-evento-tabela td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .tipo-evento-tabela th {
+    background-color: #f2f2f2;
+    font-weight: 700;
+  }
+  
+  .acoes button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 18px;
+    color: #333;
+    transition: color 0.2s ease;
+  }
+  
+  .acoes button:hover {
+    color: #007bff;
+  }
+  
+  .vazio {
+    font-size: 18px;
+    color: #666;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  /* RESPONSIVO - telas até 768px */
+  @media (max-width: 768px) {
+    .tipo-evento-section {
+      padding: 20px 0;
     }
-
-    .perfil-info {
-        width: 100%;
+  
+    .tipo-evento-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
-}
+  
+    .btn-cadastrar {
+      width: 100%;
+      justify-content: center;
+      font-size: 16px;
+    }
+  
+    .busca-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .busca-container input,
+    .btn-buscar {
+      width: 100%;
+      font-size: 16px;
+    }
+  
+    .btn-buscar {
+      margin-top: 8px;
+    }
+  
+    .tipo-evento-tabela th,
+    .tipo-evento-tabela td {
+      font-size: 14px;
+      padding: 8px 6px;
+    }
+  
+    .acoes button {
+      font-size: 16px;
+      margin-right: 6px;
+    }
+  }
+  
