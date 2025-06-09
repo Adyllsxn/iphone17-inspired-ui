@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/shared/InspirationalSlider.css';
+import './InspirationalSlider.css';
 
 const frases = [
     "“Entrega o teu caminho ao Senhor; confia nele, e ele o fará.” – Salmos 37:5",
@@ -15,7 +15,7 @@ export default function InspirationalSlider() {
     useEffect(() => {
         const interval = setInterval(() => {
         setIndex((prev) => (prev + 1) % frases.length);
-        }, 3000);
+        }, 5000);
         return () => clearInterval(interval);
     }, []);
 

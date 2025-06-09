@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import apiservice from '../../service/ApiService';
-import '../../styles/evento/Listar.css';
-import Alert from '../../components/shared/Alert';
+import apiservice from '../../../service/ApiService';
+import Alert from '../../shared/Alert';
+import './Listar.css';
+
 
 export default function Listar() {
     const [eventos, setEventos] = useState([]);
@@ -10,7 +11,7 @@ export default function Listar() {
     const [busca, setBusca] = useState('');
     const [alert, setAlert] = useState({ message: '', type: '' });
     const [carregado, setCarregado] = useState(false); // indica se o carregamento terminou
-    const eventosPorPagina = 8;
+    const eventosPorPagina = 6;
 
     const token = localStorage.getItem("token");
     const authorization = {
