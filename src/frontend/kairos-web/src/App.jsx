@@ -14,6 +14,7 @@ import Listar from './containers/features/evento/Listar';
 import Detalhes from './containers/features/evento/Detalhes';
 import AlterarSenha from './containers/features/perfil/AlterarSenha';
 import VerPerfil from './containers/features/perfil/VerPerfil';
+import TipoEvento from './containers/features/tipoevento/TipoEvento';
 
 import './App.css';
 
@@ -52,6 +53,7 @@ export default function App() {
         <Route path="/detalhesEvento" element={<Detalhes />} />
         <Route path="/verPerfil" element={<VerPerfil />} />
         <Route path="/alterarSenha" element={<AlterarSenha />} />
+        <Route path="/tipos-evento" element={<TipoEvento />} />
       </Routes>
       <Footer />
     </>
