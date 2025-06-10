@@ -21,6 +21,9 @@ public class CreateUsuarioCommand
     public string Email { get; set; } = null!;
 
     [JsonIgnore]
+    public string FotoUrl { get; set; } = null!;
+
+    [JsonIgnore]
     public int? PerfilID { get; set; }
 
     [JsonIgnore]

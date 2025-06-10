@@ -20,6 +20,9 @@ public class UpdateUsuarioCommand
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; } = null!;
 
+    [Required( ErrorMessage = " Foto é obrigatório")]
+    public string FotoUrl { get; set; } = null!;
+
     [JsonIgnore]
     [DataType(DataType.DateTime)]
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;

@@ -10,7 +10,6 @@ public static class InfrastructureDI
             services.AddScoped<IEventoRepository, EventoRepository>();
             services.AddScoped<IPerfilRepository, PerfilRepository>();
             services.AddScoped<IPresencaRepository, PresencaRepository>();
-            services.AddScoped<ISugestaoRepository, SugestaoRepository>();
             services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         #endregion
