@@ -9,6 +9,7 @@ public static class CreateUsuarioExtensions
             command.Nome,
             command.SobreNome,
             command.Email,
+            command.FotoUrl,
             command.PerfilID ?? 3,
             command.DataCadastro,
             command.Telefone,
