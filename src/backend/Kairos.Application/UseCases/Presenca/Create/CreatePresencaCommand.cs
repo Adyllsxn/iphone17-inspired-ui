@@ -7,6 +7,7 @@ public class CreatePresencaCommand
     [Required(ErrorMessage = "Evento é obrigatório")]
     public int EventoID { get; set; }
 
-    [JsonIgnore]
-    public DateTime DataHoraCheckin { get; set; } = DateTime.UtcNow;
+    [Required(ErrorMessage = "Escolha é obrigatório")]
+    public bool Confirmado { get; private set; }
+
 }

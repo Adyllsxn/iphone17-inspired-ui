@@ -11,6 +11,8 @@ public class PresencaMapping : IEntityTypeConfiguration<PresencaEntity>
                 
                 builder.Property(x => x.EventoID).
                         IsRequired(true);
+                builder.Property(x => x.Confirmado).
+                        IsRequired(true);
                 
                 builder.Property(x => x.DataHoraCheckin).
                         IsRequired(true);

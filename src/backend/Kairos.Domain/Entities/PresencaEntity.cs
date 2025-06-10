@@ -1,36 +1,40 @@
 namespace Kairos.Domain.Entities;
-public sealed class PresencaEntity: EntityBase, IAggragateRoot
+public sealed class PresencaEntity : EntityBase, IAggragateRoot
 {
     public int UsuarioID { get; private set; }
     public int EventoID { get; private set; }
+    public bool Confirmado { get; private set; }
     public DateTime DataHoraCheckin { get; private set; } = DateTime.UtcNow;
 
     [JsonIgnore]
     public UsuarioEntity Usuario { get; private set; } = null!;
-
+    
     [JsonIgnore]
     public EventoEntity Evento { get; private set; } = null!;
 
     [JsonConstructor]
-    public PresencaEntity(){}
+    public PresencaEntity() {}
 
-    public PresencaEntity(int id, int usuarioID, int eventoID, DateTime dataHoraCheckin)
+    public PresencaEntity(int usuarioID, int eventoID, bool confirmado)
     {
-        DomainValidationException.When(id <= 0 , "ID deve ser maior que zero.");
+        ValidationDomain(usuarioID, eventoID);
+        Confirmado = confirmado;
+    }
+
+    public PresencaEntity(int id, int usuarioID, int eventoID, bool confirmado)
+    {
+        DomainValidationException.When(id <= 0, "ID deve ser maior que zero.");
         Id = id;
-        ValidationDomain( usuarioID, eventoID, dataHoraCheckin);
+        ValidationDomain(usuarioID, eventoID);
+        Confirmado = confirmado;
     }
-    public PresencaEntity(int usuarioID, int eventoID, DateTime dataHoraCheckin)
+
+    private void ValidationDomain(int usuarioID, int eventoID)
     {
-        ValidationDomain( usuarioID, eventoID, dataHoraCheckin);
-    }
-    public void ValidationDomain(int usuarioID, int eventoID, DateTime dataHoraCheckin)
-    {
-        DomainValidationException.When(usuarioID <= 0 , "ID do Usuário deve ser maior que zero.");
-        DomainValidationException.When(eventoID <= 0 , "ID do Evento deve ser maior que zero.");
+        DomainValidationException.When(usuarioID <= 0, "ID do Usuário deve ser maior que zero.");
+        DomainValidationException.When(eventoID <= 0, "ID do Evento deve ser maior que zero.");
 
         UsuarioID = usuarioID;
         EventoID = eventoID;
-        DataHoraCheckin = dataHoraCheckin;
     }
 }

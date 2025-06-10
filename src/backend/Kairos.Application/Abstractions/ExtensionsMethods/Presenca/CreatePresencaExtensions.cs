@@ -7,7 +7,7 @@ public static class CreatePresencaExtensions
         (
             command.UsuarioID,
             command.EventoID,
-            command.DataHoraCheckin = DateTime.UtcNow
+            command.Confirmado
         );
     }
     
