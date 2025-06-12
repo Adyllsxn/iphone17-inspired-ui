@@ -1,78 +1,79 @@
-# DICIONÁRIO DE DADOS
+# 📘 Dicionário de Dados – Sistema Kairos
+
+## 🧑‍💼 Tabela: Tbl_Usuario
+
+| Campo         | Descrição                               | Tipo de Dados | Tamanho     | Obrigatório | Chave Primária | Chave Estrangeira | Observações                                        |
+|---------------|-----------------------------------------|---------------|-------------|-------------|----------------|-------------------|--------------------------------------------------|
+| id            | Identificador único do usuário          | INT           | -           | Sim         | Sim            | Não               | Auto incremento                                   |
+| nome          | Nome do usuário                         | NVARCHAR      | 100         | Sim         | Não            | Não               |                                                  |
+| sobrenome     | Sobrenome do usuário                    | NVARCHAR      | 100         | Sim         | Não            | Não               |                                                  |
+| email         | E-mail do usuário                       | NVARCHAR      | 250         | Sim         | Não            | Não               | Deve ser único                                   |
+| fotoUrl       | URL da imagem de perfil                 | NVARCHAR(MAX) | -           | Não         | Não            | Não               |                                                  |
+| perfilId      | ID do perfil do usuário                 | INT           | -           | Sim         | Não            | Sim               | FK para `Tbl_Perfil`                             |
+| dataCadastro  | Data do cadastro do usuário             | DATETIME      | -           | Sim         | Não            | Não               |                                                  |
+| isActive      | Indica se o usuário está ativo          | BIT           | -           | Sim         | Não            | Não               | 1 (ativo), 0 (inativo)                            |
+| passwordHash  | Hash da senha                           | NVARCHAR(MAX) | -           | Sim         | Não            | Não               | Armazenamento seguro                             |
+| passwordSalt  | Salt da senha                           | NVARCHAR(MAX) | -           | Sim         | Não            | Não               |                                                  |
+| telefone      | Telefone do usuário                     | NVARCHAR      | 20          | Não         | Não            | Não               |                                                  |
+| BI            | Número de BI (identificação pessoal)    | NVARCHAR      | 50          | Não         | Não            | Não               |                                                  |
 
 ---
 
-## TABELA => USUÁRIO
+## 🧾 Tabela: Tbl_Perfil
 
-| Campo        | Descrição                               | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                         |
-|--------------|-----------------------------------------|---------------|---------|-------------|----------------|-------------------|-----------------------------------|
-| id           | Identificador único do usuário          | INT           | -       | Sim         | Sim            | Não               | Auto incremento                    |
-| nome         | Nome completo do usuário                 | NVARCHAR      | 100     | Sim         | Não            | Não               |                                   |
-| email        | Email do usuário                         | NVARCHAR      | 250     | Sim         | Não            | Não               | Deve ser único                    |
-| PasswordHash    | Senha armazenada em formato criptografado| NVARCHAR(MAX)    | -     | Sim         | Não            | Não               |                                   |
-| PasswordSalt    | Senha armazenada em formato criptografado| NVARCHAR(MAX)    | -     | Sim         | Não            | Não               |                                   |
-| perfilId     | Identificador do perfil do usuário      | INT           | -       | Sim         | Não            | Sim               | FK para tabela PERFIL             |
-| ativo        | Indica se o usuário está ativo           | BIT           | -       | Sim         | Não            | Não               | Valores: 1 (ativo), 0 (inativo)  |
-| dataCadastro | Data e hora do cadastro do usuário       | DATETIME      | -       | Sim         | Não            | Não               |                                   |
+| Campo | Descrição                  | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Observações                          |
+|-------|----------------------------|---------------|---------|-------------|----------------|--------------------------------------|
+| id    | Identificador do perfil    | INT           | -       | Sim         | Sim            | Auto incremento                      |
+| nome  | Nome do perfil             | NVARCHAR      | 50      | Sim         | Não            | Ex: Administrador, Organizador, etc. |
 
 ---
 
-## TABELA => PERFIL
+## 🎭 Tabela: Tbl_TipoEvento
 
-| Campo | Descrição                    | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                      |
-|-------|------------------------------|---------------|---------|-------------|----------------|-------------------|--------------------------------|
-| id    | Identificador único do perfil | INT           | -       | Sim         | Sim            | Não               | Auto incremento                 |
-| nome  | Nome do perfil               | NVARCHAR      | 50      | Sim         | Não            | Não               | Ex: Administrador, Organizador, Membro |
-
----
-
-## TABELA => TIPO DE EVENTOS
-
-| Campo | Descrição                     | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                   |
-|-------|-------------------------------|---------------|---------|-------------|----------------|-------------------|-----------------------------|
-| id    | Identificador único do tipo de evento | INT    | -       | Sim         | Sim            | Não               | Auto incremento              |
-| nome  | Nome do tipo de evento         | NVARCHAR      | 50      | Sim         | Não            | Não               | Ex: Culto, Vigília, Encontro de Jovens |
+| Campo | Descrição                      | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Observações                          |
+|-------|--------------------------------|---------------|---------|-------------|----------------|--------------------------------------|
+| id    | ID do tipo de evento           | INT           | -       | Sim         | Sim            | Auto incremento                      |
+| nome  | Nome do tipo de evento         | NVARCHAR      | 50      | Sim         | Não            | Ex: Culto, Vigília, etc.             |
 
 ---
 
-## TABELA => EVENTOS
+## 📅 Tabela: Tbl_Evento
 
-| Campo           | Descrição                                    | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                                                        |
-|-----------------|----------------------------------------------|---------------|---------|-------------|----------------|-------------------|------------------------------------------------------------------|
-| id              | Identificador único do evento                 | INT           | -       | Sim         | Sim            | Não               | Auto incremento                                                  |
-| titulo          | Título do evento                              | NVARCHAR      | 100     | Sim         | Não            | Não               |                                                                  |
-| descricao       | Descrição detalhada do evento                  | NVARCHAR(MAX) | -       | Sim         | Não            | Não               |                                                                  |
-| dataHoraInicio  | Data e hora de início do evento                | DATETIME      | -       | Sim         | Não            | Não               |                                                                  |
-| dataHoraFim     | Data e hora de término do evento               | DATETIME      | -       | Sim         | Não            | Não               |                                                                  |
-| local           | Local onde o evento será realizado             | NVARCHAR      | 250     | Sim         | Não            | Não               |                                                                  |
-| tipoEventoId    | Identificador do tipo de evento                | INT           | -       | Sim         | Não            | Sim               | FK para tabela TIPO DE EVENTOS                                   |
-| usuarioId       | Identificador do usuário que criou/organizou o evento | INT    | -       | Sim         | Não            | Sim               | FK para tabela USUÁRIO                                           |
-| statusAprovacao | Status da aprovação do evento                   | NVARCHAR      | 20      | Sim         | Não            | Não               | Valores possíveis: 'Pendente', 'Aprovado', 'Rejeitado'          |
-| imagemUrl       | URL da imagem relacionada ao evento (opcional) | NVARCHAR(MAX) | -       | Não         | Não            | Não               | Pode ser arte, panfleto, etc.                                   |
-
----
-
-## TABELA => PRESENÇA
-
-| Campo           | Descrição                                    | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                   |
-|-----------------|----------------------------------------------|---------------|---------|-------------|----------------|-------------------|-----------------------------|
-| id              | Identificador único da presença               | INT           | -       | Sim         | Sim            | Não               | Auto incremento              |
-| usuarioId       | Identificador do usuário                      | INT           | -       | Sim         | Não            | Sim               | FK para tabela USUÁRIO       |
-| eventoId        | Identificador do evento                        | INT           | -       | Sim         | Não            | Sim               | FK para tabela EVENTOS       |
-| dataHoraCheckin | Data e hora do check-in                        | DATETIME      | -       | Sim         | Não            | Não               |                             |
-| dataHoraCheckout| Data e hora do check-out (futuro opcional)    | DATETIME      | -       | Não         | Não            | Não               |                             |
+| Campo           | Descrição                                | Tipo de Dados | Tamanho     | Obrigatório | Chave Primária | Chave Estrangeira | Observações                                           |
+|-----------------|------------------------------------------|---------------|-------------|-------------|----------------|-------------------|-------------------------------------------------------|
+| id              | Identificador do evento                  | INT           | -           | Sim         | Sim            | Não               | Auto incremento                                        |
+| titulo          | Título do evento                         | NVARCHAR      | 100         | Sim         | Não            | Não               |                                                       |
+| descricao       | Descrição do evento                      | NVARCHAR(MAX) | -           | Sim         | Não            | Não               |                                                       |
+| dataHoraInicio  | Data/hora de início                      | DATETIME      | -           | Sim         | Não            | Não               |                                                       |
+| dataHoraFim     | Data/hora de fim                         | DATETIME      | -           | Sim         | Não            | Não               |                                                       |
+| local           | Local do evento                          | NVARCHAR      | 250         | Sim         | Não            | Não               |                                                       |
+| tipoEventoId    | ID do tipo de evento                     | INT           | -           | Sim         | Não            | Sim               | FK para `Tbl_TipoEvento`                              |
+| usuarioId       | ID do organizador                        | INT           | -           | Sim         | Não            | Sim               | FK para `Tbl_Usuario`                                 |
+| statusAprovacao | Status de aprovação                      | NVARCHAR      | 20          | Sim         | Não            | Não               | Valores: Aprovado, Rejeitado, Pendente                |
+| imagemUrl       | URL da imagem do evento                  | NVARCHAR(MAX) | -           | Não         | Não            | Não               | Pode conter panfleto, banner, etc.                    |
 
 ---
 
-## TABELA => SUGESTÃO PRIVADA
+## 🎟️ Tabela: Tbl_Presenca
 
-| Campo      | Descrição                                   | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                                             |
-|------------|---------------------------------------------|---------------|---------|-------------|----------------|-------------------|-------------------------------------------------------|
-| id         | Identificador único da sugestão              | INT           | -       | Sim         | Sim            | Não               | Auto incremento                                        |
-| usuarioId  | Identificador do usuário                      | INT           | -       | Sim         | Não            | Sim               | FK para tabela USUÁRIO                                 |
-| eventoId   | Identificador do evento                       | INT           | -       | Sim         | Não            | Sim               | FK para tabela EVENTOS                                 |
-| conteudo   | Conteúdo da sugestão                          | NVARCHAR(MAX)          | -       | Sim         | Não            | Não               |                                                       |
-| dataEnvio  | Data e hora do envio                          | DATETIME      | -       | Sim         | Não            | Não               |                                                       |
-| status     | Status da sugestão                            | NVARCHAR      | 20      | Não         | Não            | Não               | Valores: 'Nova', 'Em análise', 'Respondida' (opcional) |
+| Campo           | Descrição                               | Tipo de Dados | Tamanho | Obrigatório | Chave Primária | Chave Estrangeira | Observações                               |
+|-----------------|-----------------------------------------|---------------|---------|-------------|----------------|-------------------|-------------------------------------------|
+| id              | Identificador da presença               | INT           | -       | Sim         | Sim            | Não               | Auto incremento                          |
+| usuarioId       | ID do usuário presente                  | INT           | -       | Sim         | Não            | Sim               | FK para `Tbl_Usuario`                    |
+| eventoId        | ID do evento                            | INT           | -       | Sim         | Não            | Sim               | FK para `Tbl_Evento`                     |
+| confirmado      | Indica se a presença foi confirmada     | BIT           | -       | Sim         | Não            | Não               | 1 = confirmado, 0 = não confirmado        |
+| dataHoraCheckin | Data/hora do check-in                   | DATETIME      | -       | Não         | Não            | Não               | Opcional dependendo do fluxo do sistema  |
 
 ---
+
+## 📝 Tabela: Tbl_Blog
+
+| Campo          | Descrição                          | Tipo de Dados | Tamanho     | Obrigatório | Chave Primária | Chave Estrangeira | Observações                           |
+|----------------|------------------------------------|---------------|-------------|-------------|----------------|-------------------|---------------------------------------|
+| id             | Identificador do post              | INT           | -           | Sim         | Sim            | Não               | Auto incremento                      |
+| usuarioId      | Autor do post                      | INT           | -           | Sim         | Não            | Sim               | FK para `Tbl_Usuario`                |
+| titulo         | Título do post                     | NVARCHAR      | 100         | Sim         | Não            | Não               |                                      |
+| conteudo       | Conteúdo do post                   | NVARCHAR(MAX) | -           | Sim         | Não            | Não               | Pode conter HTML                     |
+| imagemCapaUrl  | URL da imagem de capa              | NVARCHAR(MAX) | -           | Não         | Não            | Não               | Opcional                             |
+| dataPublicacao | Data de publicação                 | DATETIME      | -           | Sim         | Não            | Não               |                                      |
+| status         | Status do post                     | NVARCHAR      | 20          | Sim         | Não            | Não               | Ex: Publicado, Rascunho, Rejeitado   |
