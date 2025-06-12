@@ -50,6 +50,10 @@ export default function Header({ onLogout }) {
                 <Link to="/listarEvento" className='nav-link' onClick={closeMenu}>Eventos</Link>
                 </li>
 
+                <li className='nabar-item'>
+                <Link to="/listarEvento" className='nav-link' onClick={closeMenu}>Blog</Link>
+                </li>
+
                 {(perfilID === 1 || perfilID === 2) && (
                 <li className='nabar-item'>
                     <Link to="/administrativa" className='nav-link' onClick={closeMenu}>Administrativa</Link>

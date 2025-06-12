@@ -12,7 +12,7 @@ public class UpdateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork uni
 
             var entity = resultEntity.Data;
 
-            entity.UpdateInfo(command.Id,command.Nome, command.SobreNome,command.Email,command.FotoUrl ,command.DataCadastro,command.Telefone,command.BI);
+            entity.UpdateInfo(command.Id,command.Nome, command.SobreNome,command.Email,command.DataCadastro,command.Telefone,command.BI);
 
             await unitOfWork.CommitAsync();
 

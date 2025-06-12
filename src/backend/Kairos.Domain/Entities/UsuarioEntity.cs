@@ -50,11 +50,11 @@ public sealed class UsuarioEntity : EntityBase, IAggragateRoot
     }
 
 
-    public void UpdateInfo(int id, string nome, string sobrenome, string email, string fotoUrl,  DateTime dataCadastro, string telefone, string bi)
+    public void UpdateInfo(int id, string nome, string sobrenome, string email, DateTime dataCadastro, string telefone, string bi)
     {
         DomainValidationException.When(id <= 0, "ID deve ser maior que zero.");
         Id = id;
-        ValidarDados(nome, sobrenome, email, fotoUrl, PerfilID, dataCadastro, telefone, bi);
+        ValidarDados(nome, sobrenome, email, FotoUrl, PerfilID, dataCadastro, telefone, bi);
     }
 
     public void UpdatePerfil(int perfilId)
