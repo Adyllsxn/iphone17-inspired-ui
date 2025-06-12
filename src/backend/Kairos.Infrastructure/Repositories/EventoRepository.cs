@@ -226,7 +226,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
     #endregion
 
     #region </GetFile>
-    public async Task<Result<EventoEntity?>> GetFileAsync(int entityId, CancellationToken token)
+        public async Task<Result<EventoEntity?>> GetFileAsync(int entityId, CancellationToken token)
         {
             try
             {

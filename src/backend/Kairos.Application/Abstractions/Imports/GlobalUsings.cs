@@ -52,6 +52,8 @@
     global using Kairos.Application.UseCases.Usuario.Exist;
     global using Kairos.Application.UseCases.Usuario.Status;
     global using Kairos.Application.UseCases.Usuario.Update;
+    global using Kairos.Application.UseCases.Usuario.UpdateFoto;
+    global using Kairos.Application.UseCases.Usuario.GetFoto;
 
     global using Kairos.Application.UseCases.Evento.Create;
     global using Kairos.Application.UseCases.Evento.GetFile;

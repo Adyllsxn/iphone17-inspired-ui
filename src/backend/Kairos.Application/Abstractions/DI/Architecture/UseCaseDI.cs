@@ -44,6 +44,8 @@ public static class UseCaseDI
             services.AddScoped<ExistUsuarioHandler>();
             services.AddScoped<UsuarioStatusHandler>();
             services.AddScoped<UpdateUsuarioHandler>();
+            services.AddScoped<UpdateUsuarioFotoHandler>();
+            services.AddScoped<GetUsuarioFotoHandler>();
         #endregion
 
         #region </TipoEventos>

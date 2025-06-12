@@ -7,7 +7,6 @@ public static class StatusUsaurioExtensions
         {
             Id = entity.Id,
             PerfilID = entity.PerfilID
-            
         };
     }
 }

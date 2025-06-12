@@ -120,6 +120,45 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
+    #region </GetFoto>
+        public async Task<Result<UsuarioEntity?>> GetFotoAsync(int entityId, CancellationToken token)
+        {
+            try
+            {
+                if(entityId <= 0)
+                {
+                    return new Result<UsuarioEntity?>(
+                        null, 
+                        400, 
+                        "ID deve ser maior que zero."
+                        );
+                }
+                var response = await context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == entityId, token);
+                if(response == null)
+                {
+                    return new Result<UsuarioEntity?>(
+                        null, 
+                        404, 
+                        "ID não encontrado."
+                        );
+                }
+                return new Result<UsuarioEntity?>(
+                    response, 
+                    200, 
+                    "Dados encontrado."
+                    );
+            }
+            catch (Exception ex)
+            {
+                return new Result<UsuarioEntity?>(
+                    null, 
+                    500, 
+                    $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
+                    );
+            }
+        }
+    #endregion
+
     #region </GetById>
         public async Task<Result<UsuarioEntity?>> GetByIdAsync(int entityId, CancellationToken token)
         {

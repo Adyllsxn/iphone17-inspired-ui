@@ -43,9 +43,11 @@ public sealed class UsuarioEntity : EntityBase, IAggragateRoot
         PasswordSalt = passwordSalt;
     }
 
-    public void UpdateFoto(string novaFotoUrl)
+    public void UpdateFoto(int id, string novaFotoUrl)
     {
+        DomainValidationException.When(id <= 0, "ID deve ser maior que zero.");
         DomainValidationException.When(string.IsNullOrWhiteSpace(novaFotoUrl), "Foto é obrigatória.");
+        Id = id;
         FotoUrl = novaFotoUrl;
     }
 
