@@ -5,8 +5,8 @@
 | Campo         | Descrição                               | Tipo de Dados | Tamanho     | Obrigatório | Chave Primária | Chave Estrangeira | Observações                                        |
 |---------------|-----------------------------------------|---------------|-------------|-------------|----------------|-------------------|--------------------------------------------------|
 | id            | Identificador único do usuário          | INT           | -           | Sim         | Sim            | Não               | Auto incremento                                   |
-| nome          | Nome do usuário                         | NVARCHAR      | 100         | Sim         | Não            | Não               |                                                  |
-| sobrenome     | Sobrenome do usuário                    | NVARCHAR      | 100         | Sim         | Não            | Não               |                                                  |
+| nome          | Nome do usuário                         | NVARCHAR      | 50         | Sim         | Não            | Não               |                                                  |
+| sobrenome     | Sobrenome do usuário                    | NVARCHAR      | 50         | Sim         | Não            | Não               |                                                  |
 | email         | E-mail do usuário                       | NVARCHAR      | 250         | Sim         | Não            | Não               | Deve ser único                                   |
 | fotoUrl       | URL da imagem de perfil                 | NVARCHAR(MAX) | -           | Não         | Não            | Não               |                                                  |
 | perfilId      | ID do perfil do usuário                 | INT           | -           | Sim         | Não            | Sim               | FK para `Tbl_Perfil`                             |
