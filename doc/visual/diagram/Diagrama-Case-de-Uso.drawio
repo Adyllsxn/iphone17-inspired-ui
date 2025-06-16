@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Página-1" id="G1KwGGqPa4-vDrwzv6ZR">
-        <mxGraphModel dx="1393" dy="1208" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="2034" dy="1380" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -16,7 +16,7 @@
                 <mxCell id="19" style="html=1;strokeWidth=2;dashed=1;endArrow=none;endFill=0;edgeStyle=orthogonalEdgeStyle;" parent="2" source="18" target="13" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="Usuário opta por fazer pedido de cadastro caso não esteja no &lt;b&gt;sistema&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" parent="2" vertex="1">
+                <mxCell id="18" value="Usuário opta por&amp;nbsp; esperar ser cadastro caso não esteja no &lt;b&gt;sistema&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" parent="2" vertex="1">
                     <mxGeometry x="768" y="160" width="150" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="Visualizar todos Eventos e Cultos" style="ellipse;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;spacingLeft=0;spacingRight=0;strokeWidth=2;" parent="2" vertex="1">
@@ -181,19 +181,19 @@
                 <mxCell id="87" value="Os dados são exportados no formato: &lt;b&gt;PDF&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" parent="2" vertex="1">
                     <mxGeometry x="650" y="1350" width="150" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="89" value="O Administrador dá as permissões aos Usuários como: &lt;b&gt;Adm, Organizador ou Membro (Comun)&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" vertex="1" parent="2">
+                <mxCell id="89" value="O Administrador dá as permissões aos Usuários como: &lt;b&gt;Adm, Organizador ou Membro (Comun)&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" parent="2" vertex="1">
                     <mxGeometry x="530" y="1458" width="170" height="91" as="geometry"/>
                 </mxCell>
-                <mxCell id="91" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.002;entryY=0.167;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;dashed=1;endArrow=none;endFill=0;" edge="1" parent="2" source="75" target="89">
+                <mxCell id="91" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.002;entryY=0.167;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;dashed=1;endArrow=none;endFill=0;" parent="2" source="75" target="89" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="92" value="Manter Posts" style="ellipse;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;spacingLeft=0;spacingRight=0;strokeWidth=2;" vertex="1" parent="2">
+                <mxCell id="92" value="Manter Posts" style="ellipse;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;spacingLeft=0;spacingRight=0;strokeWidth=2;" parent="2" vertex="1">
                     <mxGeometry x="270" y="525" width="140" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="93" value="Organizador Consegue: &lt;b&gt;Criar, Excluir, Editar, Arquivar, e Obter&lt;/b&gt;&amp;nbsp;os Posts para&amp;nbsp;&lt;b&gt;Blog&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" vertex="1" parent="2">
+                <mxCell id="93" value="Organizador Consegue: &lt;b&gt;Criar, Excluir, Editar, Arquivar, e Obter&lt;/b&gt;&amp;nbsp;os Posts para&amp;nbsp;&lt;b&gt;Blog&lt;/b&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;strokeWidth=2;" parent="2" vertex="1">
                     <mxGeometry x="670" y="440" width="170" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="95" style="html=1;entryX=0.025;entryY=0.218;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;endArrow=none;endFill=0;strokeWidth=2;dashed=1;" edge="1" parent="2" source="92" target="93">
+                <mxCell id="95" style="html=1;entryX=0.025;entryY=0.218;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;endArrow=none;endFill=0;strokeWidth=2;dashed=1;" parent="2" source="92" target="93" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" style="html=1;entryX=0.008;entryY=0.42;entryDx=0;entryDy=0;endArrow=none;endFill=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;strokeWidth=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3" target="4" edge="1">
@@ -300,8 +300,11 @@
                 <mxCell id="72" value="Administador" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="27" y="1241" width="30" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="94" style="edgeStyle=none;html=1;entryX=-0.002;entryY=0.388;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;endArrow=none;endFill=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="47" target="92">
+                <mxCell id="94" style="edgeStyle=none;html=1;entryX=-0.002;entryY=0.388;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;endArrow=none;endFill=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="47" target="92" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="" style="swimlane;startSize=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="1">
+                    <mxGeometry x="3" y="20" width="1147" height="1620" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

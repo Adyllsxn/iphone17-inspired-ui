@@ -1,1 +1,24 @@
-{}
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 15,
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": false,
+                "trustServerCertificate": false
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "username": "sa",
+            "password": "Adyllsxn@sa#2003",
+            "database": "DB_Kairos",
+            "name": "Adyllsxn"
+        }
+    ],
+    "dataworkspace.excludedProjects": [
+        "Adyllsxn/Adyllsxn.sqlproj"
+    ]
+}
