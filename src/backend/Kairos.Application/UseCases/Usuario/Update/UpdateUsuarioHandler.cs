@@ -22,7 +22,6 @@ public class UpdateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork uni
         }
         catch (DomainValidationException ex)
         {
-            // captura erro de domínio e devolve como resultado
             return new Result<UpdateUsuarioResponse>(null, 400, ex.Message);
         }
         catch (Exception ex)

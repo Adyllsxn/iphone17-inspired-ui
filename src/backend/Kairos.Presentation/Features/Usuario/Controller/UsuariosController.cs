@@ -1,5 +1,8 @@
+using Kairos.Application.UseCases.Usuario.GetFoto;
 using Kairos.Application.UseCases.Usuario.Status;
 using Kairos.Application.UseCases.Usuario.Update;
+using Kairos.Application.UseCases.Usuario.UpdateFoto;
+using Kairos.Presentation.Features.Usuario.Model;
 
 namespace Kairos.Presentation.Features.Usuario.Controller;
 [ApiController]
@@ -77,6 +80,27 @@ public class UsuariosController(IUsuarioService service)  : ControllerBase
         }
     #endregion
 
+    #region </GetFoto>
+        [HttpGet("UsuarioFoto"), EndpointSummary("Obter a Foto do Usuario Pelo Id")]
+        public async Task<ActionResult> GetFoto([FromQuery] GetUsuarioFotoCommand command, CancellationToken token)
+        {
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+
+                var userId = User.GetId();
+
+                var response = await service.GetFotoHandler(command,token);
+                if(response.Data?.FotoUrl == null)
+                {
+                    return BadRequest("Imagem não encontrada");
+                }
+                var databyte = System.IO.File.ReadAllBytes(response.Data.FotoUrl);
+                return File(databyte, "image/jpg");
+        }
+    #endregion
+
     #region </Search>
         [HttpGet("SearchUsuario"), EndpointSummary("Pesquisar Usuarios")]
         [Authorize]
@@ -104,38 +128,6 @@ public class UsuariosController(IUsuarioService service)  : ControllerBase
         }
     #endregion
 
-    /* #region </Update>
-        [HttpPut("UpdateUsuario"), EndpointSummary("Editar o usuário.")]
-        [Authorize]
-        [Authorize]
-        public async Task<ActionResult> UpdateAsync(UpdateUsuarioCommand command, CancellationToken token)
-        {
-            try
-            {
-                var userId = User.GetId();
-                var user = await service.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-                if (!(user.Data?.PerfilID == 1 && command.Id != userId))
-                {
-                    return Unauthorized("Você não tem permissão para alterar os usuários do sistema");
-                }
-                if (!(user.Data?.PerfilID == 1 && command.Id == userId && command.PerfilID == 1))
-                {
-                        return Unauthorized("Você não tem permissão para definir você mesmo com administardor");
-                }
-
-                var usuario = await service.UpdateHendler(command, token);
-                if (usuario == null)
-                {
-                    return BadRequest("Ocorreu um erro ao alterar o usuário!");
-                }
-                return Ok("Usuário alterado com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-    #endregion */
     #region </Update>
         [HttpPut("UpdateUsuario"), EndpointSummary("Atualizar Usuário")]
         public async Task<ActionResult> Update(UpdateUsuarioCommand command, CancellationToken token)
@@ -164,4 +156,52 @@ public class UsuariosController(IUsuarioService service)  : ControllerBase
         }
     #endregion
 
+    #region </UpdateFoto>
+        [HttpPatch("UpdateUsuarioFoto"), EndpointSummary("Atualizar a Foto do Usuário")]
+        public async Task<ActionResult> UpdateFoto([FromForm] UpdateUsuarioFotoModel model, CancellationToken token)
+        {
+            if(User.FindFirst("id") == null)
+            {
+                return Unauthorized("Você não está autenticado no sistema.");
+            }
+
+            var getCommand = new GetUsuarioByIdCommand { Id = model.Id };
+            var result = await service.GetByIdHandler(getCommand, token);
+
+            if (result.Data is null)
+                return NotFound("Postagem não encontrada.");
+
+            string caminhoAntigo = result.Data.FotoUrl;
+            string caminhoNovo = caminhoAntigo;
+
+            if (model.FotoUrl != null && model.FotoUrl.Length > 0)
+            {
+                var extensao = Path.GetExtension(model.FotoUrl.FileName).ToLower();
+                var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                if (!extensoesPermitidas.Contains(extensao))
+                    return BadRequest("Extensão de imagem inválida. Use JPG, JPEG, PNG ou GIF.");
+
+                string pasta = Path.Combine("Storage", "Images");
+                Directory.CreateDirectory(pasta);
+
+                string novoNome = $"{Guid.NewGuid()}{extensao}";
+                caminhoNovo = Path.Combine(pasta, novoNome);
+
+                await using var stream = new FileStream(caminhoNovo, FileMode.Create);
+                await model.FotoUrl.CopyToAsync(stream);
+
+                if (System.IO.File.Exists(caminhoAntigo))
+                    System.IO.File.Delete(caminhoAntigo);
+            }
+
+            var command = new UpdateUsuarioFotoCommand
+            {
+                Id = model.Id,
+                FotoUrl = caminhoNovo
+            };
+
+            var response = await service.UpdateFotoHandler(command, token);
+            return Ok(response);
+        }
+    #endregion
 }
