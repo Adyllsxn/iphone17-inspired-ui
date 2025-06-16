@@ -1,16 +1,24 @@
-# REQUISITO FUNCIONAL (RF)
+# ✅ Requisitos Funcionais (RF) – Sistema Kairos
 
-| ID    | Nome                                         | Descrição                                                                                     | Prioridade      |
-|-------|----------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------|
-| **RF01** | Visualizar todos os eventos e cultos disponíveis. | O usuário poderá visualizar todos os eventos e cultos programados na igreja.                  | 🔴 **Alta**     |
-| **RF02** | Exibir detalhes dos eventos.                   | O sistema permitirá que o usuário veja os detalhes completos de cada evento, incluindo tema, data, hora, pregador e programação. | 🔴 **Alta**     |
-| **RF03** | Permitir check-in/registro de presença.        | Os membros poderão realizar o check-in nos eventos, registrando sua presença de forma digital.| 🔴 **Alta**     |
-| **RF05** | Permitir comentários privados e sugestões.     | Os usuários poderão deixar comentários privados ou sugestões sobre os eventos.                | 🟠 **Média**    |
-| **RF06** | Permitir acesso ao histórico de eventos.        | Os usuários poderão deixar comentários privados ou sugestões sobre os eventos.                | 🟠 **Média**    |
-| **RF07** | Painel com próximos eventos.                     | Será exibido um painel com os próximos eventos para facilitar o planejamento dos membros.      | 🟠 **Média**    |
-| **RF08** | Cadastro, edição e exclusão de eventos por organizadores. | Os organizadores poderão cadastrar, editar e excluir eventos.                                 | 🔴 **Alta**     |
-| **RF09** | Aprovação de eventos pelo pastor antes da publicação. | Todo evento criado deve ser aprovado pelo pastor antes de ser publicado no sistema.           | 🔴 **Alta**     |
-| **RF10** | Geração de relatórios por período (mensal, anual). | O sistema permitirá a geração de relatórios de eventos realizados em diferentes períodos, como mensal ou anual. | 🔴 **Alta**     |
-| **RF11** | Diferenciar perfis de usuários: Administrador, Organizador, Membro. | O sistema terá perfis diferenciados, com permissões específicas para administradores, organizadores e membros. | 🔴 **Alta**     |
-| **RF12** | Visualização de gráficos (participação, frequência). | Gráficos de participação e frequência dos eventos serão gerados para análise.                 | 🟠 **Média**    |
-| **RF13** | Exportação de dados (Excel, PDF).                | O sistema permitirá a exportação de dados de eventos em formatos como Excel ou PDF.           | 🟠 **Média**    |
+| ID     | Nome                                              | Descrição                                                                                                                                   | Prioridade |
+|--------|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| **RF01** | Cadastro de Usuário                                  | O sistema deve permitir o cadastro de novos usuários, informando nome, sobrenome, email, senha, perfil, telefone, BI, etc.                   | 🔴 Alta     |
+| **RF02** | Login e Autenticação                                | O sistema deve autenticar usuários com base em email e senha (utilizando `passwordHash` e `passwordSalt`).                                   | 🔴 Alta     |
+| **RF03** | Gerenciamento de Perfil de Usuário                   | O usuário poderá editar seus dados pessoais, incluindo nome, sobrenome, email, telefone, BI e foto de perfil.                                | 🟠 Média    |
+| **RF04** | Diferenciação por Perfil                             | O sistema deve restringir permissões com base no `perfilId`, diferenciando Administrador, Organizador e Membro.                              | 🔴 Alta     |
+| **RF05** | Cadastro de Perfis                                   | Administradores poderão cadastrar e editar tipos de perfil no sistema.                                                                       | 🟢 Baixa    |
+| **RF06** | Cadastro de Tipos de Evento                          | Organizadores poderão criar e manter tipos de evento, como "Culto", "Vigília", etc.                                                          | 🟠 Média    |
+| **RF07** | Criação de Eventos                                   | Organizadores poderão cadastrar novos eventos, com título, descrição, tipo, local, data e imagem.                                            | 🔴 Alta     |
+| **RF08** | Edição e Exclusão de Eventos                         | Organizadores poderão editar ou excluir eventos cadastrados por eles.                                                                        | 🔴 Alta     |
+| **RF09** | Aprovação de Eventos                                 | Eventos cadastrados deverão passar por aprovação (campo `statusAprovacao`) antes de serem publicados.                                       | 🔴 Alta     |
+| **RF10** | Listagem de Eventos                                  | O sistema deve exibir uma lista de todos os eventos aprovados para os usuários.                                                              | 🔴 Alta     |
+| **RF11** | Visualização de Detalhes do Evento                   | O usuário poderá ver informações completas sobre o evento: título, descrição, data/hora, local, imagem e tipo.                               | 🔴 Alta     |
+| **RF12** | Registro de Presença (Check-in)                      | Usuários poderão registrar presença em eventos através do sistema (check-in digital).                                                        | 🔴 Alta     |
+| **RF13** | Confirmação de Presença                              | O sistema deve permitir confirmação da presença dos usuários, gravando o status e data/hora do check-in.                                     | 🔴 Alta     |
+| **RF14** | Histórico de Presenças                               | O usuário poderá visualizar seu histórico de participações em eventos.                                                                       | 🟠 Média    |
+| **RF15** | Dashboard de Participação                            | O sistema deve fornecer gráficos de frequência com base nos dados da `Tbl_Presenca`.                                                         | 🟠 Média    |
+| **RF16** | Geração de Relatórios de Eventos                     | O sistema deverá gerar relatórios por período com base nos eventos realizados (ex: mensal, anual).                                           | 🔴 Alta     |
+| **RF17** | Exportação de Dados                                  | Administradores poderão exportar dados de eventos, presença ou usuários nos formatos Excel ou PDF.                                           | 🟠 Média    |
+| **RF18** | Publicação de Posts no Blog                          | Organizadores poderão criar posts com título, conteúdo, imagem de capa e status.                                                             | 🟠 Média    |
+| **RF19** | Aprovação e Status de Posts                          | Os posts devem ter controle de status (rascunho, publicado, rejeitado) antes de serem exibidos no sistema.                                  | 🟠 Média    |
+| **RF20** | Visualização de Conteúdo do Blog                     | O sistema permitirá aos usuários visualizar os posts aprovados/publicados com suas respectivas informações.                                  | 🟠 Média    |
