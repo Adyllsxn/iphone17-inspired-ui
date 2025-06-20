@@ -29,7 +29,7 @@ function App() {
     setIsLoggedIn(false);
   }
 
-  if (!isLoggedIn) {
+  if (isLoggedIn) {
     return <Login onLogin={handleLogin} />
   }
 
