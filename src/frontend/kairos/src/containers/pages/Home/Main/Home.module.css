@@ -17,6 +17,7 @@
 /* heroSection */
 .hero{
     position: relative;
+    height: 100vh;
 }
 .heroSection{
     position: relative;
