@@ -8,7 +8,7 @@ type HeaderProps = {
 
 const Header = ({ onLogout }: HeaderProps) => {
     const [email, setEmail] = useState('');
-    const [perfilID, setPerfilID] = useState<number | null>(null);
+    const [/*perfilID*/, setPerfilID] = useState<number | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
