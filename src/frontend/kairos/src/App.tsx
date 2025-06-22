@@ -9,8 +9,12 @@ import FAQ from './containers/pages/Institucional/FAQ/FAQ';
 import SobreNos from './containers/pages/Institucional/SobreNos/SobreNos';
 import PoliticaDePrivacidade from './containers/pages/Politica/PoliticaDePrivacidade';
 import Login from './containers/features/Auth/Login/Login';
-
 import './core/style/App.css';
+import AdminLayout from './containers/pages/Administrativa/AdminLayout';
+import Dashboard from './containers/pages/Dashboard/Dashboard';
+import Evento from './containers/features/Evento/Main/Evento';
+
+
 
 function App() {
   
@@ -43,6 +47,12 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/sobreNos" element={<SobreNos />} />
           <Route path="/politicaDePrivacidade" element={<PoliticaDePrivacidade />} />
+
+          <Route path="/administrativa" element={<AdminLayout />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="eventos" element={<Evento />} />
+          </Route>
         </Routes>
       <Footer />
     </>
