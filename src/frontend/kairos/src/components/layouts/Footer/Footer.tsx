@@ -42,7 +42,7 @@ export default function Footer() {
                     <div className={styles.footerBottom}>
                         <p>© {new Date().getFullYear()} Kairos | Todos os direitos reservados</p>
                         <p>
-                            <Link to="/politicaDePrivacidade" className='nav-link'>Política de Privacidade</Link>
+                            <Link to="/politicaDePrivacidade" className='navLink'>Política de Privacidade</Link>
                         </p>
                     </div>
                 </div>
