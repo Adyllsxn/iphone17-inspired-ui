@@ -12,7 +12,7 @@ public class PublishBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWo
 
             var entity = resultEntity.Data;
 
-            entity.Arquivar();
+            entity.Publicar();
 
             await unitOfWork.CommitAsync();
 

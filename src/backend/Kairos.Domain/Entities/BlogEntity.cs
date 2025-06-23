@@ -65,6 +65,6 @@ public class BlogEntity : EntityBase, IAggragateRoot
     {
         DomainValidationException.When(Status != EStatusPostagem.Publicado,
             "Apenas posts em publicados podem ser aqruivados.");
-        Status = EStatusPostagem.Publicado;
+        Status = EStatusPostagem.Arquivado;
     }
 }
