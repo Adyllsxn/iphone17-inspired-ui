@@ -6,7 +6,7 @@ public class BlogEntity : EntityBase, IAggragateRoot
     public string Titulo { get; private set; } = null!;
     public string Conteudo { get; private set; } = null!;
     public string ImagemCapaUrl { get; private set; } = null!;
-    public DateTime DataPublicacao { get; private set; }
+    public DateTime DataPublicacao { get; private set; } = DateTime.UtcNow;
     public EStatusPostagem Status { get; private set; } = EStatusPostagem.Rascunho;
 
     [JsonIgnore]

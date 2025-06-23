@@ -19,7 +19,7 @@ public class CreateBlogCommand
     public string ImagemCapaUrl { get; set; } = null!;
 
     [JsonIgnore]
-    public DateTime DataPublicacao { get; set; }
+    public DateTime DataPublicacao { get; set; } = DateTime.UtcNow;
 
     [JsonIgnore]
     public EStatusPostagem Status { get; private set; } = EStatusPostagem.Rascunho;
