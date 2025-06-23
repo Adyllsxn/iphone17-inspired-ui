@@ -1,17 +1,6 @@
-using Kairos.Application.UseCases.Blog.Archive;
-using Kairos.Application.UseCases.Blog.Create;
-using Kairos.Application.UseCases.Blog.Delete;
-using Kairos.Application.UseCases.Blog.GetAll;
-using Kairos.Application.UseCases.Blog.GetById;
-using Kairos.Application.UseCases.Blog.GetFile;
-using Kairos.Application.UseCases.Blog.GetPublish;
-using Kairos.Application.UseCases.Blog.Publish;
-using Kairos.Application.UseCases.Blog.Search;
-using Kairos.Application.UseCases.Blog.Update;
-
 namespace Kairos.Presentation.Features.Blog.Controller;
 [ApiController]
-[Route("api/")]
+[Route("v1/")]
 public class BlogsController(IBlogService service) : ControllerBase
 {
     #region List
