@@ -23,7 +23,7 @@ public class DashboardController(IDashboardService service, IUsuarioService usua
                     return Unauthorized("Reservado apenas para adm.");
                 }
 
-                Log.LogToFile("GetDashboard - Success", "Retorna dados agregados do sistema para o painel do administrador.");
+                Logger.LogToFile("GetDashboard - Success", "Retorna dados agregados do sistema para o painel do administrador.");
 
                 var response = await service.GetHandler(token);
                 return Ok(
@@ -33,7 +33,7 @@ public class DashboardController(IDashboardService service, IUsuarioService usua
             catch(Exception error)
             {
                 Problem($"Error: {error.Message}");
-                Log.LogToFile("GetDashboard - Success", $"Error {error.Message}");
+                Logger.LogToFile("GetDashboard - Success", $"Error {error.Message}");
                 return null!;
             }
         }
