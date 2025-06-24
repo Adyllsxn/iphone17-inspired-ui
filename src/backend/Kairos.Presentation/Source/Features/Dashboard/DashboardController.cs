@@ -9,22 +9,33 @@ public class DashboardController(IDashboardService service, IUsuarioService usua
         [EndpointSummary("Retorna dados agregados do sistema para o painel do administrador.")]
         public async Task<ActionResult> GetDashboard(CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
+            try
             {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
 
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == PerfilConstant.Adm))
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm))
+                {
+                    return Unauthorized("Reservado apenas para adm.");
+                }
+
+                Logger.LogToFile("GetDashboard - Success", "Retorna dados agregados do sistema para o painel do administrador.");
+
+                var response = await service.GetHandler(token);
+                return Ok(
+                    $" PERFIL: {response.QtdPerfil} \n USUARIO: {response.QtdUsuario}  \n TIPO DE EVENTO: {response.QtdTipoEvento} \n EVENTO: {response.QtdEvento}\n PRESENCA: {response.QtdPresenca} \n BLOG POST: {response.QtdBlog} "
+                );
+            }
+            catch(Exception error)
             {
-                return Unauthorized("Reservado apenas para adm.");
+                Problem($"Error: {error.Message}");
+                Logger.LogToFile("GetDashboard - Success", $"Error {error.Message}");
+                return null!;
             }
-
-            var response = await service.GetHandler(token);
-            return Ok(
-                $" PERFIL: {response.QtdPerfil} \n USUARIO: {response.QtdUsuario}  \n TIPO DE EVENTO: {response.QtdTipoEvento} \n EVENTO: {response.QtdEvento}\n PRESENCA: {response.QtdPresenca} \n BLOG POST: {response.QtdBlog} "
-            );
         }
     #endregion
 }
