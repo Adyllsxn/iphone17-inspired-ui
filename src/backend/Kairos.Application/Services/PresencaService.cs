@@ -1,17 +1,17 @@
 namespace Kairos.Application.Services;
 public class PresencaService(CreatePresencaHandler create, DeletePresencaHandler delete, GetPresencaHandler get, GetPresencaByIdHandler getById ) : IPresencaService
 {
-    public async Task<Result<CreatePresencaResponse>> CreateHandler(CreatePresencaCommand command, CancellationToken token)
+    public async Task<QueryResult<CreatePresencaResponse>> CreateHandler(CreatePresencaCommand command, CancellationToken token)
     {
         return await create.CreateHandler(command, token);
     }
 
-    public async Task<Result<bool>> DeleteHandler(DeletePresencaCommand command, CancellationToken token)
+    public async Task<QueryResult<bool>> DeleteHandler(DeletePresencaCommand command, CancellationToken token)
     {
         return await delete.DeleteHandler(command, token);
     }
 
-    public async Task<Result<GetPresencaByIdResponse>> GetByIdHandler(GetPresencaByIdCommand command, CancellationToken token)
+    public async Task<QueryResult<GetPresencaByIdResponse>> GetByIdHandler(GetPresencaByIdCommand command, CancellationToken token)
     {
         return await getById.GetByIdHandler(command, token);
     }

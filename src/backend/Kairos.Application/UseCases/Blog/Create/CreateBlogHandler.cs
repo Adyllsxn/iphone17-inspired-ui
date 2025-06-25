@@ -1,7 +1,7 @@
 namespace Kairos.Application.UseCases.Blog.Create;
 public class CreateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<Result<CreateBlogResponse>> CreateHandler(CreateBlogCommand command, CancellationToken token)
+    public async Task<QueryResult<CreateBlogResponse>> CreateHandler(CreateBlogCommand command, CancellationToken token)
     {
         try
         {
@@ -9,7 +9,7 @@ public class CreateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
             var response = await repository.CreateAsync(entity, token);
             await unitOfWork.CommitAsync();
 
-            return new Result<CreateBlogResponse>(
+            return new QueryResult<CreateBlogResponse>(
                 response.Data?.MapToCreateBlog(), 
                 response.Code, 
                 response.Message
@@ -17,7 +17,7 @@ public class CreateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
         }
         catch(Exception ex)
         {
-            return new Result<CreateBlogResponse>(
+            return new QueryResult<CreateBlogResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (CRIAR). Erro: {ex.Message}"

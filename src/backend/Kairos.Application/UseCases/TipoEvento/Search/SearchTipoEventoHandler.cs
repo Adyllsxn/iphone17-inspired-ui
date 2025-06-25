@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.TipoEvento.Search;
 public class SearchTipoEventoHandler(ITipoEventoRepository repository)
 {
-    public async Task<Result<List<SearchTipoEventoResponse>>> SearchHendler(SearchTipoEventoCommand command, CancellationToken token)
+    public async Task<QueryResult<List<SearchTipoEventoResponse>>> SearchHendler(SearchTipoEventoCommand command, CancellationToken token)
     {
         try
         {
             if(command.Nome == null)
             {
-                return new Result<List<SearchTipoEventoResponse>>(
+                return new QueryResult<List<SearchTipoEventoResponse>>(
                     null, 
                     400, 
                     "Parâmetro não deve estar vazio."
@@ -17,7 +17,7 @@ public class SearchTipoEventoHandler(ITipoEventoRepository repository)
 
             if (response.Data == null || !response.Data.Any())
             {
-                return new Result<List<SearchTipoEventoResponse>>(
+                return new QueryResult<List<SearchTipoEventoResponse>>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -25,7 +25,7 @@ public class SearchTipoEventoHandler(ITipoEventoRepository repository)
             }
             var result = response.Data.MapToSearchTipoEvento().ToList();
             
-            return new Result<List<SearchTipoEventoResponse>>(
+            return new QueryResult<List<SearchTipoEventoResponse>>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -33,7 +33,7 @@ public class SearchTipoEventoHandler(ITipoEventoRepository repository)
         }
         catch (Exception ex)
         {
-            return new Result<List<SearchTipoEventoResponse>>(
+            return new QueryResult<List<SearchTipoEventoResponse>>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (SEARCH). Erro: {ex.Message}"

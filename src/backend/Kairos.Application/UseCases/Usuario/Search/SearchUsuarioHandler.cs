@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.Usuario.Search;
 public class SearchUsuarioHandler(IUsuarioRepository repository)
 {
-    public async Task<Result<List<SearchUsuarioResponse>>> SearchHendler(SearchUsuarioCommand command, CancellationToken token)
+    public async Task<QueryResult<List<SearchUsuarioResponse>>> SearchHendler(SearchUsuarioCommand command, CancellationToken token)
     {
         try
         {
             if(command.Nome == null)
             {
-                return new Result<List<SearchUsuarioResponse>>(
+                return new QueryResult<List<SearchUsuarioResponse>>(
                     null, 
                     400, 
                     "Parâmetro não deve estar vazio."
@@ -17,7 +17,7 @@ public class SearchUsuarioHandler(IUsuarioRepository repository)
 
             if (response.Data == null || !response.Data.Any())
             {
-                return new Result<List<SearchUsuarioResponse>>(
+                return new QueryResult<List<SearchUsuarioResponse>>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -25,7 +25,7 @@ public class SearchUsuarioHandler(IUsuarioRepository repository)
             }
             var result = response.Data.MapToSearchUsuario().ToList();
             
-            return new Result<List<SearchUsuarioResponse>>(
+            return new QueryResult<List<SearchUsuarioResponse>>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -33,7 +33,7 @@ public class SearchUsuarioHandler(IUsuarioRepository repository)
         }
         catch (Exception ex)
         {
-            return new Result<List<SearchUsuarioResponse>>(
+            return new QueryResult<List<SearchUsuarioResponse>>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (SEARCH). Erro: {ex.Message}"

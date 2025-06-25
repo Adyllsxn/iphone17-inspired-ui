@@ -5,6 +5,6 @@ public record UpdateEventoStatusCommand
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Status de Aprovação é obrigatório")]
-    public EStatusAprovacao StatusAprovacao { get; set; }
+    public EAprovacao StatusAprovacao { get; set; }
 }
 

@@ -1,7 +1,7 @@
 namespace Kairos.Application.UseCases.Blog.Update;
 public class UpdateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<Result<UpdateBlogResponse>> UpdateHendler(UpdateBlogCommand command, CancellationToken token)
+    public async Task<QueryResult<UpdateBlogResponse>> UpdateHendler(UpdateBlogCommand command, CancellationToken token)
     {
         try
         {
@@ -9,7 +9,7 @@ public class UpdateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
             var response = await repository.UpdateAsync(entity, token);
             await unitOfWork.CommitAsync();
 
-            return new Result<UpdateBlogResponse>(
+            return new QueryResult<UpdateBlogResponse>(
                 response.Data?.MapToUpdateBlog(),
                 response.Code,
                 response.Message
@@ -17,7 +17,7 @@ public class UpdateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
         }
         catch(Exception ex)
         {
-            return new Result<UpdateBlogResponse>(
+            return new QueryResult<UpdateBlogResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (UPDATE). Erro: {ex.Message}"

@@ -2,21 +2,21 @@
 namespace Kairos.Infrastructure.Repositories;
 public class EventoRepository(AppDbContext context) : IEventoRepository
 {
-    #region </Create>
-        public async Task<Result<EventoEntity>> CreateAsync(EventoEntity entity, CancellationToken token)
+    #region Create
+        public async Task<QueryResult<EventoEntity>> CreateAsync(EventoEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<EventoEntity>(
+                    return new QueryResult<EventoEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
                         );
                 }
                 await context.Eventos.AddAsync(entity, token);
-                return new Result<EventoEntity>(
+                return new QueryResult<EventoEntity>(
                     entity, 
                     201, 
                     "Operação executada com sucesso."
@@ -24,7 +24,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<EventoEntity>(
+                return new QueryResult<EventoEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (CRIAR). Erro {ex.Message}."
@@ -33,14 +33,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </Delete>
-        public async Task<Result<bool>> DeleteAsync(int entityId, CancellationToken token)
+    #region Delete
+        public async Task<QueryResult<bool>> DeleteAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if (entityId <= 0)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         400, 
                         "ID deve ser maior que zero."
@@ -49,14 +49,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                 var response = await context.Eventos.FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if (response == null)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Eventos.Remove(response);
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     true, 
                     200, 
                     "Operação executada com sucesso."
@@ -64,7 +64,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     false, 
                     500, 
                     $"Erro ao executar a operação (DELETAR). Erro {ex.Message}."
@@ -73,7 +73,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </GetAll>
+    #region GetAll
         public async Task<PagedList<List<EventoEntity>?>> GetAllAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -105,14 +105,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </GetById>
-        public async Task<Result<EventoEntity?>> GetByIdAsync(int entityId, CancellationToken token)
+    #region GetById
+        public async Task<QueryResult<EventoEntity?>> GetByIdAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<EventoEntity?>(
+                    return new QueryResult<EventoEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -121,13 +121,13 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                 var response = await context.Eventos.Include(x => x.Usuario).Include(x => x.TipoEvento).FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<EventoEntity?>(
+                    return new QueryResult<EventoEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<EventoEntity?>(
+                return new QueryResult<EventoEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -135,7 +135,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<EventoEntity?>(
+                return new QueryResult<EventoEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -144,7 +144,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
     
-    #region </GetAprovados>
+    #region GetAprovados
         public async Task<PagedList<List<EventoEntity>?>> GetEventosAprovadosAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -153,7 +153,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                     .AsNoTracking()
                     .Include(x => x.Usuario)
                     .Include(x => x.TipoEvento)
-                    .Where(e => e.StatusAprovacao == EStatusAprovacao.Aprovado);
+                    .Where(e => e.StatusAprovacao == EAprovacao.Aprovado);
 
                 var result = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
@@ -171,7 +171,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </GetPendentes>
+    #region GetPendentes
         public async Task<PagedList<List<EventoEntity>?>> GetEventosPendentesAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -180,7 +180,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                     .AsNoTracking()
                     .Include(x => x.Usuario)
                     .Include(x => x.TipoEvento)
-                    .Where(e => e.StatusAprovacao == EStatusAprovacao.Pendente);
+                    .Where(e => e.StatusAprovacao == EAprovacao.Pendente);
 
                 var result = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
@@ -198,7 +198,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </GetRejeitados>
+    #region GetRejeitados
         public async Task<PagedList<List<EventoEntity>?>> GetEventosRejeitadosAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -207,7 +207,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                     .AsNoTracking()
                     .Include(x => x.Usuario)
                     .Include(x => x.TipoEvento)
-                    .Where(e => e.StatusAprovacao == EStatusAprovacao.Rejeitado);
+                    .Where(e => e.StatusAprovacao == EAprovacao.Rejeitado);
 
                 var result = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
@@ -225,14 +225,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </GetFile>
-        public async Task<Result<EventoEntity?>> GetFileAsync(int entityId, CancellationToken token)
+    #region GetFile
+        public async Task<QueryResult<EventoEntity?>> GetFileAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<EventoEntity?>(
+                    return new QueryResult<EventoEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -241,13 +241,13 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                 var response = await context.Eventos.Include(x => x.Usuario).Include(x => x.TipoEvento).FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<EventoEntity?>(
+                    return new QueryResult<EventoEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<EventoEntity?>(
+                return new QueryResult<EventoEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -255,7 +255,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<EventoEntity?>(
+                return new QueryResult<EventoEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -264,14 +264,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </Search>
-        public async Task<Result<List<EventoEntity>?>> SearchAsync(Expression<Func<EventoEntity, bool>> expression, string entity, CancellationToken token)
+    #region Search
+        public async Task<QueryResult<List<EventoEntity>?>> SearchAsync(Expression<Func<EventoEntity, bool>> expression, string entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<List<EventoEntity>?>(
+                    return new QueryResult<List<EventoEntity>?>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -280,14 +280,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                 var response = await context.Eventos.Include(x => x.Usuario).Include(x => x.TipoEvento).Where(expression).ToListAsync(token);
                 if(response == null || response.Count == 0)
                 {
-                    return new Result<List<EventoEntity>?>(
+                    return new QueryResult<List<EventoEntity>?>(
                         null, 
                         404, 
                         "Nenhum dado encontrado."
                         );
                 }
 
-                return new Result<List<EventoEntity>?>(
+                return new QueryResult<List<EventoEntity>?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -295,7 +295,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<List<EventoEntity>?>(
+                return new QueryResult<List<EventoEntity>?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (SEARCH). Erro {ex.Message}."
@@ -304,14 +304,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
         }
     #endregion
 
-    #region </Update>
-        public async Task<Result<EventoEntity>> UpdateAsync(EventoEntity entity, CancellationToken token)
+    #region Update
+        public async Task<QueryResult<EventoEntity>> UpdateAsync(EventoEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<EventoEntity>(
+                    return new QueryResult<EventoEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -320,14 +320,14 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
                 var response = await context.Eventos.FindAsync(entity.Id);
                 if(response == null)
                 {
-                    return new Result<EventoEntity>(
+                    return new QueryResult<EventoEntity>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Entry(response).CurrentValues.SetValues(entity);
-                return new Result<EventoEntity>(
+                return new QueryResult<EventoEntity>(
                     response, 
                     200, 
                     "Operação executada com sucesso."
@@ -335,7 +335,7 @@ public class EventoRepository(AppDbContext context) : IEventoRepository
             }
             catch (Exception ex)
             {
-                return new Result<EventoEntity>(
+                return new QueryResult<EventoEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (UPDATE). Erro {ex.Message}."

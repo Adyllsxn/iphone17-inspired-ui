@@ -1,7 +1,7 @@
 namespace Kairos.Application.UseCases.Evento.Create;
 public class CreateEventoHandler(IEventoRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<Result<CreateEventoResponse>> CreateHandler(CreateEventoCommand command, CancellationToken token)
+    public async Task<QueryResult<CreateEventoResponse>> CreateHandler(CreateEventoCommand command, CancellationToken token)
     {
         try
         {
@@ -9,7 +9,7 @@ public class CreateEventoHandler(IEventoRepository repository, IUnitOfWork unitO
             var response = await repository.CreateAsync(entity, token);
             await unitOfWork.CommitAsync();
 
-            return new Result<CreateEventoResponse>(
+            return new QueryResult<CreateEventoResponse>(
                 response.Data?.MapToCreateEvento(), 
                 response.Code, 
                 response.Message
@@ -17,7 +17,7 @@ public class CreateEventoHandler(IEventoRepository repository, IUnitOfWork unitO
         }
         catch(Exception ex)
         {
-            return new Result<CreateEventoResponse>(
+            return new QueryResult<CreateEventoResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (CRIAR). Erro: {ex.Message}"

@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.Blog.Search;
 public class SearchBlogHandler(IBlogRepository repository)
 {
-    public async Task<Result<List<GetBlogsResponse>>> SearchHendler(SearchBlogCommand command, CancellationToken token)
+    public async Task<QueryResult<List<GetBlogsResponse>>> SearchHendler(SearchBlogCommand command, CancellationToken token)
     {
         try
         {
             if(command.Titulo == null)
             {
-                return new Result<List<GetBlogsResponse>>(
+                return new QueryResult<List<GetBlogsResponse>>(
                     null, 
                     400, 
                     "Parâmetro não deve estar vazio."
@@ -17,7 +17,7 @@ public class SearchBlogHandler(IBlogRepository repository)
 
             if (response.Data == null || !response.Data.Any())
             {
-                return new Result<List<GetBlogsResponse>>(
+                return new QueryResult<List<GetBlogsResponse>>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -25,7 +25,7 @@ public class SearchBlogHandler(IBlogRepository repository)
             }
             var result = response.Data.MapToGetBlogs().ToList();
             
-            return new Result<List<GetBlogsResponse>>(
+            return new QueryResult<List<GetBlogsResponse>>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -33,7 +33,7 @@ public class SearchBlogHandler(IBlogRepository repository)
         }
         catch (Exception ex)
         {
-            return new Result<List<GetBlogsResponse>>(
+            return new QueryResult<List<GetBlogsResponse>>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (SEARCH). Erro: {ex.Message}"

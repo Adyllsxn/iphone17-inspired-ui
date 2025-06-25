@@ -34,7 +34,7 @@ public record UpdateEventoCommand
     public int UsuarioID { get; set; }
 
     [Required(ErrorMessage = "Status de Aprovação é obrigatório")]
-    public EStatusAprovacao StatusAprovacao { get; set; }
+    public EAprovacao StatusAprovacao { get; set; }
 
     [Required(ErrorMessage = "ImagemUrl é obrigatório")]
     [MinLength(1, ErrorMessage = "Imagem deve ter no mínimo 1 caractere.")]

@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.Perfil.Search;
 public class SearchPerfilHandler(IPerfilRepository repository)
 {
-    public async Task<Result<List<SearchPerfilResponse>>> SearchHendler(SearchPerfilCommand command, CancellationToken token)
+    public async Task<QueryResult<List<SearchPerfilResponse>>> SearchHendler(SearchPerfilCommand command, CancellationToken token)
     {
         try
         {
             if(command.Nome == null)
             {
-                return new Result<List<SearchPerfilResponse>>(
+                return new QueryResult<List<SearchPerfilResponse>>(
                     null, 
                     400, 
                     "Parâmetro não deve estar vazio."
@@ -17,7 +17,7 @@ public class SearchPerfilHandler(IPerfilRepository repository)
 
             if (response.Data == null || !response.Data.Any())
             {
-                return new Result<List<SearchPerfilResponse>>(
+                return new QueryResult<List<SearchPerfilResponse>>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -25,7 +25,7 @@ public class SearchPerfilHandler(IPerfilRepository repository)
             }
             var result = response.Data.MapToSearchPerfil().ToList();
             
-            return new Result<List<SearchPerfilResponse>>(
+            return new QueryResult<List<SearchPerfilResponse>>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -33,7 +33,7 @@ public class SearchPerfilHandler(IPerfilRepository repository)
         }
         catch (Exception ex)
         {
-            return new Result<List<SearchPerfilResponse>>(
+            return new QueryResult<List<SearchPerfilResponse>>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (SEARCH). Erro: {ex.Message}"

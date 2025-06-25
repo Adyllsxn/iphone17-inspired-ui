@@ -1,21 +1,21 @@
 namespace Kairos.Infrastructure.Repositories;
 public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
 {
-    #region </Create>
-        public async Task<Result<UsuarioEntity>> CreateAsync(UsuarioEntity entity, CancellationToken token)
+    #region Create
+        public async Task<QueryResult<UsuarioEntity>> CreateAsync(UsuarioEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<UsuarioEntity>(
+                    return new QueryResult<UsuarioEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
                         );
                 }
                 await context.Usuarios.AddAsync(entity, token);
-                return new Result<UsuarioEntity>(
+                return new QueryResult<UsuarioEntity>(
                     entity, 
                     201, 
                     "Operação executada com sucesso."
@@ -23,7 +23,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<UsuarioEntity>(
+                return new QueryResult<UsuarioEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (CRIAR). Erro {ex.Message}."
@@ -32,14 +32,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </Delete>
-        public async Task<Result<bool>> DeleteAsync(int entityId, CancellationToken token)
+    #region Delete
+        public async Task<QueryResult<bool>> DeleteAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if (entityId <= 0)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         400, 
                         "ID deve ser maior que zero."
@@ -48,7 +48,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 var response = await context.Usuarios.FirstOrDefaultAsync( x => x.Id == entityId, token);
                 if (response == null)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         404, 
                         "ID não encontrado."
@@ -56,7 +56,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 }
                 response.Deactivate();
                 context.Usuarios.Update(response);
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     true, 
                     200, 
                     "Operação executada com sucesso."
@@ -64,7 +64,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     false, 
                     500, 
                     $"Erro ao executar a operação (DELETAR). Erro {ex.Message}."
@@ -73,7 +73,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </Exist>
+    #region Exist
         public async Task<bool> GetIfExistAsync()
         {
             try
@@ -88,7 +88,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
     
-    #region </GetAll>
+    #region GetAll
         public async Task<PagedList<List<UsuarioEntity>?>> GetAllAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -120,14 +120,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </GetFoto>
-        public async Task<Result<UsuarioEntity?>> GetFotoAsync(int entityId, CancellationToken token)
+    #region GetFoto
+        public async Task<QueryResult<UsuarioEntity?>> GetFotoAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<UsuarioEntity?>(
+                    return new QueryResult<UsuarioEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -136,13 +136,13 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 var response = await context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<UsuarioEntity?>(
+                    return new QueryResult<UsuarioEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<UsuarioEntity?>(
+                return new QueryResult<UsuarioEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -150,7 +150,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<UsuarioEntity?>(
+                return new QueryResult<UsuarioEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -159,14 +159,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </GetById>
-        public async Task<Result<UsuarioEntity?>> GetByIdAsync(int entityId, CancellationToken token)
+    #region GetById
+        public async Task<QueryResult<UsuarioEntity?>> GetByIdAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<UsuarioEntity?>(
+                    return new QueryResult<UsuarioEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -175,13 +175,13 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 var response = await context.Usuarios.Where( x => x.IsActive == true).Include(x => x.Perfil).FirstOrDefaultAsync( x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<UsuarioEntity?>(
+                    return new QueryResult<UsuarioEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<UsuarioEntity?>(
+                return new QueryResult<UsuarioEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -189,7 +189,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<UsuarioEntity?>(
+                return new QueryResult<UsuarioEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -198,7 +198,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </GetExist>
+    #region GetExist
         public async Task<bool> GetIfUserExistAsync()
         {
             try
@@ -212,14 +212,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </Search>
-        public async Task<Result<List<UsuarioEntity>?>> SearchAsync(Expression<Func<UsuarioEntity, bool>> expression, string entity, CancellationToken token)
+    #region Search
+        public async Task<QueryResult<List<UsuarioEntity>?>> SearchAsync(Expression<Func<UsuarioEntity, bool>> expression, string entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<List<UsuarioEntity>?>(
+                    return new QueryResult<List<UsuarioEntity>?>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -228,14 +228,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 var response = await context.Usuarios.Where( x => x.IsActive == true).Include(x => x.Perfil).Where(expression).ToListAsync(token);
                 if(response == null || response.Count == 0)
                 {
-                    return new Result<List<UsuarioEntity>?>(
+                    return new QueryResult<List<UsuarioEntity>?>(
                         null, 
                         404, 
                         "Nenhum dado encontrado."
                         );
                 }
 
-                return new Result<List<UsuarioEntity>?>(
+                return new QueryResult<List<UsuarioEntity>?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -243,7 +243,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<List<UsuarioEntity>?>(
+                return new QueryResult<List<UsuarioEntity>?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (SEARCH). Erro {ex.Message}."
@@ -252,14 +252,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region </Update>
-        public async Task<Result<UsuarioEntity>> UpdateAsync(UsuarioEntity entity, CancellationToken token)
+    #region Update
+        public async Task<QueryResult<UsuarioEntity>> UpdateAsync(UsuarioEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<UsuarioEntity>(
+                    return new QueryResult<UsuarioEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -268,14 +268,14 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
                 var response = await context.Usuarios.FindAsync(entity.Id);
                 if(response == null)
                 {
-                    return new Result<UsuarioEntity>(
+                    return new QueryResult<UsuarioEntity>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Entry(response).CurrentValues.SetValues(entity);
-                return new Result<UsuarioEntity>(
+                return new QueryResult<UsuarioEntity>(
                     response, 
                     200, 
                     "Operação executada com sucesso."
@@ -283,7 +283,7 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
             }
             catch (Exception ex)
             {
-                return new Result<UsuarioEntity>(
+                return new QueryResult<UsuarioEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (UPDATE). Erro {ex.Message}."
@@ -292,23 +292,23 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         }
     #endregion
 
-    #region <UpdatePassword>
-        public async Task<Result<bool>> UpdatePasswordAsync(int usuarioId, byte[] newHash, byte[] newSalt, CancellationToken token)
+    #region UpdatePassword
+        public async Task<QueryResult<bool>> UpdatePasswordAsync(int usuarioId, byte[] newHash, byte[] newSalt, CancellationToken token)
         {
             try
             {
                 var usuario = await context.Usuarios.FindAsync(usuarioId);
                 if (usuario == null)
-                    return new Result<bool>(false, 404, "Usuário não encontrado.");
+                    return new QueryResult<bool>(false, 404, "Usuário não encontrado.");
 
                 usuario.UpdatePassword(newHash, newSalt);
                 context.Usuarios.Update(usuario);
                 await context.SaveChangesAsync(token);
-                return new Result<bool>(true, 200, "Senha atualizada com sucesso.");
+                return new QueryResult<bool>(true, 200, "Senha atualizada com sucesso.");
             }
             catch (Exception ex)
             {
-                return new Result<bool>(false, 500, $"Erro ao atualizar senha: {ex.Message}");
+                return new QueryResult<bool>(false, 500, $"Erro ao atualizar senha: {ex.Message}");
             }
         }
     #endregion

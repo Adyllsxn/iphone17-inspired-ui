@@ -1,21 +1,21 @@
 namespace Kairos.Infrastructure.Repositories;
 public class PresencaRepository(AppDbContext context) : IPresencaRepository
 {
-    #region </Create>
-        public async Task<Result<PresencaEntity>> CreateAsync(PresencaEntity entity, CancellationToken token)
+    #region Create
+        public async Task<QueryResult<PresencaEntity>> CreateAsync(PresencaEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<PresencaEntity>(
+                    return new QueryResult<PresencaEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
                         );
                 }
                 await context.Presencas.AddAsync(entity, token);
-                return new Result<PresencaEntity>(
+                return new QueryResult<PresencaEntity>(
                     entity, 
                     201, 
                     "Operação executada com sucesso."
@@ -23,7 +23,7 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
             }
             catch (Exception ex)
             {
-                return new Result<PresencaEntity>(
+                return new QueryResult<PresencaEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (CRIAR). Erro {ex.Message}."
@@ -32,14 +32,14 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
         }
     #endregion
 
-    #region </Delete>
-        public async Task<Result<bool>> DeleteAsync(int entityId, CancellationToken token)
+    #region Delete
+        public async Task<QueryResult<bool>> DeleteAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if (entityId <= 0)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         400, 
                         "ID deve ser maior que zero."
@@ -48,14 +48,14 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
                 var response = await context.Presencas.FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if (response == null)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Presencas.Remove(response);
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     true, 
                     200, 
                     "Operação executada com sucesso."
@@ -63,7 +63,7 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
             }
             catch (Exception ex)
             {
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     false, 
                     500, 
                     $"Erro ao executar a operação (DELETAR). Erro {ex.Message}."
@@ -72,7 +72,7 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
         }
     #endregion
 
-    #region </GeaAll>
+    #region GetAll
         public async Task<PagedList<List<PresencaEntity>?>> GetAllAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -104,14 +104,14 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
         }
     #endregion
 
-    #region </GetById>
-        public async Task<Result<PresencaEntity?>> GetByIdAsync(int entityId, CancellationToken token)
+    #region GetById
+        public async Task<QueryResult<PresencaEntity?>> GetByIdAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<PresencaEntity?>(
+                    return new QueryResult<PresencaEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -120,13 +120,13 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
                 var response = await context.Presencas.FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<PresencaEntity?>(
+                    return new QueryResult<PresencaEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<PresencaEntity?>(
+                return new QueryResult<PresencaEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -134,7 +134,7 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
             }
             catch (Exception ex)
             {
-                return new Result<PresencaEntity?>(
+                return new QueryResult<PresencaEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -143,14 +143,14 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
         }
     #endregion
 
-    #region </Update>
-        public async Task<Result<PresencaEntity>> UpdateAsync(PresencaEntity entity, CancellationToken token)
+    #region Update
+        public async Task<QueryResult<PresencaEntity>> UpdateAsync(PresencaEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<PresencaEntity>(
+                    return new QueryResult<PresencaEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -159,14 +159,14 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
                 var response = await context.Presencas.FindAsync(entity.Id);
                 if(response == null)
                 {
-                    return new Result<PresencaEntity>(
+                    return new QueryResult<PresencaEntity>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Entry(response).CurrentValues.SetValues(entity);
-                return new Result<PresencaEntity>(
+                return new QueryResult<PresencaEntity>(
                     response, 
                     200, 
                     "Operação executada com sucesso."
@@ -174,7 +174,7 @@ public class PresencaRepository(AppDbContext context) : IPresencaRepository
             }
             catch (Exception ex)
             {
-                return new Result<PresencaEntity>(
+                return new QueryResult<PresencaEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (UPDATE). Erro {ex.Message}."

@@ -1,7 +1,7 @@
 namespace Kairos.Application.UseCases.TipoEvento.Create;
 public class CreateTipoEventoHandler(ITipoEventoRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<Result<CreateTipoEventoResponse>> CreateHandler(CreateTipoEventoCommand command, CancellationToken token)
+    public async Task<QueryResult<CreateTipoEventoResponse>> CreateHandler(CreateTipoEventoCommand command, CancellationToken token)
     {
         try
         {
@@ -9,7 +9,7 @@ public class CreateTipoEventoHandler(ITipoEventoRepository repository, IUnitOfWo
             var response = await repository.CreateAsync(entity, token);
             await unitOfWork.CommitAsync();
 
-            return new Result<CreateTipoEventoResponse>(
+            return new QueryResult<CreateTipoEventoResponse>(
                 response.Data?.MapToCreateTipoEvento(), 
                 response.Code, 
                 response.Message
@@ -17,7 +17,7 @@ public class CreateTipoEventoHandler(ITipoEventoRepository repository, IUnitOfWo
         }
         catch(Exception ex)
         {
-            return new Result<CreateTipoEventoResponse>(
+            return new QueryResult<CreateTipoEventoResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (CRIAR). Erro: {ex.Message}"

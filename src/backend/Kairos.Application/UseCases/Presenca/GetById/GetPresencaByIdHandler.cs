@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.Presenca.GetById;
 public class GetPresencaByIdHandler(IPresencaRepository repository)
 {
-    public async Task<Result<GetPresencaByIdResponse>> GetByIdHandler(GetPresencaByIdCommand command, CancellationToken token)
+    public async Task<QueryResult<GetPresencaByIdResponse>> GetByIdHandler(GetPresencaByIdCommand command, CancellationToken token)
     {
         try
         {
             if(command.Id <= 0)
             {
-                return new Result<GetPresencaByIdResponse>(
+                return new QueryResult<GetPresencaByIdResponse>(
                     null,
                     400,
                     "ID deve ser maior que zero."
@@ -16,7 +16,7 @@ public class GetPresencaByIdHandler(IPresencaRepository repository)
             var response = await repository.GetByIdAsync(command.Id, token);
             if (response.Data == null)
             {
-                return new Result<GetPresencaByIdResponse>(
+                return new QueryResult<GetPresencaByIdResponse>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -24,7 +24,7 @@ public class GetPresencaByIdHandler(IPresencaRepository repository)
             }
             var result = response.Data.MapToGetPresencaById();
             
-            return new Result<GetPresencaByIdResponse>(
+            return new QueryResult<GetPresencaByIdResponse>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -32,7 +32,7 @@ public class GetPresencaByIdHandler(IPresencaRepository repository)
         }
         catch(Exception ex)
         {
-            return new Result<GetPresencaByIdResponse>(
+            return new QueryResult<GetPresencaByIdResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (GET BY ID). Erro: {ex.Message}"

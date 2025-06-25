@@ -6,5 +6,5 @@ public class ArchiveBlogCommand
 
     [JsonIgnore]
     [Required(ErrorMessage = "Status de Postagem é obrigatório")]
-    public EStatusPostagem StatusPostagem { get; set; } = EStatusPostagem.Arquivado;
+    public EBlog StatusPostagem { get; set; } = EBlog.Arquivado;
 }

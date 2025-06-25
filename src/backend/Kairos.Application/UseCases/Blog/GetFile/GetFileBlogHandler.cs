@@ -1,13 +1,13 @@
 namespace Kairos.Application.UseCases.Blog.GetFile;
 public class GetFileBlogHandler(IBlogRepository repository)
 {
-    public async Task<Result<GetFileBlogResponse>> GetFileHandler(GetFileBlogCommand command, CancellationToken token)
+    public async Task<QueryResult<GetFileBlogResponse>> GetFileHandler(GetFileBlogCommand command, CancellationToken token)
     {
         try
         {
             if(command.Id <= 0)
             {
-                return new Result<GetFileBlogResponse>(
+                return new QueryResult<GetFileBlogResponse>(
                     null,
                     400,
                     "ID deve ser maior que zero."
@@ -16,7 +16,7 @@ public class GetFileBlogHandler(IBlogRepository repository)
             var response = await repository.GetFileAsync(command.Id, token);
             if (response.Data == null)
             {
-                return new Result<GetFileBlogResponse>(
+                return new QueryResult<GetFileBlogResponse>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -24,7 +24,7 @@ public class GetFileBlogHandler(IBlogRepository repository)
             }
             var result = response.Data.MapToGetFileBlog();
             
-            return new Result<GetFileBlogResponse>(
+            return new QueryResult<GetFileBlogResponse>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -32,7 +32,7 @@ public class GetFileBlogHandler(IBlogRepository repository)
         }
         catch(Exception ex)
         {
-            return new Result<GetFileBlogResponse>(
+            return new QueryResult<GetFileBlogResponse>(
                 null, 
                 500, 
                 $"Erro ao manipular a operação (GET FILE). Erro: {ex.Message}"

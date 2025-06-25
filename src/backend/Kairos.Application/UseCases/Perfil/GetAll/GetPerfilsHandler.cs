@@ -1,7 +1,7 @@
 namespace Kairos.Application.UseCases.Perfil.GetAll;
 public class GetPerfilsHandler(IPerfilRepository repository)
 {
-    public async Task<Result<List<GetPerfilsResponse>>> GetHandler(CancellationToken token)
+    public async Task<QueryResult<List<GetPerfilsResponse>>> GetHandler(CancellationToken token)
     {
         try
         {
@@ -9,7 +9,7 @@ public class GetPerfilsHandler(IPerfilRepository repository)
 
             if (response.Data == null || !response.Data.Any())
             {
-                return new Result<List<GetPerfilsResponse>>(
+                return new QueryResult<List<GetPerfilsResponse>>(
                     null, 
                     404, 
                     "Nenhum dado encontrado"
@@ -17,7 +17,7 @@ public class GetPerfilsHandler(IPerfilRepository repository)
             }
             var result = response.Data.MapToGetPerfils().ToList();
             
-            return new Result<List<GetPerfilsResponse>>(
+            return new QueryResult<List<GetPerfilsResponse>>(
                 result, 
                 200, 
                 "Dados encontrados"
@@ -25,7 +25,7 @@ public class GetPerfilsHandler(IPerfilRepository repository)
         }
         catch (Exception ex)
         {
-            return new Result<List<GetPerfilsResponse>>(
+            return new QueryResult<List<GetPerfilsResponse>>(
                 null, 
                 500, 
                 $"Erro ao manupular a operação (GET ALL). Erro: {ex.Message}"

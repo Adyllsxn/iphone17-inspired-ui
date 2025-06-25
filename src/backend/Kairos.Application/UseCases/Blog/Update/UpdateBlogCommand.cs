@@ -25,5 +25,5 @@ public class UpdateBlogCommand
     public DateTime DataPublicacao { get; set; }
 
     [JsonIgnore]
-    public EStatusPostagem Status { get; private set; } = EStatusPostagem.Rascunho;
+    public EBlog Status { get; private set; } = EBlog.Rascunho;
 }
