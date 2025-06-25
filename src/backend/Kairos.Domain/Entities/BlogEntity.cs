@@ -7,7 +7,7 @@ public class BlogEntity : EntityBase, IAggragateRoot
     public string Conteudo { get; private set; } = null!;
     public string ImagemCapaUrl { get; private set; } = null!;
     public DateTime DataPublicacao { get; private set; } = DateTime.UtcNow;
-    public EStatusPostagem Status { get; private set; } = EStatusPostagem.Rascunho;
+    public EBlog Status { get; private set; } = EBlog.Rascunho;
 
     [JsonIgnore]
     public UsuarioEntity Usuario { get; private set; } = null!;
@@ -41,7 +41,7 @@ public class BlogEntity : EntityBase, IAggragateRoot
         Conteudo = conteudo;
         ImagemCapaUrl = imagemCapaUrl;
         DataPublicacao = dataPublicacao;
-        Status = EStatusPostagem.Rascunho;
+        Status = EBlog.Rascunho;
     }
 
     public void AtualizarConteudo(string novoTitulo, string novoConteudo)
@@ -56,15 +56,15 @@ public class BlogEntity : EntityBase, IAggragateRoot
 
     public void Publicar()
     {
-        DomainValidationException.When(Status != EStatusPostagem.Rascunho,
+        DomainValidationException.When(Status != EBlog.Rascunho,
             "Apenas posts em rascunho podem ser publicados.");
-        Status = EStatusPostagem.Publicado;
+        Status = EBlog.Publicado;
     }
 
     public void Arquivar()
     {
-        DomainValidationException.When(Status != EStatusPostagem.Publicado,
+        DomainValidationException.When(Status != EBlog.Publicado,
             "Apenas posts em publicados podem ser aqruivados.");
-        Status = EStatusPostagem.Arquivado;
+        Status = EBlog.Arquivado;
     }
 }

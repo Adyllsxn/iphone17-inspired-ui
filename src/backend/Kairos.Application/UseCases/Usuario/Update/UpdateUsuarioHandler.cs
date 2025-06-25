@@ -1,14 +1,14 @@
 namespace Kairos.Application.UseCases.Usuario.Update;
 public class UpdateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<Result<UpdateUsuarioResponse>> UpdateHandler(UpdateUsuarioCommand command, CancellationToken token)
+    public async Task<QueryResult<UpdateUsuarioResponse>> UpdateHandler(UpdateUsuarioCommand command, CancellationToken token)
     {
         try
         {
             var resultEntity = await repository.GetByIdAsync(command.Id, token);
 
             if (resultEntity == null || resultEntity.Data == null)
-                return new Result<UpdateUsuarioResponse>(null, 404, "Evento não encontrado.");
+                return new QueryResult<UpdateUsuarioResponse>(null, 404, "Evento não encontrado.");
 
             var entity = resultEntity.Data;
 
@@ -18,15 +18,15 @@ public class UpdateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork uni
 
             var response = entity.MapToUpdateUsuarioResponse(); 
 
-            return new Result<UpdateUsuarioResponse>(response, 200, "Status atualizado com sucesso.");
+            return new QueryResult<UpdateUsuarioResponse>(response, 200, "Status atualizado com sucesso.");
         }
         catch (DomainValidationException ex)
         {
-            return new Result<UpdateUsuarioResponse>(null, 400, ex.Message);
+            return new QueryResult<UpdateUsuarioResponse>(null, 400, ex.Message);
         }
         catch (Exception ex)
         {
-            return new Result<UpdateUsuarioResponse>(null, 500, $"Erro ao atualizar status: {ex.Message}");
+            return new QueryResult<UpdateUsuarioResponse>(null, 500, $"Erro ao atualizar status: {ex.Message}");
         }
     }
 }

@@ -11,6 +11,7 @@ public class AuthController(IUsuarioService service, IAuthenticateIdentity authe
             var emailExist = await authentication.UserExistAsync(command.Email);
             if(emailExist)
             {
+                Logger.LogToFile("Register - BadRequest", "Este email já possui um cadastro.");
                 return BadRequest("Este email já possui um cadastro.");
             }
 
@@ -23,6 +24,7 @@ public class AuthController(IUsuarioService service, IAuthenticateIdentity authe
             {
                 if(User.FindFirst("id") == null)
                 {
+                    Logger.LogToFile("Register - Unauthorized", "Você não está autenticado no sistema.");
                     return Unauthorized("Você não está autenticado no sistema.");
                 }
 
@@ -30,6 +32,7 @@ public class AuthController(IUsuarioService service, IAuthenticateIdentity authe
                 var user = await service.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
                 if(!(user.Data?.PerfilID == 1))
                 {
+                    Logger.LogToFile("Register - Unauthorized", "Alguém tentou acessar sem permissão.");
                     return Unauthorized("Você não tem permissão para incluir novo usuário.");
                 }
             }
@@ -37,6 +40,7 @@ public class AuthController(IUsuarioService service, IAuthenticateIdentity authe
             var response = await service.CreateHandler(command,token);
             if(response == null)
             {
+                Logger.LogToFile("Register - BadRequest", "Alguém tentou acessar sem permissão.");
                 return BadRequest("Ocorreu um erro ao cadastrar.");
             }
 

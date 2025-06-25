@@ -6,5 +6,5 @@ public class PublishBlogCommand
 
     [JsonIgnore]
     [Required(ErrorMessage = "Status de Postagem é obrigatório")]
-    public EStatusPostagem StatusPostagem { get; set; } = EStatusPostagem.Publicado;
+    public EBlog StatusPostagem { get; set; } = EBlog.Publicado;
 }

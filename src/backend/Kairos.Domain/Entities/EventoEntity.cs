@@ -10,7 +10,7 @@ public sealed class EventoEntity : EntityBase, IAggragateRoot
     public string Local { get; private set; } = null!;
     public int TipoEventoID { get; private set; }
     public int UsuarioID { get; private set; }
-    public EStatusAprovacao StatusAprovacao { get; private set; }
+    public EAprovacao StatusAprovacao { get; private set; }
     public string ImagemUrl { get; private set; } = null!;
 
     [JsonIgnore]
@@ -37,11 +37,11 @@ public sealed class EventoEntity : EntityBase, IAggragateRoot
         ValidationDomain(titulo, descricao, dataHoraInicio, dataHoraFim, local, tipoEventoID, usuarioID, imagemUrl);
     }
 
-    public void AtualizarStatus(EStatusAprovacao novoStatus)
+    public void AtualizarStatus(EAprovacao novoStatus)
     {
-        if (StatusAprovacao == EStatusAprovacao.Pendente)
+        if (StatusAprovacao == EAprovacao.Pendente)
         {
-            if (novoStatus == EStatusAprovacao.Aprovado || novoStatus == EStatusAprovacao.Rejeitado)
+            if (novoStatus == EAprovacao.Aprovado || novoStatus == EAprovacao.Rejeitado)
             {
                 StatusAprovacao = novoStatus;
             }
@@ -81,7 +81,7 @@ public sealed class EventoEntity : EntityBase, IAggragateRoot
         Local = local;
         TipoEventoID = tipoEventoID;
         UsuarioID = usuarioID;
-        StatusAprovacao = EStatusAprovacao.Pendente;
+        StatusAprovacao = EAprovacao.Pendente;
         ImagemUrl = imagemUrl;
     }
 }

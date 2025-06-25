@@ -1,21 +1,21 @@
 namespace Kairos.Infrastructure.Repositories;
 public class BlogRepository(AppDbContext context) : IBlogRepository
 {
-    #region </Create>
-        public async Task<Result<BlogEntity>> CreateAsync(BlogEntity entity, CancellationToken token)
+    #region Create
+        public async Task<QueryResult<BlogEntity>> CreateAsync(BlogEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<BlogEntity>(
+                    return new QueryResult<BlogEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
                         );
                 }
                 await context.Blogs.AddAsync(entity, token);
-                return new Result<BlogEntity>(
+                return new QueryResult<BlogEntity>(
                     entity, 
                     201, 
                     "Operação executada com sucesso."
@@ -23,7 +23,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<BlogEntity>(
+                return new QueryResult<BlogEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (CRIAR). Erro {ex.Message}."
@@ -32,14 +32,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </Delete>
-        public async Task<Result<bool>> DeleteAsync(int entityId, CancellationToken token)
+    #region Delete
+        public async Task<QueryResult<bool>> DeleteAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if (entityId <= 0)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         400, 
                         "ID deve ser maior que zero."
@@ -48,14 +48,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
                 var response = await context.Blogs.FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if (response == null)
                 {
-                    return new Result<bool>(
+                    return new QueryResult<bool>(
                         false, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Blogs.Remove(response);
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     true, 
                     200, 
                     "Operação executada com sucesso."
@@ -63,7 +63,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<bool>(
+                return new QueryResult<bool>(
                     false, 
                     500, 
                     $"Erro ao executar a operação (DELETAR). Erro {ex.Message}."
@@ -72,7 +72,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </GetAll>
+    #region GetAll
         public async Task<PagedList<List<BlogEntity>?>> GetAllAsync(PagedRequest request, CancellationToken token)
         {
             try
@@ -104,14 +104,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </GetPublish>
+    #region GetPublish
         public async Task<PagedList<List<BlogEntity>?>> GetAllPublishAsync(PagedRequest request, CancellationToken token)
         {
             try
             {
                 var query = context.Blogs
                                     .AsNoTracking()
-                                    .Where(x => x.Status == EStatusPostagem.Publicado)
+                                    .Where(x => x.Status == EBlog.Publicado)
                                     .Include(x => x.Usuario)
                                     .AsQueryable();
 
@@ -140,14 +140,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </GetById>
-        public async Task<Result<BlogEntity?>> GetByIdAsync(int entityId, CancellationToken token)
+    #region GetById
+        public async Task<QueryResult<BlogEntity?>> GetByIdAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<BlogEntity?>(
+                    return new QueryResult<BlogEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -156,13 +156,13 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
                 var response = await context.Blogs.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<BlogEntity?>(
+                    return new QueryResult<BlogEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<BlogEntity?>(
+                return new QueryResult<BlogEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -170,7 +170,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<BlogEntity?>(
+                return new QueryResult<BlogEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -179,14 +179,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </GetFile>
-        public async Task<Result<BlogEntity?>> GetFileAsync(int entityId, CancellationToken token)
+    #region GetFile
+        public async Task<QueryResult<BlogEntity?>> GetFileAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if(entityId <= 0)
                 {
-                    return new Result<BlogEntity?>(
+                    return new QueryResult<BlogEntity?>(
                         null, 
                         400, 
                         "ID deve ser maior que zero."
@@ -195,13 +195,13 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
                 var response = await context.Blogs.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if(response == null)
                 {
-                    return new Result<BlogEntity?>(
+                    return new QueryResult<BlogEntity?>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
-                return new Result<BlogEntity?>(
+                return new QueryResult<BlogEntity?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -209,7 +209,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<BlogEntity?>(
+                return new QueryResult<BlogEntity?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (GET BY ID). Erro {ex.Message}."
@@ -218,14 +218,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </Search>
-        public async Task<Result<List<BlogEntity>?>> SearchAsync(Expression<Func<BlogEntity, bool>> expression, string entity, CancellationToken token)
+    #region Search
+        public async Task<QueryResult<List<BlogEntity>?>> SearchAsync(Expression<Func<BlogEntity, bool>> expression, string entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<List<BlogEntity>?>(
+                    return new QueryResult<List<BlogEntity>?>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -234,14 +234,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
                 var response = await context.Blogs.Include(x => x.Usuario).Where(expression).ToListAsync(token);
                 if(response == null || response.Count == 0)
                 {
-                    return new Result<List<BlogEntity>?>(
+                    return new QueryResult<List<BlogEntity>?>(
                         null, 
                         404, 
                         "Nenhum dado encontrado."
                         );
                 }
 
-                return new Result<List<BlogEntity>?>(
+                return new QueryResult<List<BlogEntity>?>(
                     response, 
                     200, 
                     "Dados encontrado."
@@ -249,7 +249,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<List<BlogEntity>?>(
+                return new QueryResult<List<BlogEntity>?>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (SEARCH). Erro {ex.Message}."
@@ -258,14 +258,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
         }
     #endregion
 
-    #region </Update>
-        public async Task<Result<BlogEntity>> UpdateAsync(BlogEntity entity, CancellationToken token)
+    #region Update
+        public async Task<QueryResult<BlogEntity>> UpdateAsync(BlogEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new Result<BlogEntity>(
+                    return new QueryResult<BlogEntity>(
                         null, 
                         400, 
                         "Parâmetros não podem estar vazio."
@@ -274,14 +274,14 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
                 var response = await context.Blogs.FindAsync(entity.Id);
                 if(response == null)
                 {
-                    return new Result<BlogEntity>(
+                    return new QueryResult<BlogEntity>(
                         null, 
                         404, 
                         "ID não encontrado."
                         );
                 }
                 context.Entry(response).CurrentValues.SetValues(entity);
-                return new Result<BlogEntity>(
+                return new QueryResult<BlogEntity>(
                     response, 
                     200, 
                     "Operação executada com sucesso."
@@ -289,7 +289,7 @@ public class BlogRepository(AppDbContext context) : IBlogRepository
             }
             catch (Exception ex)
             {
-                return new Result<BlogEntity>(
+                return new QueryResult<BlogEntity>(
                     null, 
                     500, 
                     $"Erro ao executar a operação (UPDATE). Erro {ex.Message}."

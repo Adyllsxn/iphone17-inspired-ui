@@ -13,8 +13,8 @@
 #region </Domain>
     global using Kairos.Domain.Abstrations.Pagination;
     global using Kairos.Domain.Abstrations.Interfaces;
-    global using Kairos.Domain.Abstrations.Shared;
-    global using Kairos.Domain.Abstrations.Enums;
+    global using Kairos.Domain.Foundations.Result;
+    global using Kairos.Domain.Foundations.Enums;
     global using Kairos.Domain.Abstrations.Exceptions;
     global using Kairos.Domain.Entities;
 #endregion

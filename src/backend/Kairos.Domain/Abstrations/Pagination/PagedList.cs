@@ -1,5 +1,5 @@
 namespace Kairos.Domain.Abstrations.Pagination;
-public class PagedList<TData> : Result<TData>
+public class PagedList<TData> : QueryResult<TData>
 {
     public int CurrentPage { get; set; }
     public int TotalPage => (int)Math.Ceiling(TotalCount / (double) PageSize);
