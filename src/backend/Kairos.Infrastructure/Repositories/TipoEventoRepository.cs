@@ -128,7 +128,6 @@ public class TipoEventoRepository(AppDbContext context) : ITipoEventoRepository
                 }
                 
                 await context.TipoEventos.AddAsync(entity, token);
-
                 return CommandResult<bool>.Success(
                     value: true,
                     message: "Operação executada com sucesso.",
@@ -147,81 +146,85 @@ public class TipoEventoRepository(AppDbContext context) : ITipoEventoRepository
     #endregion
 
     #region Update
-        public async Task<QueryResult<TipoEventoEntity>> UpdateAsync(TipoEventoEntity entity, CancellationToken token)
+        public async Task<CommandResult<bool>> UpdateAsync(TipoEventoEntity entity, CancellationToken token)
         {
             try
             {
                 if(entity == null)
                 {
-                    return new QueryResult<TipoEventoEntity>(
-                        null, 
-                        400, 
-                        "Parâmetros não podem estar vazio."
+                    return CommandResult<bool>.Failure(
+                        value: false,
+                        message: "Parâmetros não podem estar vazio.",
+                        code: StatusCode.BadRequest
                         );
                 }
+
                 var response = await context.TipoEventos.FindAsync(entity.Id);
                 if(response == null)
                 {
-                    return new QueryResult<TipoEventoEntity>(
-                        null, 
-                        404, 
-                        "ID não encontrado."
+                    return CommandResult<bool>.Failure(
+                        value: false,
+                        message: $"ID {entity.Id} não encontrado",
+                        code: StatusCode.NotFound
                         );
                 }
+
                 context.Entry(response).CurrentValues.SetValues(entity);
-                return new QueryResult<TipoEventoEntity>(
-                    response, 
-                    200, 
-                    "Operação executada com sucesso."
-                    );
+                return CommandResult<bool>.Success(
+                        value: true,
+                        message: "Operação executada com sucesso.",
+                        code: StatusCode.NoContent
+                        );
             }
             catch (Exception ex)
             {
-                return new QueryResult<TipoEventoEntity>(
-                    null, 
-                    500, 
-                    $"Erro ao executar a operação (UPDATE). Erro {ex.Message}."
-                    );
+                return CommandResult<bool>.Failure(
+                    value: true,
+                    message: $"Erro ao executar a operação (UPDATE). Erro {ex.Message}.",
+                    code: StatusCode.InternalServerError
+                    );  
             }
         }
     #endregion
 
     #region Delete
-        public async Task<QueryResult<bool>> DeleteAsync(int entityId, CancellationToken token)
+        public async Task<CommandResult<bool>> DeleteAsync(int entityId, CancellationToken token)
         {
             try
             {
                 if (entityId <= 0)
                 {
-                    return new QueryResult<bool>(
-                        false, 
-                        400, 
-                        "ID deve ser maior que zero."
+                    return CommandResult<bool>.Failure(
+                        value: false,
+                        message: $"ID {entityId} deve ser maior que zero.",
+                        code: StatusCode.BadRequest
                         );
                 }
+
                 var response = await context.TipoEventos.FirstOrDefaultAsync(x => x.Id == entityId, token);
                 if (response == null)
                 {
-                    return new QueryResult<bool>(
-                        false, 
-                        404, 
-                        "ID não encontrado."
+                    return CommandResult<bool>.Failure(
+                        value: false,
+                        message: $"ID {entityId} não encontrado",
+                        code: StatusCode.NotFound
                         );
                 }
+                
                 context.TipoEventos.Remove(response);
-                return new QueryResult<bool>(
-                    true, 
-                    200, 
-                    "Operação executada com sucesso."
-                    );
+                return CommandResult<bool>.Success(
+                    value: true,
+                    message: "Operação executada com sucesso.",
+                    code: StatusCode.NoContent
+                    ); 
             }
             catch (Exception ex)
             {
-                return new QueryResult<bool>(
-                    false, 
-                    500, 
-                    $"Erro ao executar a operação (DELETAR). Erro {ex.Message}."
-                    );
+                return CommandResult<bool>.Failure(
+                    value: false,
+                    message: $"Erro ao executar a operação (DELETAR). Erro {ex.Message}.",
+                    code: StatusCode.InternalServerError
+                    ); 
             }
         }
     #endregion

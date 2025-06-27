@@ -5,6 +5,6 @@ public interface ITipoEventoRepository
     Task<PagedList<List<TipoEventoEntity>?>> GetAllAsync (PagedRequest request, CancellationToken token);
     Task<QueryResult<List<TipoEventoEntity>?>> SearchAsync (Expression<Func<TipoEventoEntity, bool>> expression, string entity, CancellationToken token);
     Task<CommandResult<bool>> CreateAsync (TipoEventoEntity entity, CancellationToken token);
-    Task<QueryResult<TipoEventoEntity>> UpdateAsync (TipoEventoEntity entity, CancellationToken token);
-    Task<QueryResult<bool>> DeleteAsync (int entityId, CancellationToken token);
+    Task<CommandResult<bool>> UpdateAsync (TipoEventoEntity entity, CancellationToken token);
+    Task<CommandResult<bool>> DeleteAsync (int entityId, CancellationToken token);
 }

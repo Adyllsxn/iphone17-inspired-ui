@@ -16,7 +16,7 @@
     global using Microsoft.Extensions.FileProviders;
 #endregion
 
-#region </Domain>
+#region Domain
     global using Kairos.Domain.Abstrations.Authentication;
 #endregion
 
