@@ -1,28 +1,37 @@
 namespace Kairos.Application.UseCases.Evento.Status;
 public class UpdateEventoStatusHandler(IEventoRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<QueryResult<UpdateEventoStatusResponse>> StatusHandler(UpdateEventoStatusCommand command, CancellationToken token)
+    public async Task<CommandResult<bool>> StatusHandler(UpdateEventoStatusCommand command, CancellationToken token)
     {
         try
         {
             var resultEntity = await repository.GetByIdAsync(command.Id, token);
-
             if (resultEntity == null || resultEntity.Data == null)
-                return new QueryResult<UpdateEventoStatusResponse>(null, 404, "Evento não encontrado.");
+            {
+                return CommandResult<bool>.Failure(
+                value: false,
+                message: $"Evento {command.Id} não encontrado.",
+                code: StatusCode.NoContent
+                );
+            }
 
             var entity = resultEntity.Data;
-
             entity.AtualizarStatus(command.StatusAprovacao);
 
             await unitOfWork.CommitAsync(token);
-
-            var response = entity.MapToUpdateStatusResponse(); 
-
-            return new QueryResult<UpdateEventoStatusResponse>(response, 200, "Status atualizado com sucesso.");
+            return CommandResult<bool>.Success(
+                value: true,
+                message: "Status atualizado com sucesso.",
+                code: StatusCode.NoContent
+                );
         }
         catch (Exception ex)
         {
-            return new QueryResult<UpdateEventoStatusResponse>(null, 500, $"Erro ao atualizar status: {ex.Message}");
+            return CommandResult<bool>.Failure(
+                value: false,
+                message: $"Erro ao manipular a operação (STATUS). Erro {ex.Message}.",
+                code: StatusCode.InternalServerError
+                );
         }
     }
 }
