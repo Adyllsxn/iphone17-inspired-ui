@@ -9,7 +9,7 @@ public class CreateTipoEventoHandler(ITipoEventoRepository repository, IUnitOfWo
         {
             var entity = command.MapToTipoEventoEntity();
             var response = await repository.CreateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             /*return new CommandResult<bool>(
                 response.Data?.MapToCreateTipoEvento(), 

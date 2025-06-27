@@ -14,7 +14,7 @@ public class UpdateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork uni
 
             entity.UpdateInfo(command.Id,command.Nome, command.SobreNome,command.Email,command.DataCadastro,command.Telefone,command.BI);
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             var response = entity.MapToUpdateUsuarioResponse(); 
 

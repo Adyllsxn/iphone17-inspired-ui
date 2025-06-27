@@ -14,7 +14,7 @@ public class UsuarioStatusHandler(IUsuarioRepository repository, IUnitOfWork uni
 
             entity.UpdatePerfil(command.Perfil.Id);
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             var response = entity.MapToUsuarioStatusResponse(); 
 

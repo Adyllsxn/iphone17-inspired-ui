@@ -7,7 +7,7 @@ public class CreatePresencaHandler(IPresencaRepository repository, IUnitOfWork u
         {
             var entity = command.MapToPresencaEntity();
             var response = await repository.CreateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<CreatePresencaResponse>(
                 response.Data?.MapToCreatePresenca(), 

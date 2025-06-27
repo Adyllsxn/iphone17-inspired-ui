@@ -14,7 +14,7 @@ public class PublishBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWo
 
             entity.Publicar();
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             var response = entity.MapToPublishPostagem(); 
 

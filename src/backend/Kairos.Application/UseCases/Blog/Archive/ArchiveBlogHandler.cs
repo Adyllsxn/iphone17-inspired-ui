@@ -14,7 +14,7 @@ public class ArchiveBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWo
 
             entity.Arquivar();
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             var response = entity.MapToArchivePostagem(); 
 

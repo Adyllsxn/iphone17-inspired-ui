@@ -7,7 +7,7 @@ public class UpdateEventoHandler(IEventoRepository repository, IUnitOfWork unitO
         {
             var entity = command.MapToEventoEntity();
             var response = await repository.UpdateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<UpdateEventoResponse>(
                 response.Data?.MapToUpdateEvento(),

@@ -7,7 +7,7 @@ public class UpdateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
         {
             var entity = command.MapToBlogEntity();
             var response = await repository.UpdateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<UpdateBlogResponse>(
                 response.Data?.MapToUpdateBlog(),

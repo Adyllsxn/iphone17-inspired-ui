@@ -14,7 +14,7 @@ public class UpdateUsuarioFotoHandler(IUsuarioRepository repository, IUnitOfWork
 
             entity.UpdateFoto(command.Id,command.FotoUrl);
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<bool>(true, 200, "Foto atualizado com sucesso.");
         }

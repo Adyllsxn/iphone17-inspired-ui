@@ -6,7 +6,7 @@ public class DeletePresencaHandler(IPresencaRepository repository, IUnitOfWork u
         try
         {
             var response = await repository.DeleteAsync(command.Id, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
             return new QueryResult<bool>(
                 response.Data,
                 response.Code,
