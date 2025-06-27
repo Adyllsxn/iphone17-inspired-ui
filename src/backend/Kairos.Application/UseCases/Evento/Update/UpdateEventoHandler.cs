@@ -1,26 +1,26 @@
 namespace Kairos.Application.UseCases.Evento.Update;
 public class UpdateEventoHandler(IEventoRepository repository, IUnitOfWork unitOfWork)
 {
-    public async Task<QueryResult<UpdateEventoResponse>> UpdateHendler(UpdateEventoCommand command, CancellationToken token)
+    public async Task<CommandResult<bool>> UpdateHendler(UpdateEventoCommand command, CancellationToken token)
     {
         try
         {
             var entity = command.MapToEventoEntity();
             var response = await repository.UpdateAsync(entity, token);
-            await unitOfWork.CommitAsync(token);
 
-            return new QueryResult<UpdateEventoResponse>(
-                response.Data?.MapToUpdateEvento(),
-                response.Code,
-                response.Message
-            );
+            await unitOfWork.CommitAsync(token);
+            return CommandResult<bool>.Success(
+                value: true,
+                message: response.Message,
+                code: response.Code
+                );
         }
         catch(Exception ex)
         {
-            return new QueryResult<UpdateEventoResponse>(
-                null, 
-                500, 
-                $"Erro ao manipular a operação (UPDATE). Erro: {ex.Message}"
+            return CommandResult<bool>.Failure(
+                value: false,
+                message: $"Erro ao manipular a operação (EDITAR). Erro {ex.Message}.",
+                code: StatusCode.InternalServerError
                 );
         }
     }
