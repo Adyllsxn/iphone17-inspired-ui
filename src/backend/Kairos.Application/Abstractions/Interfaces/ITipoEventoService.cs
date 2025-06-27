@@ -5,7 +5,7 @@ public interface ITipoEventoService
     Task<QueryResult<GetTipoEventoByIdResponse>> GetByIdHandler(GetTipoEventoByIdCommand command, CancellationToken token);
     Task<QueryResult<List<SearchTipoEventoResponse>>> SearchHendler(SearchTipoEventoCommand command, CancellationToken token);
     Task<CommandResult<bool>> CreateHandler(CreateTipoEventoCommand command, CancellationToken token);
-    Task<QueryResult<UpdateTipoEventoResponse>> UpdateHendler(UpdateTipoEventoCommand command, CancellationToken token);
-    Task<QueryResult<bool>> DeleteHandler(DeleteTipoEventoCommand command, CancellationToken token);
+    Task<CommandResult<bool>> UpdateHendler(UpdateTipoEventoCommand command, CancellationToken token);
+    Task<CommandResult<bool>> DeleteHandler(DeleteTipoEventoCommand command, CancellationToken token);
 
 }

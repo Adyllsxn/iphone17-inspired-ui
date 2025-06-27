@@ -1,4 +1,4 @@
-#region </System>
+#region System
     global using System.ComponentModel.DataAnnotations;
     global using System.ComponentModel.DataAnnotations.Schema;
     global using System.Text.Json.Serialization;
@@ -6,11 +6,11 @@
     global using System.Text;
 #endregion
 
-#region </Microsoft>
+#region Microsoft
     global using Microsoft.Extensions.DependencyInjection;
 #endregion
 
-#region </Domain>
+#region Domain
     global using Kairos.Domain.Abstrations.Pagination;
     global using Kairos.Domain.Abstrations.Interfaces;
     global using Kairos.Domain.Foundations.Result;
@@ -20,7 +20,7 @@
     global using Kairos.Domain.Abstrations.Shared;
 #endregion
 
-#region </Application>
+#region Application
     global using Kairos.Application.Abstractions.DI.Architecture;
     global using Kairos.Application.Abstractions.Response;
     global using Kairos.Application.Abstractions.Interfaces;
