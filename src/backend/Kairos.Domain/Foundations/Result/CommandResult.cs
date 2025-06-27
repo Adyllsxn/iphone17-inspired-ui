@@ -1,7 +1,7 @@
 namespace Kairos.Domain.Foundations.Result;
 public class CommandResult<TData>
 {
-    public bool IsSuccess { get; private set; }
+    protected bool IsSuccess { get; private set; }
     public string? Message { get; private set; }
     public int Code { get; private set; }
     public TData? Value { get; private set; }
