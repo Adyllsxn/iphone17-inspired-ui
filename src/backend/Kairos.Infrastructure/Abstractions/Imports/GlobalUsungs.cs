@@ -27,6 +27,7 @@
 #region </Infrastructure>
     global using Kairos.Infrastructure.Abstractions.DI;
     global using Kairos.Infrastructure.Abstractions.Identity;
+    global using Kairos.Infrastructure.Abstractions.UoW;
     global using Kairos.Infrastructure.Context;
     global using Kairos.Infrastructure.Context.Connections;
     global using Kairos.Infrastructure.Repositories;

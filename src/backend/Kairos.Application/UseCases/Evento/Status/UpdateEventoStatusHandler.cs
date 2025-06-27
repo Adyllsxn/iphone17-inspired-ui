@@ -14,7 +14,7 @@ public class UpdateEventoStatusHandler(IEventoRepository repository, IUnitOfWork
 
             entity.AtualizarStatus(command.StatusAprovacao);
 
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             var response = entity.MapToUpdateStatusResponse(); 
 

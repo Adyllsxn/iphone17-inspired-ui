@@ -7,7 +7,7 @@ public class CreateEventoHandler(IEventoRepository repository, IUnitOfWork unitO
         {
             var entity = command.MapToEventoEntity();
             var response = await repository.CreateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<CreateEventoResponse>(
                 response.Data?.MapToCreateEvento(), 

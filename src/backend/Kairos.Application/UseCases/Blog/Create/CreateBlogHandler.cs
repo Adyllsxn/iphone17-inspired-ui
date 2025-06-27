@@ -7,7 +7,7 @@ public class CreateBlogHandler(IBlogRepository repository, IUnitOfWork unitOfWor
         {
             var entity = command.MapToBlogEntity();
             var response = await repository.CreateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<CreateBlogResponse>(
                 response.Data?.MapToCreateBlog(), 

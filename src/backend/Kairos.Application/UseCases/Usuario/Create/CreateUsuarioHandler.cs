@@ -17,7 +17,7 @@ public class CreateUsuarioHandler(IUsuarioRepository repository, IUnitOfWork uni
             }
 
             var response = await repository.CreateAsync(entity, token);
-            await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync(token);
 
             return new QueryResult<CreateUsuarioResponse>(
                 response.Data?.MapToCreateUsuario(), 
