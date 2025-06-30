@@ -1,18 +1,21 @@
-# KAIROS
+# KAIROS (Gestão de Eventos e Cultos)
 
-**KAIROS** é uma plataforma web de compartilhamento de conteúdos acadêmicos entre estudantes. Permite que os usuários publiquem materiais como resumos, links, vídeos e PDFs, com organização por disciplina, comentários, curtidas e favoritos.
+**Kairos** é uma plataforma web desenvolvida para auxiliar igrejas na gestão de cultos, eventos e presença de membros. Com uma abordagem moderna, o sistema organiza e automatiza processos como o cadastro de eventos, controle de participantes, visualização de conteúdos e administração de perfis.
+
+> 💡 MVP desenvolvido no contexto de estágio curricular, com foco na Igreja Sossego em Cristo – UTANGA.
 
 ---
 
 ## ✨ Funcionalidades Principais
 
-- ✅ Cadastro e login com autenticação JWT
-- 📚 Upload de arquivos e links educacionais
-- 🗂 Organização de conteúdos por disciplinas
-- 🔍 Pesquisa por título, descrição ou autor
-- 💬 Comentários e curtidas em conteúdos
-- ⭐ Favoritos e listagem personalizada
-- 👤 Perfil de usuário com histórico de postagens
+- ✅ **Cadastro e autenticação de usuários** (com perfis de Membro, Organizador e Administrador)
+- 📅 **Criação, edição e listagem de eventos** e cultos
+- ⛪ **Classificação por tipo de evento** (ex: Culto, Vigília, Ensaio)
+- 🧾 **Registro de presença (check-in digital)** com histórico individual
+- 👥 **Gestão de membros e organizadores**
+- 📝 **Publicação de posts no blog da igreja**
+- 📊 **Dashboard com gráficos de participação**
+- 🔐 **Permissões por perfil e segurança de dados**
 
 ---
 
