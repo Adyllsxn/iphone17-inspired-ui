@@ -25,9 +25,9 @@ public class GetBlogsHandler(IBlogRepository repository)
         catch (Exception ex)
         {
             return new PagedList<List<GetBlogsResponse>?>(
-                null, 
-                500, 
-                $"Erro ao manupular a operação (GET ALL). Erro: {ex.Message}"
+                data: null, 
+                message: $"Erro ao manupular a operação (GET ALL). Erro: {ex.Message}",
+                code: StatusCode.InternalServerError
                 );
         }
     }
