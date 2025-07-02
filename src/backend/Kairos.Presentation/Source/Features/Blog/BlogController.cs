@@ -50,8 +50,12 @@ public class BlogController(IBlogService service) : ControllerBase
         try
         {
             var response = await service.GetFileHandler(command, token);
-            Logger.LogToFile("GetImageBlog - Success", "Retorna imagem específico pelo ID");
-            return Ok(response);
+            if(response.Data?.ImagemCapaUrl == null)
+            {
+                return BadRequest("Imagem não encontrada");
+            }
+            var databyte = System.IO.File.ReadAllBytes(response.Data.ImagemCapaUrl);
+            return File(databyte, "image/jpg");
         }
         catch (Exception error)
         {
@@ -125,19 +129,46 @@ public class BlogController(IBlogService service) : ControllerBase
     #region Edit
     [HttpPut("EditBlog")]
     [EndpointSummary("Edita completamente um post existente")]
-    public async Task<ActionResult> EditBlog(UpdateBlogCommand command, CancellationToken token)
+    public async Task<ActionResult> EditBlog([FromForm] BlogUpdateModel model, CancellationToken token)
     {
-        var response = await service.UpdateHendler(command, token);
-        return Ok(response);
-    }
-    #endregion
+        var getCommand = new GetBlogByIdCommand { Id = model.Id };
+        var result = await service.GetByIdHandler(getCommand, token);
 
-    #region Delete
-    [HttpDelete("DeleteBlog")]
-    [EndpointSummary("Remove um post do blog pelo ID")]
-    public async Task<ActionResult> DeleteBlog([FromQuery] DeleteBlogCommand command, CancellationToken token)
-    {
-        var response = await service.DeleteHandler(command, token);
+        if (result.Data is null)
+            return NotFound("Postagem não encontrada.");
+
+        string caminhoAntigo = result.Data.ImagemCapaUrl;
+        string caminhoNovo = caminhoAntigo;
+
+        if (model.ImagemCapaUrl != null && model.ImagemCapaUrl.Length > 0)
+        {
+            var extensao = Path.GetExtension(model.ImagemCapaUrl.FileName).ToLower();
+            var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            if (!extensoesPermitidas.Contains(extensao))
+                return BadRequest("Extensão de imagem inválida. Use JPG, JPEG, PNG ou GIF.");
+
+            string pasta = Path.Combine("Storage", "Images");
+            Directory.CreateDirectory(pasta);
+
+            string novoNome = $"{Guid.NewGuid()}{extensao}";
+            caminhoNovo = Path.Combine(pasta, novoNome);
+
+            await using var stream = new FileStream(caminhoNovo, FileMode.Create);
+            await model.ImagemCapaUrl.CopyToAsync(stream);
+
+            if (System.IO.File.Exists(caminhoAntigo))
+                System.IO.File.Delete(caminhoAntigo);
+        }
+
+        var command = new UpdateBlogCommand
+        {
+            Id = model.Id,
+            UsuarioID = model.UsuarioID,
+            Titulo = model.Titulo,
+            Conteudo = model.Conteudo,
+            ImagemCapaUrl = caminhoNovo
+        };
+        var response = await service.UpdateHendler(command, token);
         return Ok(response);
     }
     #endregion
@@ -153,13 +184,24 @@ public class BlogController(IBlogService service) : ControllerBase
     #endregion
 
     #region Publish
-    [HttpPatch("PublishBlog")]
-    [EndpointSummary("Publicar um post do blog para visivel")]
-    public async Task<ActionResult> PublishBlog(PublishBlogCommand command, CancellationToken token)
-    {
-        var response = await service.PublishHandler(command, token);
-        return Ok(response);
-    }
+        [HttpPatch("PublishBlog")]
+        [EndpointSummary("Publicar um post do blog para visivel")]
+        public async Task<ActionResult> PublishBlog(PublishBlogCommand command, CancellationToken token)
+        {
+            var response = await service.PublishHandler(command, token);
+            return Ok(response);
+        }
     #endregion
+
+    #region Delete
+        [HttpDelete("DeleteBlog")]
+        [EndpointSummary("Remove um post do blog pelo ID")]
+        public async Task<ActionResult> DeleteBlog([FromQuery] DeleteBlogCommand command, CancellationToken token)
+        {
+            var response = await service.DeleteHandler(command, token);
+            return Ok(response);
+        }
+    #endregion
+
 }
 

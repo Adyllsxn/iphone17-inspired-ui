@@ -182,10 +182,10 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         }
     #endregion
 
-    #region DeleteEvento
-        [HttpDelete("DeleteEvento")]
-        [EndpointSummary("Excluir evento pelo ID.")]
-        public async Task<ActionResult> DeleteEvento([FromForm] EventoUpdateModel model, CancellationToken token)
+    #region UpdateEvento
+        [HttpPut("UpdateEvento")]
+        [EndpointSummary("Atualiza o evento.")]
+        public async Task<ActionResult> UpdateEvento([FromForm] EventoUpdateModel model, CancellationToken token)
         {
             if(User.FindFirst("id") == null)
             {
@@ -247,5 +247,16 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         }
 
     #endregion
+
+    #region Delete
+        [HttpDelete("DeleteEvento")]
+        [EndpointSummary("Remove um post do Evento pelo ID")]
+        public async Task<ActionResult> DeleteEvento([FromQuery] DeleteEventoCommand command, CancellationToken token)
+        {
+            var response = await service.DeleteHandler(command, token);
+            return Ok(response);
+        }
+    #endregion
+
 }
 
