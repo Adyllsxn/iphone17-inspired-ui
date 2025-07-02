@@ -15,12 +15,5 @@ public class BlogCreateModel
     public string Conteudo { get; set; } = null!;
 
     [Required(ErrorMessage = "ImagemCapaUrl é obrigatório")]
-    [MinLength(1, ErrorMessage = "ImagemCapaUrl deve ter no mínimo 1 caracteres.")]
     public IFormFile ImagemCapaUrl { get; set; } = null!;
-
-    [JsonIgnore]
-    public DateTime DataPublicacao { get; set; } = DateTime.UtcNow;
-
-    [JsonIgnore]
-    public EBlog Status { get; private set; } = EBlog.Rascunho;
 }
