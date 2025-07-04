@@ -147,6 +147,7 @@
 
 
 @media(max-width: 768px) {
+    
     .eventos-section .evento-content {
         flex-direction: column;
         gap: 20px;

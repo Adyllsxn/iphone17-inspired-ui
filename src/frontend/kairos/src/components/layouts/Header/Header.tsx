@@ -55,7 +55,7 @@ const Header = ({ onLogout }: HeaderProps) => {
                             <Link to="/eventoList" className={styles.navLink} onClick={closeMenu}>Eventos</Link>
                         </li>
                         <li className={styles.navBarItem}>
-                            <Link to="/eventoList" className={styles.navLink} onClick={closeMenu}>Blog</Link>
+                            <Link to="/blogList" className={styles.navLink} onClick={closeMenu}>Blog</Link>
                         </li>
                         {(perfilID === 1 || perfilID === 2) && (
                         <li className={styles.navBarItem}>

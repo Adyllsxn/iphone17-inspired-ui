@@ -13,6 +13,8 @@ import Dashboard from './containers/pages/Dashboard/Dashboard';
 import EventoList from './containers/features/Evento/List/EventoList';
 import EventoDetails from './containers/features/Evento/Details/EventoDetails';
 import UsuarioView from './containers/features/Usuario/View/UsuarioView'
+import BlogList from './containers/features/Blog/List/BlogList';
+import BlogView from './containers/features/Blog/Views/BlogView';
 import Login from './containers/features/Auth/Login/Login';
 import './core/style/App.css';
 
@@ -51,6 +53,8 @@ function App() {
           <Route path="/eventoList" element={<EventoList />} />
           <Route path="/eventoDetails" element={<EventoDetails />} />
           <Route path="/usuarioView" element={<UsuarioView />} />
+          <Route path="/blogList" element={<BlogList />} />
+          <Route path="/blogView" element={<BlogView />} />
 
           <Route path="/administrativa" element={<AdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
