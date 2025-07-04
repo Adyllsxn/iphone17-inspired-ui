@@ -8,12 +8,13 @@ import Ajuda  from './containers/pages/Institucional/Ajuda/Ajuda';
 import FAQ from './containers/pages/Institucional/FAQ/FAQ';
 import SobreNos from './containers/pages/Institucional/SobreNos/SobreNos';
 import PoliticaDePrivacidade from './containers/pages/Politica/PoliticaDePrivacidade';
-import Login from './containers/features/Auth/Login/Login';
-import './core/style/App.css';
 import AdminLayout from './containers/pages/Administrativa/AdminLayout';
 import Dashboard from './containers/pages/Dashboard/Dashboard';
 import EventoList from './containers/features/Evento/List/EventoList';
 import EventoDetails from './containers/features/Evento/Details/EventoDetails';
+import UsuarioView from './containers/features/Usuario/View/UsuarioView'
+import Login from './containers/features/Auth/Login/Login';
+import './core/style/App.css';
 
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
           <Route path="/sobreNos" element={<SobreNos />} />
           <Route path="/politicaDePrivacidade" element={<PoliticaDePrivacidade />} />
           <Route path="/eventoList" element={<EventoList />} />
-          <Route path="/detalhesEvento" element={<EventoDetails />} />
+          <Route path="/eventoDetails" element={<EventoDetails />} />
+          <Route path="/usuarioView" element={<UsuarioView />} />
 
           <Route path="/administrativa" element={<AdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />

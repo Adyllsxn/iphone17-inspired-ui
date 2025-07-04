@@ -126,7 +126,7 @@ export default function Listar() {
                   </h5>
                   <p>
                     <Link
-                      to='/detalhesEvento'
+                      to='/eventoDetails'
                       state={{ evento }}
                       className='evento-card-inf-link'
                     >
