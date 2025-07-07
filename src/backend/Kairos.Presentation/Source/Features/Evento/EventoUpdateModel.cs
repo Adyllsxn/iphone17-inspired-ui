@@ -30,6 +30,7 @@ public class EventoUpdateModel
     [Required(ErrorMessage = "Tipo de Evento é obrigatório")]
     public int TipoEventoID { get; set; }
 
+    [JsonIgnore]
     [Required(ErrorMessage = "Usuário é obrigatório")]
     public int UsuarioID { get; set; }
 

@@ -27,6 +27,7 @@ public class EventoCreateModel
     [Required(ErrorMessage = "Tipo de Evento é obrigatório")]
     public int TipoEventoID { get; set; }
 
+    [JsonIgnore]
     [Required(ErrorMessage = "Usuário é obrigatório")]
     public int UsuarioID { get; set; }
 

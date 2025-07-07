@@ -9,8 +9,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Listar todos os eventos.")]
         public async Task<ActionResult> ListEvento([FromQuery] GetEventosCommand command,CancellationToken token)
         {
-            var response = await service.GetHandler(command,token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+            
+            #region ListEvento
+                try
+                {
+                    var response = await service.GetHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -19,20 +41,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Obter eventos pendentes.")]
         public async Task<ActionResult> GetPendentesEvento([FromQuery] GetEventosCommand command,CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
-            {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
 
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == 1 || user.Data?.PerfilID == 2))
-            {
-                return Unauthorized("Você não tem permissão para visualizar evento.");
-            }
-
-            var response = await service.GePendentetHandler(command,token);
-            return Ok(response);
+            #region GetPendentesEvento
+                try
+                {
+                    var response = await service.GePendentetHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -41,8 +73,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Obter eventos aprovados.")]
         public async Task<ActionResult> GetAprovadosEvento([FromQuery] GetEventosCommand command,CancellationToken token)
         {
-            var response = await service.GetAprovadoHandler(command,token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+
+            #region GetAprovadosEvento
+                try
+                {
+                    var response = await service.GetAprovadoHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -51,8 +105,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Obter eventos rejeitados.")]
         public async Task<ActionResult> GetRejeitadosEvento([FromQuery] GetEventosCommand command,CancellationToken token)
         {
-            var response = await service.GetReijetadoHandler(command,token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+
+            #region GetRejeitadosEvento
+                try
+                {
+                    var response = await service.GetReijetadoHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -61,8 +137,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Obter evento pelo ID.")]
         public async Task<ActionResult> GetByIdEvento([FromQuery] GetEventoByIdCommand command, CancellationToken token)
         {
-            var response = await service.GetByIdHandler(command,token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+
+            #region GetByIdEvento
+                try
+                {
+                    var response = await service.GetByIdHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -71,25 +169,35 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Obter imagem do evento.")]
         public async Task<ActionResult> GetImagemEvento([FromQuery] GetFileEventoCommand command, CancellationToken token)
         {
+            #region Authorize
                 if(User.FindFirst("id") == null)
                 {
                     return Unauthorized("Você não está autenticado no sistema.");
                 }
-
                 var userId = User.GetId();
                 var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-                if(!(user.Data?.PerfilID == 1 || user.Data?.PerfilID == 2))
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
                 {
                     return Unauthorized("Você não tem permissão para visualizar evento.");
                 }
+            #endregion
 
-                var response = await service.GetFileHandler(command,token);
-                if(response.Data?.ImagemUrl == null)
+            #region GetImagemEvento
+                try
                 {
-                    return BadRequest("Imagem não encontrada");
+                    var response = await service.GetFileHandler(command,token);
+                    if(response.Data?.ImagemUrl == null)
+                    {
+                        return BadRequest("Imagem não encontrada");
+                    }
+                    var databyte = System.IO.File.ReadAllBytes(response.Data.ImagemUrl);
+                    return File(databyte, "image/jpg");
                 }
-                var databyte = System.IO.File.ReadAllBytes(response.Data.ImagemUrl);
-                return File(databyte, "image/jpg");
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -98,8 +206,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Pesquisar eventos por filtros.")]
         public async Task<ActionResult> SearchEvento([FromQuery] SearchEventoCommand command, CancellationToken token)
         {
-            var response = await service.SearchHendler(command,token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+
+            #region SearchEvento
+                try
+                {
+                    var response = await service.SearchHendler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -108,55 +238,65 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Criar um novo evento.")]
         public async Task<ActionResult> CreateEvento([FromForm] EventoCreateModel model, CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
-            {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
 
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == 1 || user.Data?.PerfilID == 2))
-            {
-                return Unauthorized("Você não tem permissão para incluir um novo evento.");
-            }
+            #region CreateEvento
+                try
+                {
+                    if (model.ImagemUrl == null || model.ImagemUrl.Length == 0)
+                    {
+                        return BadRequest("Nenhuma imagem foi enviada.");
+                    }
 
-            if (model.ImagemUrl == null || model.ImagemUrl.Length == 0)
-            {
-                return BadRequest("Nenhuma imagem foi enviada.");
-            }
+                    string pastaRaiz = "Storage";
+                    string pastaImagens = Path.Combine(pastaRaiz, "Images");
+                    if (!Directory.Exists(pastaImagens))
+                    {
+                        Directory.CreateDirectory(pastaImagens);
+                    }
 
-            string pastaRaiz = "Storage";
-            string pastaImagens = Path.Combine(pastaRaiz, "Images");
-            if (!Directory.Exists(pastaImagens))
-            {
-                Directory.CreateDirectory(pastaImagens);
-            }
+                    var extensao = Path.GetExtension(model.ImagemUrl.FileName).ToLower();
+                    var extensoesPermitidas = new HashSet<string> { ".jpg", ".jpeg", ".png", ".gif" };
+                    if (!extensoesPermitidas.Contains(extensao))
+                    {
+                        return BadRequest($"Extensão de arquivo não suportada: {extensao}. Permitidos: JPG, JPEG, PNG, GIF.");
+                    }
 
-            var extensao = Path.GetExtension(model.ImagemUrl.FileName).ToLower();
-            var extensoesPermitidas = new HashSet<string> { ".jpg", ".jpeg", ".png", ".gif" };
-            if (!extensoesPermitidas.Contains(extensao))
-            {
-                return BadRequest($"Extensão de arquivo não suportada: {extensao}. Permitidos: JPG, JPEG, PNG, GIF.");
-            }
+                    string nomeArquivo = $"{Guid.NewGuid()}{extensao}";
+                    string caminhoCompleto = Path.Combine(pastaImagens, nomeArquivo);
 
-            string nomeArquivo = $"{Guid.NewGuid()}{extensao}";
-            string caminhoCompleto = Path.Combine(pastaImagens, nomeArquivo);
+                    await using var stream = new FileStream(caminhoCompleto, FileMode.Create);
+                    await model.ImagemUrl.CopyToAsync(stream);
 
-            await using var stream = new FileStream(caminhoCompleto, FileMode.Create);
-            await model.ImagemUrl.CopyToAsync(stream);
-
-            var newCommand = new CreateEventoCommand{
-                Titulo = model.Titulo,
-                Descricao = model.Descricao,
-                DataHoraInicio = model.DataHoraInicio,
-                DataHoraFim = model.DataHoraFim,
-                Local = model.Local,
-                TipoEventoID = model.TipoEventoID,
-                UsuarioID = model.UsuarioID,
-                ImagemUrl = caminhoCompleto
-            };
-            var response = await service.CreateHandler(newCommand,token);
-            return Ok(response);
+                    var newCommand = new CreateEventoCommand{
+                        Titulo = model.Titulo,
+                        Descricao = model.Descricao,
+                        DataHoraInicio = model.DataHoraInicio,
+                        DataHoraFim = model.DataHoraFim,
+                        Local = model.Local,
+                        TipoEventoID = model.TipoEventoID,
+                        UsuarioID = userId,
+                        ImagemUrl = caminhoCompleto
+                    };
+                    var response = await service.CreateHandler(newCommand,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -165,20 +305,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Atualizar status de aprovação do evento.")]
         public async Task<ActionResult> UpdateStatusEvento(UpdateEventoStatusCommand command, CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
-            {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
 
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == 1))
-            {
-                return Unauthorized("Você não tem permissão para aprovar evento.");
-            }
-
-            var response = await service.StatusHandler(command,token);
-            return Ok(response);
+            #region UpdateStatusEvento
+                try
+                {
+                    var response = await service.StatusHandler(command,token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
@@ -187,63 +337,72 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Atualiza o evento.")]
         public async Task<ActionResult> UpdateEvento([FromForm] EventoUpdateModel model, CancellationToken token)
         {
-            if(User.FindFirst("id") == null)
-            {
-                return Unauthorized("Você não está autenticado no sistema.");
-            }
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
 
-            var userId = User.GetId();
-            var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
-            if(!(user.Data?.PerfilID == 1 || user.Data?.PerfilID == 2))
-            {
-                return Unauthorized("Você não tem permissão para atualizar o evento.");
-            }
+            #region UpdateEvento
+                try
+                {
+                    var getCommand = new GetEventoByIdCommand { Id = model.Id };
+                    var result = await service.GetByIdHandler(getCommand, token);
 
+                    if (result.Data is null)
+                        return NotFound("Postagem não encontrada.");
 
-            var getCommand = new GetEventoByIdCommand { Id = model.Id };
-            var result = await service.GetByIdHandler(getCommand, token);
+                    string caminhoAntigo = result.Data.ImagemUrl;
+                    string caminhoNovo = caminhoAntigo;
 
-            if (result.Data is null)
-                return NotFound("Postagem não encontrada.");
+                    if (model.ImagemUrl != null && model.ImagemUrl.Length > 0)
+                    {
+                        var extensao = Path.GetExtension(model.ImagemUrl.FileName).ToLower();
+                        var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        if (!extensoesPermitidas.Contains(extensao))
+                            return BadRequest("Extensão de imagem inválida. Use JPG, JPEG, PNG ou GIF.");
 
-            string caminhoAntigo = result.Data.ImagemUrl;
-            string caminhoNovo = caminhoAntigo;
+                        string pasta = Path.Combine("Storage", "Images");
+                        Directory.CreateDirectory(pasta);
 
-            if (model.ImagemUrl != null && model.ImagemUrl.Length > 0)
-            {
-                var extensao = Path.GetExtension(model.ImagemUrl.FileName).ToLower();
-                var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-                if (!extensoesPermitidas.Contains(extensao))
-                    return BadRequest("Extensão de imagem inválida. Use JPG, JPEG, PNG ou GIF.");
+                        string novoNome = $"{Guid.NewGuid()}{extensao}";
+                        caminhoNovo = Path.Combine(pasta, novoNome);
 
-                string pasta = Path.Combine("Storage", "Images");
-                Directory.CreateDirectory(pasta);
+                        await using var stream = new FileStream(caminhoNovo, FileMode.Create);
+                        await model.ImagemUrl.CopyToAsync(stream);
 
-                string novoNome = $"{Guid.NewGuid()}{extensao}";
-                caminhoNovo = Path.Combine(pasta, novoNome);
+                        if (System.IO.File.Exists(caminhoAntigo))
+                            System.IO.File.Delete(caminhoAntigo);
+                    }
 
-                await using var stream = new FileStream(caminhoNovo, FileMode.Create);
-                await model.ImagemUrl.CopyToAsync(stream);
+                    var command = new UpdateEventoCommand
+                    {
+                        Id = model.Id,
+                        Titulo = model.Titulo,
+                        Descricao = model.Descricao,
+                        DataHoraInicio = model.DataHoraInicio,
+                        DataHoraFim = model.DataHoraFim,
+                        Local = model.Local,
+                        TipoEventoID = model.TipoEventoID,
+                        UsuarioID = userId,
+                        ImagemUrl = caminhoNovo
+                    };
 
-                if (System.IO.File.Exists(caminhoAntigo))
-                    System.IO.File.Delete(caminhoAntigo);
-            }
-
-            var command = new UpdateEventoCommand
-            {
-                Id = model.Id,
-                Titulo = model.Titulo,
-                Descricao = model.Descricao,
-                DataHoraInicio = model.DataHoraInicio,
-                DataHoraFim = model.DataHoraFim,
-                Local = model.Local,
-                TipoEventoID = model.TipoEventoID,
-                UsuarioID = model.UsuarioID,
-                ImagemUrl = caminhoNovo
-            };
-
-            var response = await service.UpdateHendler(command, token);
-            return Ok(response);
+                    var response = await service.UpdateHendler(command, token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
 
     #endregion
@@ -253,8 +412,30 @@ public class EventoController(IEventoService service, IUsuarioService usuario) :
         [EndpointSummary("Remove um post do Evento pelo ID")]
         public async Task<ActionResult> DeleteEvento([FromQuery] DeleteEventoCommand command, CancellationToken token)
         {
-            var response = await service.DeleteHandler(command, token);
-            return Ok(response);
+            #region Authorize
+                if(User.FindFirst("id") == null)
+                {
+                    return Unauthorized("Você não está autenticado no sistema.");
+                }
+                var userId = User.GetId();
+                var user = await usuario.GetByIdHandler(new GetUsuarioByIdCommand { Id = userId }, token);
+                if(!(user.Data?.PerfilID == PerfilConstant.Adm || user.Data?.PerfilID == PerfilConstant.Organizador))
+                {
+                    return Unauthorized("Você não tem permissão para visualizar evento.");
+                }
+            #endregion
+
+            #region DeleteEvento
+                try
+                {
+                    var response = await service.DeleteHandler(command, token);
+                    return Ok(response);
+                }
+                catch(Exception error)
+                {
+                    return Problem($"Error: {error.Message}");
+                }
+            #endregion
         }
     #endregion
 
