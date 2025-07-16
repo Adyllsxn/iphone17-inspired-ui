@@ -1,0 +1,31 @@
+.presencaSection{
+    padding: 50px 0;
+    width: 100%;
+}
+.presencaSection h1{
+    color: var(--color-text-primary);
+    text-shadow: var(--color-text-shadow) 1px 1px;
+    font-size: var(--font-size-title);
+    margin-bottom: 40px;
+}
+
+.presencaContext{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-accent-primary);
+  margin: 10px;
+  padding: 10px;
+  width: 400px;
+  border-radius: 10px;
+
+  & p{
+    color: var(--color-text-primary);
+    font-weight: bold;
+    font-size: var(--font-size-primary);
+
+    & span{
+      font-weight: normal;
+      font-size: var(--font-size-primary);
+    }
+  }
+}
