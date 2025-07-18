@@ -23,8 +23,29 @@ interface DashboardData {
   blogPost: number;
 }
 
+interface Usuario {
+  id: number;
+  nome: string;
+  sobreNome: string;
+  email: string;
+  fotoUrl: string;
+  perfilID: number;
+  perfil: {
+    id: number;
+    nome: string;
+  };
+  dataCadastro: string;
+  telefone: string;
+  bi: string;
+}
+
 export default function Dashboard() {
   const [dados, setDados] = useState<DashboardData | null>(null);
+  const [contadores, setContadores] = useState({
+    administradores: 0,
+    organizadores: 0,
+    membros: 0,
+  });
 
   const token = localStorage.getItem('token');
   const authorization = {
@@ -34,27 +55,49 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    apiservice
-      .get('/v1/GetDashboard', authorization)
-      .then((response) => {
-        const texto: string = response.data;
-
-        const valores = {
-          perfil: extrairValor(texto, 'PERFIL'),
-          usuario: extrairValor(texto, 'USUARIO'),
-          tipoEvento: extrairValor(texto, 'TIPO DE EVENTO'),
-          evento: extrairValor(texto, 'EVENTOS'),
-          presenca: extrairValor(texto, 'PRESENCA'),
-          blogPost: extrairValor(texto, 'BLOG POST'),
-        };
-
-        setDados(valores);
-      })
-      .catch((error) => {
-        console.error('Erro ao carregar o dashboard:', error);
-        alert('Erro ao carregar dados do dashboard.');
-      });
+    carregarDashboard();
+    carregarUsuarios();
   }, []);
+
+  const carregarDashboard = async () => {
+    try {
+      const response = await apiservice.get('/v1/GetDashboard', authorization);
+      const texto: string = response.data;
+
+      const valores = {
+        perfil: extrairValor(texto, 'PERFIL'),
+        usuario: extrairValor(texto, 'USUARIO'),
+        tipoEvento: extrairValor(texto, 'TIPO DE EVENTO'),
+        evento: extrairValor(texto, 'EVENTOS'),
+        presenca: extrairValor(texto, 'PRESENCA'),
+        blogPost: extrairValor(texto, 'BLOG POST'),
+      };
+
+      setDados(valores);
+    } catch (error) {
+      console.error('Erro ao carregar o dashboard:', error);
+      alert('Erro ao carregar dados do dashboard.');
+    }
+  };
+
+  const carregarUsuarios = async () => {
+    try {
+      const response = await apiservice.get<{ data: Usuario[] }>('/v1/ListUsuario', authorization);
+      const lista = response.data.data;
+
+      const admin = lista.filter(u => u.perfilID === 1).length;
+      const orgs = lista.filter(u => u.perfilID === 2).length;
+      const membros = lista.filter(u => u.perfilID === 3).length;
+
+      setContadores({
+        administradores: admin,
+        organizadores: orgs,
+        membros: membros,
+      });
+    } catch (error) {
+      console.error('Erro ao carregar usuários:', error);
+    }
+  };
 
   const extrairValor = (texto: string, chave: string): number => {
     const regex = new RegExp(`${chave}:\\s*(\\d+)`, 'i');
@@ -134,26 +177,20 @@ export default function Dashboard() {
       </div>
 
       <div className='perfilUsuario'>
-            <div className='administradores'>
-              <div>
-                2
-              </div>
-              <p>Administradores</p>
-            </div>
+        <div className='administradores'>
+          <div>{contadores.administradores}</div>
+          <p>Administradores</p>
+        </div>
 
-            <div className='organizadores'>
-              <div>
-                6
-              </div>
-              <p>Organizadores</p>
-            </div>
+        <div className='organizadores'>
+          <div>{contadores.organizadores}</div>
+          <p>Organizadores</p>
+        </div>
 
-            <div className='membros'>
-              <div>
-                20
-              </div>
-              <p>Membros Comuns</p>
-            </div>
+        <div className='membros'>
+          <div>{contadores.membros}</div>
+          <p>Membros Comuns</p>
+        </div>
       </div>
     </div>
   );
