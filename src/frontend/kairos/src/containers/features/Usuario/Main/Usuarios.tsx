@@ -7,6 +7,8 @@ import {
   FaTrash,
   FaUser,
   FaX,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa6";
 import "./Usuarios.css";
 import api from "../../../../core/service/api";
@@ -40,6 +42,7 @@ const Usuarios = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const [novoUsuario, setNovoUsuario] = useState({
     nome: "",
@@ -136,6 +139,7 @@ const Usuarios = () => {
         telefone: "",
         bi: "",
       });
+      setMostrarSenha(false);
       carregarUsuarios();
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
@@ -248,12 +252,40 @@ const Usuarios = () => {
             <input name="nome" type="text" placeholder="Nome" value={novoUsuario.nome} onChange={handleChange} />
             <input name="sobreNome" type="text" placeholder="Sobrenome" value={novoUsuario.sobreNome} onChange={handleChange} />
             <input name="email" type="email" placeholder="Email" value={novoUsuario.email} onChange={handleChange} />
-            <input name="password" type="password" placeholder="Senha" value={novoUsuario.password} onChange={handleChange} />
 
-            <input name="telefone" type="text" placeholder="Telefone (começa com 9)" value={novoUsuario.telefone} onChange={handleChange} />
+            <div className="input-senha-wrapper">
+              <input
+                name="password"
+                type={mostrarSenha ? "text" : "password"}
+                placeholder="Senha"
+                value={novoUsuario.password}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className="btn-ver-senha"
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+              >
+                {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+
+            <input
+              name="telefone"
+              type="text"
+              placeholder="Telefone (começa com 9)"
+              value={novoUsuario.telefone}
+              onChange={handleChange}
+            />
             {erros.telefone && <small className="erro">{erros.telefone}</small>}
 
-            <input name="bi" type="text" placeholder="BI (000000000XX000)" value={novoUsuario.bi} onChange={handleChange} />
+            <input
+              name="bi"
+              type="text"
+              placeholder="BI (000000000XX000)"
+              value={novoUsuario.bi}
+              onChange={handleChange}
+            />
             {erros.bi && <small className="erro">{erros.bi}</small>}
 
             <div className="modal-actions">
