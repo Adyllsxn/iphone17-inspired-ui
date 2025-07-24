@@ -143,5 +143,33 @@
 
 
 
+.imprimir {
+  text-align: right;
+  margin-top: 1rem;
+}
 
+.imprimir button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.imprimir button:hover {
+  background-color: #45a049;
+}
+.mensagem-erro {
+  color: #b30000;
+  background-color: #ffe5e5;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-weight: bold;
+  text-align: center;
+}
 
