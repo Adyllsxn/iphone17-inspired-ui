@@ -63,9 +63,7 @@ const UsuarioEdit = () => {
 
       await api.put('/v1/UpdateUsuario', formData);
       alert('Dados atualizados com sucesso!');
-    } catch (error) {
-      alert('Erro ao atualizar dados.');
-    }
+    } catch (_) {}
   };
 
   return (

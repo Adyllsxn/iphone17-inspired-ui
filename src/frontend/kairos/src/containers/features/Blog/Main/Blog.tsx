@@ -128,9 +128,7 @@ export default function Blog() {
       } else {
         alert("Erro ao deletar: " + r.data?.message);
       }
-    } catch (err) {
-      alert("Erro na requisição de exclusão.");
-    }
+    } catch (_) {}
   };
 
   const publicarPost = async (id: number) => {
