@@ -1,5 +1,6 @@
-import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
+import type { ReactElement } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/layouts/Header/Header";
 import Footer from "./components/layouts/Footer/Footer";
@@ -29,60 +30,65 @@ import Login from "./containers/features/Auth/Login/Login";
 import "./core/style/App.css";
 import "./core/style/index.css";
 
-
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Verifica se já tem token salvo
-    return !!localStorage.getItem("token");
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem("token"));
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
 
-  function handleLogin() {
+  const handleLogin = () => {
     setIsLoggedIn(true);
-  }
+  };
 
-  function handleLogout() {
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
+  const handleLogout = () => {
+    localStorage.clear();
     setIsLoggedIn(false);
-  }
+  };
 
-  if (!isLoggedIn) {
-    return <Login onLogin={handleLogin} />;
-  }
+  const isProtectedRoute = (element: ReactElement): ReactElement =>
+    isLoggedIn ? element : <Navigate to="/login" state={{ from: location }} replace />;
 
   return (
     <>
-      <Header onLogout={handleLogout} />
+      {!isLoginPage && <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+
       <Routes>
+        {/* Públicas */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/ajuda" element={<Ajuda />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/sobreNos" element={<SobreNos />} />
-        <Route
-          path="/politicaDePrivacidade"
-          element={<PoliticaDePrivacidade />}
-        />
-        <Route path="/minhasPresencas" element={<PresencaList />} />
+        <Route path="/politicaDePrivacidade" element={<PoliticaDePrivacidade />} />
         <Route path="/eventoList" element={<EventoList />} />
         <Route path="/eventoDetails" element={<EventoDetails />} />
-        <Route path="/usuarioView" element={<UsuarioView />} />
-        <Route path="/usuarioEdit" element={<UsuarioEdit />} />
         <Route path="/blogList" element={<BlogList />} />
         <Route path="/blogDetails/:id" element={<BlogDetails />} />
         <Route path="/blogView" element={<BlogView />} />
-        <Route path="/administrativa" element={<AdminLayout />}>
+
+        {/* Login */}
+        {!isLoggedIn && <Route path="/login" element={<Login onLogin={handleLogin} />} />}
+        {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}
+
+        {/* Privadas */}
+        <Route path="/usuarioView" element={isProtectedRoute(<UsuarioView />)} />
+        <Route path="/usuarioEdit" element={isProtectedRoute(<UsuarioEdit />)} />
+        <Route path="/minhasPresencas" element={isProtectedRoute(<PresencaList />)} />
+
+        <Route path="/administrativa" element={isProtectedRoute(<AdminLayout />)}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="eventos" element={<Eventos />} />
-          <Route path="/administrativa/eventoAdd" element={<EventoCreate />} />
+          <Route path="eventoAdd" element={<EventoCreate />} />
           <Route path="tipos" element={<Tipos />} />
           <Route path="usuarios" element={<Usuarios />} />
           <Route path="presencas" element={<Presencas />} />
           <Route path="blog" element={<Blog />} />
         </Route>
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer />
+
+      {!isLoginPage && <Footer />}
     </>
   );
 }

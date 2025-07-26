@@ -4,8 +4,7 @@ import './SideBar.css';
 import {
   FaBlog,
   FaChartPie,
-  FaTags,
-  FaUserCheck
+  FaTags
 } from 'react-icons/fa6';
 import {
   FaCalendarAlt,
