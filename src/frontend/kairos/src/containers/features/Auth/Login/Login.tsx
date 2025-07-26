@@ -26,7 +26,7 @@ export default function Login({ onLogin }: LoginProps) {
       localStorage.setItem('perfilID', response.data.perfilID.toString());
 
       onLogin();
-    } catch (_) {
+    } catch {
       alert('Erro ao fazer login. Verifique os dados e tente novamente.');
     } finally {
       setLoading(false);
