@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import {
   FaCalendarAlt,
   FaUsers,
@@ -47,19 +47,22 @@ export default function Dashboard() {
     membros: 0,
   });
 
-  const token = localStorage.getItem('token');
-  const authorization = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  useEffect(() => {
-    carregarDashboard();
-    carregarUsuarios();
+  const authorization = useMemo(() => {
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        Authorization: `Bearer ${token ?? ''}`,
+      },
+    };
   }, []);
 
-  const carregarDashboard = async () => {
+  const extrairValor = (texto: string, chave: string): number => {
+    const regex = new RegExp(`${chave}:\\s*(\\d+)`, 'i');
+    const match = texto.match(regex);
+    return match ? parseInt(match[1], 10) : 0;
+  };
+
+  const carregarDashboard = useCallback(async () => {
     try {
       const response = await apiservice.get('/v1/GetDashboard', authorization);
       const texto: string = response.data;
@@ -78,9 +81,9 @@ export default function Dashboard() {
       console.error('Erro ao carregar o dashboard:', error);
       alert('Erro ao carregar dados do dashboard.');
     }
-  };
+  }, [authorization]);
 
-  const carregarUsuarios = async () => {
+  const carregarUsuarios = useCallback(async () => {
     try {
       const response = await apiservice.get<{ data: Usuario[] }>('/v1/ListUsuario', authorization);
       const lista = response.data.data;
@@ -97,13 +100,12 @@ export default function Dashboard() {
     } catch (error) {
       console.error('Erro ao carregar usuários:', error);
     }
-  };
+  }, [authorization]);
 
-  const extrairValor = (texto: string, chave: string): number => {
-    const regex = new RegExp(`${chave}:\\s*(\\d+)`, 'i');
-    const match = texto.match(regex);
-    return match ? parseInt(match[1], 10) : 0;
-  };
+  useEffect(() => {
+    carregarDashboard();
+    carregarUsuarios();
+  }, [carregarDashboard, carregarUsuarios]);
 
   const cards = [
     {
@@ -134,7 +136,6 @@ export default function Dashboard() {
   ];
 
   const COLORS = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'];
-
   return (
     <div className="dashboard-container">
       <div className="card-row">
