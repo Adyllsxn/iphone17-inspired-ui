@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   FaInfo,
   FaMagnifyingGlass,
@@ -59,6 +59,12 @@ export default function Blog() {
   const [imagemFile, setImagemFile] = useState<File | null>(null);
   const pageSize = 5;
 
+  const authorization = useMemo(() => ({
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+    },
+  }), []);
+
   useEffect(() => {
     load();
   }, []);
@@ -67,7 +73,8 @@ export default function Blog() {
     try {
       const response = await api.get("/v1/ListBlog");
       if (response.data?.data) setPosts(response.data.data);
-    } catch {
+    } catch (error) {
+      console.error("Erro ao carregar posts:", error);
       alert("Erro ao carregar posts.");
     }
   };
@@ -80,7 +87,8 @@ export default function Blog() {
         setPosts(r.data.data);
         setPage(1);
       }
-    } catch {
+    } catch (error) {
+      console.error("Erro na busca:", error);
       alert("Erro na busca.");
     }
   };
@@ -96,13 +104,14 @@ export default function Blog() {
     formData.append("ImagemCapaUrl", imagemFile);
 
     try {
-      const r = await api.post("/v1/CreateBlog", formData);
+      const r = await api.post("/v1/CreateBlog", formData, authorization);
       if (r.data?.isSuccess) {
         alert("Post criado com sucesso!");
         fecharModais();
         await load();
       }
-    } catch {
+    } catch (error) {
+      console.error("Erro ao criar post:", error);
       alert("Erro ao criar post.");
     }
   };
@@ -116,11 +125,7 @@ export default function Blog() {
     if (!postToDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
-      const r = await api.delete(`/v1/DeleteBlog?Id=${postToDelete.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      const r = await api.delete(`/v1/DeleteBlog?Id=${postToDelete.id}`, authorization);
       if (r.data?.isSuccess) {
         alert("Post deletado com sucesso.");
         setPosts(posts.filter((p) => p.id !== postToDelete.id));
@@ -128,50 +133,59 @@ export default function Blog() {
       } else {
         alert("Erro ao deletar: " + r.data?.message);
       }
-    } catch {}
+    } catch (error) {
+      console.error("Erro ao deletar post:", error);
+      alert("Erro ao deletar post.");
+    }
   };
 
   const publicarPost = async (id: number) => {
-    const token = localStorage.getItem("token");
     try {
-      await api.patch("/v1/PublishBlog", { id }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.patch("/v1/PublishBlog", { id }, authorization);
       await load();
-    } catch {
+    } catch (error) {
+      console.error("Erro ao publicar post:", error);
       alert("Erro ao publicar.");
     }
   };
 
   const arquivarPost = async (id: number) => {
-    const token = localStorage.getItem("token");
     try {
-      await api.patch("/v1/ArchiveBlog", { id }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.patch("/v1/ArchiveBlog", { id }, authorization);
       await load();
-    } catch {
+    } catch (error) {
+      console.error("Erro ao arquivar post:", error);
       alert("Erro ao arquivar.");
     }
   };
 
   const verDetalhes = async (id: number) => {
-    const r = await api.get(`/v1/GetByIdBlog?Id=${id}`);
-    if (r.data?.data) {
-      setCurrent(r.data.data);
-      setIsModalDetail(true);
+    try {
+      const r = await api.get(`/v1/GetByIdBlog?Id=${id}`);
+      if (r.data?.data) {
+        setCurrent(r.data.data);
+        setIsModalDetail(true);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar detalhes:", error);
+      alert("Erro ao carregar detalhes.");
     }
   };
 
   const abrirModalEdicao = async (id: number) => {
-    const r = await api.get(`/v1/GetByIdBlog?Id=${id}`);
-    if (r.data?.data) {
-      const post = r.data.data;
-      setCurrent(post);
-      setTitulo(post.titulo);
-      setConteudo(post.conteudo || "");
-      setImagemFile(null);
-      setIsModalEdit(true);
+    try {
+      const r = await api.get(`/v1/GetByIdBlog?Id=${id}`);
+      if (r.data?.data) {
+        const post = r.data.data;
+        setCurrent(post);
+        setTitulo(post.titulo);
+        setConteudo(post.conteudo || "");
+        setImagemFile(null);
+        setIsModalEdit(true);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar post para edição:", error);
+      alert("Erro ao carregar post.");
     }
   };
 
@@ -192,7 +206,11 @@ export default function Blog() {
 
     try {
       const r = await api.put("/v1/EditBlog", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        ...authorization,
+        headers: {
+          ...authorization.headers,
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (r.data?.isSuccess) {
@@ -202,7 +220,8 @@ export default function Blog() {
       } else {
         alert("Erro: " + r.data?.message);
       }
-    } catch {
+    } catch (error) {
+      console.error("Erro ao atualizar post:", error);
       alert("Erro ao atualizar post.");
     }
   };
@@ -221,6 +240,7 @@ export default function Blog() {
 
   const postsPaginados = posts.slice((page - 1) * pageSize, page * pageSize);
   const totalPages = Math.ceil(posts.length / pageSize);
+
 
   return (
     <section className="blogMain">

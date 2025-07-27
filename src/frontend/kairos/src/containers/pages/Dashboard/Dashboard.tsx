@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import {
   FaCalendarAlt,
   FaUsers,
@@ -47,12 +47,14 @@ export default function Dashboard() {
     membros: 0,
   });
 
-  const token = localStorage.getItem('token');
-  const authorization = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  const authorization = useMemo(() => {
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        Authorization: `Bearer ${token ?? ''}`,
+      },
+    };
+  }, []);
 
   const extrairValor = (texto: string, chave: string): number => {
     const regex = new RegExp(`${chave}:\\s*(\\d+)`, 'i');
@@ -103,7 +105,7 @@ export default function Dashboard() {
   useEffect(() => {
     carregarDashboard();
     carregarUsuarios();
-  }, [carregarDashboard, carregarUsuarios]); // ✅ dependências incluídas
+  }, [carregarDashboard, carregarUsuarios]);
 
   const cards = [
     {
@@ -134,7 +136,6 @@ export default function Dashboard() {
   ];
 
   const COLORS = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'];
-
   return (
     <div className="dashboard-container">
       <div className="card-row">

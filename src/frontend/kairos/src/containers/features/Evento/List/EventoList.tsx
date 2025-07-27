@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import apiservice from '../../../../core/service/api';
 import './EventoList.css';
@@ -17,12 +17,12 @@ export default function Listar() {
 
   const eventosPorPagina = 6;
 
-  const token = localStorage.getItem('token');
-  const authorization = {
+  // 🔐 Memoize o authorization para evitar recriação desnecessária
+  const authorization = useMemo(() => ({
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
     },
-  };
+  }), []);
 
   const carregarEventos = useCallback(() => {
     apiservice
@@ -85,7 +85,7 @@ export default function Listar() {
       setPaginaAtual(novaPagina);
     }
   };
-
+  
   return (
     <main>
       <div className="layoutContainer">
