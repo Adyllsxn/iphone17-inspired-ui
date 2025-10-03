@@ -53,3 +53,9 @@ npm install
 
 # Run in development mode
 npm run dev
+```
+---
+
+## 📸 Demo Screenshot
+
+![Frapi Demo](./Assets/screem.png "Screem")
