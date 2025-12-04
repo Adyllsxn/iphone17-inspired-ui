@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# 📱 iPhone 17 Inspired UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **UI inspired** by the launch of the iPhone 17, built with **React** and **Tailwind CSS**.  
+The goal is to practice **pixel-perfect design**, explore modern animations, and demonstrate mastery of **professional frontend development**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Technologies Used
 
-## React Compiler
+- React.js  
+- Tailwind CSS  
+- JavaScript  
+- Vite  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎨 Highlights
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Interface inspired by Apple's official iPhone 17 website  
+- Responsive design for desktop and mobile  
+- Centralized typography and color constants  
+- Reusable components  
+- Modern animations and smooth transitions  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ How to Run the Project
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 1. Clone this repository:
+    ```bash
+    git clone https://github.com/Adyllsxn/iphone17-inspired-ui.git
+    ```
+### 2. Navigate to the project folder:
+    ```bash
+    cd iphone17-inspired-ui
+    ```
+### 3. Install dependencies:
+    ```bash
+    npm install
+    ```
+### 4. Start the development server:
+    ```bash
+    npm run dev
+    ```
+### 5. Open in your browser:
+    ```bash
+    http://localhost:5173
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📸 Demo
+![Demo](./public/demo/demo.png "Visual")
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📌 Purpose
+
+This project was created for practice and portfolio purposes. It has no commercial intent and is not affiliated with Apple. The aim is to showcase skills in modern frontend development and design inspired by major brands.
+
+---
+
+## 👨‍💻 Author
+**Domingos Nascimento (Adyllsxn)**  
+
+- [LinkedIn](https://www.linkedin.com/in/adyllsxn/)  
+- [GitHub](https://github.com/Adyllsxn)
