@@ -58,4 +58,10 @@ npx expo start
 **Domingos Nascimento (Adyllsxn)**  
 
 - [LinkedIn](https://www.linkedin.com/in/adyllsxn/)  
-- [GitHub](https://github.com/Adyllsxn)  
+- [GitHub](https://github.com/Adyllsxn)
+
+---
+
+## 📄 License
+
+- This project is for educational and portfolio purposes only.
